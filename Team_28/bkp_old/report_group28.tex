@@ -1,0 +1,327 @@
+\documentclass[11pt, a4paper]{article}
+
+% --- Packages ---
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{times}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{multirow}
+
+% --- Amrita Colors ---
+\definecolor{amritaMaroon}{HTML}{A4123F}
+
+% --- Title & Section Formatting ---
+\titlespacing*{\section}{0pt}{10pt}{3pt}
+\titleformat{\section}{\large\bfseries\color{amritaMaroon}}{\thesection}{1em}{}
+
+\pagestyle{empty} 
+
+\begin{document}
+
+% ==========================================
+% HEADER 
+% ==========================================
+\noindent
+\begin{minipage}{\textwidth}
+    \centering
+    {\Large \textbf{\textcolor{amritaMaroon}{
+    AMRITA VISHWA VIDYAPEETHAM \\
+    SCHOOL OF COMPUTING \\
+    DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING \\
+    }}} 
+    \vspace{0.2cm}
+    {\large \textbf{Explainable Federated Analytics for Multivariate Time-Series Forecasting with Personalized Model Adaptation}} \\
+    \vspace{0.1cm}
+    23CSE399 -- Project Phase 1 (Panel Review 1)\\
+    \today
+\end{minipage}
+
+\vspace{0.3cm}
+\hrule
+\vspace{0.3cm}
+
+% --- Team & Guide Details ---
+\noindent
+\begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \setlength{\tabcolsep}{5pt}
+    \begin{tabular}{|l|p{4.2cm}|p{4cm}|p{2.5cm}|c|}
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Team Members}} & \textbf{Guide} & \textbf{Project Type} & \textbf{Marks} \\ 
+        \hline
+        
+        % Row 1
+        \small CB.SC.U4CSE23XXX & \small \raggedright Haswitha K & 
+        \multirow{5}{=}{\raggedright \small \textbf{Dr. G R RAMYA ,Dr. VANDHAN S} \newline \textit{SR Assistant Professor, Assistant Professor, \newline Dept. of CSE}} & 
+        \multirow{5}{=}{\raggedright \small \textbf{Type 2} \newline Implementation / Use-Case} & 
+        \multirow{5}{*}{\textbf{\huge \dots / 5}} \\ \cline{1-2}
+        
+        % Row 2
+        \small CB.SC.U4CSE23529 & \small Hasini Reddy M & & & \\ \cline{1-2}
+        
+        % Row 3
+        \small CB.SC.U4CSE23547 & \small Sheela Akshar Sakhi & & & \\ \cline{1-2}
+        
+        % Row 4
+        \small CB.SC.U4CSE23761 & \small Kousik sarma lakkaraju 4 & & & \\ 
+        \cline{1-2}
+        
+        % Row 5
+        \small CB.SC.U4CSE23364 & \small Kamboji Haswitheswari 5 & & & \\ 
+        \hline
+    \end{tabular}
+\end{center}
+\vspace{0.2cm}
+
+% ==========================================
+% MAIN CONTENT - TYPE 2 (IMPLEMENTATION)
+% ==========================================
+
+% --- 1. PROBLEM & UTILITY ---
+\section{Problem Definition \& Relevance}
+
+\textbf{Problem Statement:} 
+
+To develop a privacy-preserving time-series forecasting system that simultaneously addresses client heterogeneity and concept drift, thereby enabling collaborative and trustworthy analytics in real-world distributed environments
+
+\vspace{0.2cm}
+\textbf{Utility Claim:}
+
+\begin{itemize}[noitemsep, topsep=0pt]
+    \item \textbf{Practical Application:} We apply federated learning combined with personalized model adaptation and explainable AI to enable privacy-preserving collaborative analytics for time-series forecasting—a combination not effectively implemented in current production systems.
+    
+    \item \textbf{Efficiency Improvement:} Our implementation enables multiple organizations to collaboratively improve prediction accuracy without sharing raw data, while providing explainable insights that support informed decision-making. This addresses critical needs in healthcare (patient risk prediction), smart grids (energy demand forecasting), industrial IoT (machine failure prediction), and smart cities (traffic flow management).
+\end{itemize}
+
+% --- 2. SURVEY & GAPS ---
+\section{Literature \& Market Survey}
+
+\subsection{Current Practices}
+
+Currently, organizations handling time-series data use one of the following approaches:
+
+\begin{enumerate}[noitemsep, topsep=0pt]
+    \item \textbf{Centralized Machine Learning:} Organizations aggregate data in central servers for training high-accuracy models. This violates privacy regulations and is unsuitable for distributed environments.
+    
+    \item \textbf{Isolated Local Models:} Each organization trains models independently on their own data, resulting in poor generalization and inability to leverage collective intelligence.
+    
+    \item \textbf{Basic Federated Learning:} Some systems implement FedAvg-based federated learning for privacy preservation, but lack personalization for heterogeneous clients and provide no explainability for predictions.
+\end{enumerate}
+
+\subsection{Existing Limitations}
+
+A comprehensive analysis of 25 recent research papers (2020-2025) from top-tier venues (NeurIPS, AAAI, IEEE, ACM, Elsevier) reveals critical gaps:
+
+\begin{itemize}[noitemsep, topsep=0pt]
+    \item \textbf{Privacy vs. Accuracy Trade-off:} Privacy-preserving methods like basic federated learning achieve lower accuracy on heterogeneous data compared to centralized approaches.
+    
+    \item \textbf{Lack of Personalization:} Global federated models perform poorly when client data distributions are non-IID (non-independent and identically distributed). Existing personalization methods (FedPer, pFedMe) don't integrate explainability.
+    
+    \item \textbf{No Drift Handling:} Real-world time-series data exhibits concept drift over time. Most federated systems lack adaptive mechanisms to detect and respond to changing patterns.
+    
+    \item \textbf{Black-box Predictions:} Even when federated learning achieves good accuracy, predictions remain unexplainable, which is unacceptable in high-stakes domains like healthcare and finance.
+    
+    \item \textbf{Limited Time-Series Focus:} Most explainable AI research (SHAP, LIME) targets centralized settings or classification tasks, not federated time-series forecasting.
+\end{itemize}
+
+\subsection{Implementation Gap}
+
+There is no accessible system that integrates:
+\begin{itemize}[noitemsep, topsep=0pt]
+    \item Privacy-preserving federated learning
+    \item Client-specific personalized forecasting
+    \item Explainable analytics for time-series predictions
+    \item Adaptive drift detection and handling
+\end{itemize}
+
+Our literature survey of 25 papers confirms this gap across multiple research communities (federated learning, time-series forecasting, explainable AI, and healthcare informatics).
+
+% --- 3. SYSTEM ARCHITECTURE ---
+\section{Proposed System Architecture}
+
+\textbf{Core Solution:} 
+
+We propose a three-layer federated architecture that enables privacy-preserving collaborative time-series analytics and forecasting. The system integrates local analytics modules, personalized LSTM/Transformer-based forecasting models, and a central aggregation server using a modified FedAvg protocol with personalization layers.
+
+\subsection{System Components}
+
+\textbf{1. Client Layer (Hospitals/Industries/Smart Cities):}
+\begin{itemize}[noitemsep, topsep=0pt]
+    \item \textbf{Data Collection:} Local time-series data collection (sensor readings, patient vitals, energy consumption)
+    \item \textbf{Local Analytics Module:} Extracts trends, detects anomalies, identifies patterns without sharing raw data
+    \item \textbf{Personalized Forecasting Model:} LSTM/Transformer model with client-specific personalization layers
+    \item \textbf{Drift Detection:} CUSUM-based concept drift detection for adaptive learning
+\end{itemize}
+
+\textbf{2. Communication Layer:}
+\begin{itemize}[noitemsep, topsep=0pt]
+    \item \textbf{Secure Transmission:} Encrypted model updates (gradients/parameters) sent via REST API over HTTPS
+    \item \textbf{Privacy Preservation:} Raw data never leaves client devices; only aggregated insights shared
+    \item \textbf{Validation:} Server-side validation ensures model update integrity
+\end{itemize}
+
+\textbf{3. Server Layer (Central Aggregation):}
+\begin{itemize}[noitemsep, topsep=0pt]
+    \item \textbf{Global Model Aggregation:} FedAvg-based weighted averaging of client updates
+    \item \textbf{Model Distribution:} Improved global model broadcast to all clients
+    \item \textbf{Analytics Dashboard:} Web-based visualization of system-wide insights and performance metrics
+\end{itemize}
+
+% FIGURE PLACEHOLDER
+\begin{figure}[H]
+    \centering
+    \fbox{\begin{minipage}[c][8cm]{0.95\textwidth}
+        \centering
+        \vspace{1cm}
+        \textbf{System Architecture Diagram}
+        
+        \vspace{0.5cm}
+        \begin{tabular}{ccc}
+            \textbf{CLIENT 1} & \textbf{CLIENT 2} & \textbf{CLIENT 3} \\
+            (Hospital) & (Industry) & (Smart City) \\
+            \hline
+            $\downarrow$ & $\downarrow$ & $\downarrow$ \\
+            Local Data & Local Data & Local Data \\
+            $\downarrow$ & $\downarrow$ & $\downarrow$ \\
+            Analytics Module & Analytics Module & Analytics Module \\
+            $\downarrow$ & $\downarrow$ & $\downarrow$ \\
+            Personalized Model & Personalized Model & Personalized Model \\
+            \hline
+        \end{tabular}
+        
+        \vspace{0.5cm}
+        $\downarrow$ \textbf{Model Updates (Encrypted)} $\downarrow$
+        
+        \vspace{0.3cm}
+        \fbox{\textbf{CENTRAL SERVER (Federated Aggregation)}}
+        
+        \vspace{0.3cm}
+        $\uparrow$ \textbf{Global Model Distribution} $\uparrow$
+        
+        \vspace{0.5cm}
+        % \small \textit{Flow: Local Training → Secure Upload → Global Aggregation → Model Redistribution}
+    \end{minipage}}
+    \caption{Proposed Three-Layer Federated System Architecture}
+\end{figure}
+
+
+  \small \textit{Flow: Local Training → Secure Upload → Global Aggregation → Model Redistribution}
+
+\subsection{Implementation Logic}
+
+\textbf{Training Workflow:}
+\begin{enumerate}[noitemsep, topsep=0pt]
+    \item \textbf{Model Initialization:} The server initializes a global model and shares it with all participating clients.
+    \item \textbf{Local Training:} Each client trains a local model using its own time-series data without sharing raw data.
+    \item \textbf{Local Analytics:} Clients perform local data analytics to identify patterns such as trends and anomalies.
+    \item \textbf{Update Preparation:} Each client prepares model updates based on local training results.
+    \item \textbf{Secure Communication:} Clients send only model updates to the server through secure communication channels.
+    \item \textbf{Global Aggregation:} The server aggregates updates received from multiple clients to improve the global model.
+    \item \textbf{Model Distribution:} The updated global model is redistributed to all clients.
+    \item \textbf{Personalization:} Clients adapt the global model locally to suit their individual data characteristics.
+\end{enumerate}
+
+\textbf{Inference \& Explainability:}
+\begin{itemize}[noitemsep, topsep=0pt]
+    \item Clients generate forecasts using personalized models
+    \item Feature importance computed using attention weights and gradient-based methods
+    \item Explanations provided through temporal attention visualization and feature contribution analysis
+\end{itemize}
+
+\subsection{Technical Stack}
+
+\textbf{Frontend:}
+\begin{itemize}[noitemsep, topsep=0pt]
+    \item Web-based dashboard: HTML5, CSS3, JavaScript (React.js)
+    \item Visualization: D3.js, Plotly for time-series and attention visualization
+\end{itemize}
+
+\textbf{Backend:}
+\begin{itemize}[noitemsep, topsep=0pt]
+    \item Python 3.9+ (Federated learning logic, model training)
+    \item Flask/FastAPI for REST API endpoints
+    \item NumPy, Pandas for data processing
+\end{itemize}
+
+\textbf{Machine Learning:}
+\begin{itemize}[noitemsep, topsep=0pt]
+    \item PyTorch 2.0+ / TensorFlow 2.12+ for model implementation
+    \item LSTM and Transformer architectures for time-series forecasting
+    \item Scikit-learn for analytics and drift detection
+\end{itemize}
+
+\textbf{Communication \& Security:}
+\begin{itemize}[noitemsep, topsep=0pt]
+    \item REST API over HTTPS for secure client-server communication
+    \item SSL/TLS encryption for data in transit
+    \item Optional: Differential privacy for additional protection
+\end{itemize}
+
+% --- 4. PLAN ---
+\section{Current Status \& Plan}
+
+\textbf{Current Status (Phase 1):}
+\begin{itemize}[noitemsep, topsep=0pt]
+    \item \textbf{Use-Case Finalized:} Healthcare patient risk prediction and smart grid energy forecasting identified as primary applications
+    \item \textbf{Literature Survey Completed:} Comprehensive analysis of 25 papers revealing research gaps
+    \item \textbf{Architecture Designed:} Three-layer federated system architecture with component specifications
+    \item \textbf{Tools Selected:} PyTorch for modeling, Flask for API, React for frontend
+    \item \textbf{Dataset Identified:} Planning to use MIMIC-III (healthcare) and UCI Smart Grid datasets
+    \item \textbf{Prototype Conceptualized:} Basic FedAvg implementation with 3 simulated clients tested
+\end{itemize}
+
+\textbf{Next Steps (Phase 2 - Implementation):}
+\begin{enumerate}[noitemsep, topsep=0pt]
+    \item \textbf{Weeks 1-2:} Implement local analytics module with trend extraction and anomaly detection
+    \item \textbf{Weeks 3-4:} Develop personalized LSTM/Transformer models with attention mechanisms
+    \item \textbf{Weeks 5-6:} Implement federated aggregation server with secure communication
+    \item \textbf{Weeks 7-8:} Integrate explainability layer (attention visualization, feature importance)
+    \item \textbf{Weeks 9-10:} Add drift detection mechanism using CUSUM algorithm
+    \item \textbf{Weeks 11-12:} Testing in simulated multi-client environment
+    \item \textbf{Weeks 13-14:} Performance analysis and comparison with baseline methods
+\end{enumerate}
+
+\textbf{Phase 3 - Evaluation \& Deployment:}
+\begin{itemize}[noitemsep, topsep=0pt]
+    \item Evaluation metrics: Prediction accuracy (RMSE, MAE), privacy preservation, explainability scores
+    \item Comparison with centralized models, basic federated learning, and non-personalized approaches
+    \item Web dashboard development for real-time monitoring
+    \item Documentation and final report preparation
+\end{itemize}
+
+\textbf{Expected Outcomes:}
+\begin{itemize}[noitemsep, topsep=0pt]
+    \item A functional federated learning system demonstrating privacy-preserving collaborative analytics
+    \item Improved prediction accuracy through personalization compared to single global model
+    \item Explainable insights supporting decision-making in healthcare and energy domains
+    \item Proof-of-concept demonstrating scalability to multiple organizations
+\end{itemize}
+
+% --- REFERENCES ---
+% --- REFERENCES ---
+\vspace{0.3cm}
+\section*{Bibliographic}
+
+% Add citations in the text to reference papers
+The foundational work on federated learning~\cite{mcmahan2017} established FedAvg as the standard aggregation method. Personalization approaches including FedPer~\cite{arivazhagan2020} and adaptive fusion~\cite{bernardi2023adaptive} address client heterogeneity. Drift detection methods~\cite{jothimurugesan2022} enable adaptive learning over time.
+
+Recent advances include vertical federated learning for multivariate forecasting~\cite{yang2025mvfl}, explainable federated AI~\cite{kalakoti2025fedxai}, and personalized financial forecasting~\cite{noseda2025financial,wang2025personalized}. Clinical decision support~\cite{karamanlioglu2025clinical} and LLM-based approaches~\cite{abdelsater2024llama} demonstrate healthcare applications.
+
+AutoML methods~\cite{maher2025automl}, privacy-enhancing techniques~\cite{gupta2025privacy}, and heterogeneity handling~\cite{yuan2024trend,tang2025horizon} improve automation and robustness. Attention mechanisms~\cite{larocca2021attention} and explainable AI~\cite{larocca2022shap} provide interpretability. Multi-task learning~\cite{zhang2022multitask}, client clustering~\cite{amato2023clustering}, and gradient correction~\cite{liu2022} optimize federated training.
+
+Healthcare applications including sepsis prediction~\cite{dusing2025sepsis,qayyum2023fedsepsis,lei2025supervised}, multi-channel systems~\cite{pan2025multiprog}, and secure edge computing~\cite{maurya2025secure} validate real-world feasibility. On-device analytics~\cite{churaev2023} demonstrates privacy-preserving local intelligence.
+
+\bibliographystyle{IEEEtran}
+\bibliography{ref}
+
+\end{document}
+
+% \vspace{0.2cm}
+% \textit{Complete list of 25 references available in project bibliography.}
+
+% \end{document}

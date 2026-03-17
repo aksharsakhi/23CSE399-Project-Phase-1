@@ -1,0 +1,16 @@
+# LaTeX
+*.aux
+*.fdb_latexmk
+*.fls
+*.gz
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.vrb
+*.bbl
+*.blg
+
+# OS
+.DS_Store
