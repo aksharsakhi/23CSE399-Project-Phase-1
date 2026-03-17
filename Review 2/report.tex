@@ -1,0 +1,162 @@
+\documentclass[11pt, a4paper]{article}
+
+% --- Packages ---
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{times}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{amsmath}
+
+% --- Amrita Colors ---
+\definecolor{amritaMaroon}{HTML}{A4123F}
+
+% --- Title & Section Formatting ---
+\titlespacing*{\section}{0pt}{10pt}{3pt}
+\titleformat{\section}{\large\bfseries\color{amritaMaroon}}{\thesection}{1em}{}
+
+\pagestyle{empty}
+
+\begin{document}
+
+% = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+% HEADER
+% = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+\noindent
+\begin{minipage}{\textwidth}
+\centering
+{\Large \textbf{\textcolor{amritaMaroon}{
+AMRITA VISHWA VIDYAPEETHAM \\
+SCHOOL OF COMPUTING \\
+DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING}}}
+
+\vspace{0.2cm}
+
+{\large \textbf{Explainable Federated Analytics for Multivariate Time-Series Forecasting with Personalized Model Adaptation}}
+
+\vspace{0.1cm}
+23CSE399 -- Project Phase 1 (Panel Review 2)\\
+\today
+\end{minipage}
+
+\vspace{0.3cm}
+\hrule
+\vspace{0.3cm}
+
+% = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+% TEAM DETAILS
+% = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{|l|p{4.2cm}|p{4cm}|p{2.5cm}|c|}
+\hline
+\multicolumn{2}{|c|}{\textbf{Team Members}} & \textbf{Guide} & \textbf{Project Type} & \textbf{Marks} \\
+\hline
+CB.SC.U4CSE23547 & Sheela Akshar Sakhi &
+\multirow{5}{=}{\raggedright \small \textbf{Dr. G R RAMYA, Dr. VANDHANA S}\\
+\textit{Dept. of CSE}} &
+\multirow{5}{=}{\raggedright \small \textbf{Type 1}\\Research} &
+\multirow{5}{*}{\textbf{\huge \dots / 50}} \\ \cline{1-2}
+
+CB.SC.U4CSE23529 & Hasini Reddy M & & & \\ \cline{1-2}
+CB.SC.U4CSE23761 & Kousik Sarma Lakkaraju & & & \\ \cline{1-2}
+CB.SC.U4CSE23363 & Haswitha K & & & \\ \cline{1-2}
+CB.SC.U4CSE23753 & V.Chakravarthy & & & \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+
+% = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+% 1. PROBLEM FORMULATION & SCOPE
+% = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+
+\section{Problem Formulation \& Targeted Scope}
+
+\textbf{Targeted Application Scope: Smart Energy Grids (Household Load Forecasting)}
+
+Modern smart grids require accurate short-term load forecasting (STLF) for efficient energy distribution and peak demand management. However, household energy meter data is highly sensitive, and utilities face strict privacy regulations preventing centralization. Furthermore, residential energy usage patterns exhibit **extreme heterogeneity** (due to varying lifestyles, appliances, and occupancy) and **temporal drift** (triggered by seasons, holidays, or behavioral changes).
+
+\textbf{Problem Statement:}
+To develop a privacy-preserving, domain-specific federated framework for multivariate time-series forecasting in smart grids that handles non-IID energy distributions through personalized layers and mitigates prediction degradation caused by behavioral concept drift using statistical monitoring.
+
+\textbf{Key Challenges Addressed:}
+\begin{enumerate}[noitemsep]
+\item \textbf{Heterogeneity:} Energy usage at House A (e.g., EV owner) is radically different from House B (e.g., student).
+\item \textbf{Concept Drift:} Demand patterns shift abruptly during heatwaves or festive seasons, rendering static global models inaccurate.
+\item \textbf{Trustworthiness:} Utility operators need to know *why* a peak is forecast (e.g., is it due to historical trends or a sudden temperature spike?).
+\end{enumerate}
+
+% = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+% 2. RESEARCH NOVELTY & TECHNICAL DEPTH
+% = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+
+\section{Research Novelty \& Technical Methodology}
+
+\textbf{Role of Drift Detection (CUSUM):}
+The core novelty lies in integrating the **Cumulative Sum (CUSUM)** algorithm directly into the federated training loop. Unlike standard FL (which blindly aggregates), our framework monitors local loss residuals ($e_t$).
+\[
+S_t = \max(0, S_{t-1} + (e_t - \mu - k))
+\]
+If $S_t > h$, a local **"Drift Alert"** is triggered. This forces the client to perform an unscheduled local retraining of its personalized layers before participating in the next global aggregation round, preventing "drift-polluted" updates from degrading the global backbone.
+
+\textbf{Architecture Components (Technical Overview):}
+\begin{itemize}[noitemsep]
+\item \textbf{Shared Backbone (LSTM/Transformer):} Captures cyclic patterns (e.g., 24-hour periodicity) common to all houses.
+\item \textbf{Personalization Head:} A local MLP layer that maps global features to house-specific consumption habits.
+\item \textbf{Explainable Attention:} Temporal attention weights highlight specific past timesteps (e.g., "Previous Peak Hour") that most influence the current forecast.
+\end{itemize}
+
+% = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+% 3. COMPARATIVE ANALYSIS & PRIVACY
+% = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+
+\section{Methodological Validation \& Privacy}
+
+\textbf{Comparison of Federated Learning Methods:}
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Method} & \textbf{Approach} & \textbf{Heterogeneity} & \textbf{Drift Handling} \\ \midrule
+FedAvg & Global weighted average & Fails on non-IID & Static weights \\
+FedPer & Base + Personalization layers & Good local adaptation & No temporal awareness \\
+FedProp & Feature propagation/Regularization & Handles client noise & No drift adaptation \\ \midrule
+\textbf{FPDAF} & \textbf{Personalized + Drift-Aware} & \textbf{Optimal} & \textbf{Active Monitoring} \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Privacy Elaborations:}
+\begin{itemize}[noitemsep]
+\item \textbf{General Privacy:} Only model weights are shared via HTTPS; raw consumption data remains on the consumer's local smart gateway.
+\item \textbf{Differential Privacy (DP):} To counter model inversion attacks, we add calibrated Laplacian noise ($\epsilon$-DP) to the gradients before transmission, ensuring that no individual house's usage pattern can be reverse-engineered from the global model.
+\end{itemize}
+
+% = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+% 4. STUDY METHODOLOGY & STATUS
+% = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+
+\section{Evaluation Strategy \& Current Status}
+
+\textbf{Hypothesis Validation:} We hypothesize that detecting localized drift via CUSUM and adapting the personalization head will reduce forecasting error by $>15\%$ compared to standard FedAvg in non-stationary energy markets.
+
+\textbf{Current Status:}
+\begin{itemize}[noitemsep]
+\item Domain defined: Smart Grids.
+\item Mathematical formulation of CUSUM-FL integration completed.
+\item Differential Privacy mechanism conceptualized.
+\item Comparative study of FedAvg vs. FedPer initialized on public Pecan Street dataset.
+\end{itemize}
+
+\bibliographystyle{IEEEtran}
+\bibliography{ref}
+
+\end{document}
