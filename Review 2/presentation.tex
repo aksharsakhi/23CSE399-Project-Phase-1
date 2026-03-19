@@ -106,24 +106,46 @@
 % --- TARGETED PROBLEM STATEMENT ---
 \section{Problem Statement}
 \begin{frame}{Targeted Problem Statement: Smart Grids}
-    \begin{block}{The Challenge}
-        Accurate Household Load Forecasting (STLF) is hindered by:
-        \begin{itemize}
-            \item \textbf{Data Privacy:} Smart meter data is sensitive and regulated.
-            \item \textbf{High Heterogeneity:} Diverse life styles (EV chargers vs. low-usage homes).
-            \item \textbf{Concept Drift:} Demand shifts due to seasonality and behavior.
-        \end{itemize}
-    \end{block}
+    \begin{columns}
+        \begin{column}{0.6\textwidth}
+            \begin{block}{The Challenge}
+                Accurate Short-Term Load Forecasting (STLF) is hindered by:
+                \begin{itemize}
+                    \item \textbf{Privacy:} Household energy data is legally protected.
+                    \item \textbf{Heterogeneity:} Non-IID profiles (High-usage vs. Solar-homes).
+                    \item \textbf{Drift:} Behavioral shifts due to seasons or appliance upgrades.
+                \end{itemize}
+            \end{block}
+            \centering \small \textit{Objective: A framework that learns globally but adapts locally.}
+        \end{column}
+        \begin{column}{0.4\textwidth}
+            \centering
+            \includegraphics[width=0.8\linewidth]{logo_square.png}\\
+            \vspace{0.2cm}
+            \textbf{FPDAF}\\
+            \small \textit{Drift-Aware Analytics}
+        \end{column}
+    \end{columns}
+\end{frame}
 
-    \vspace{0.2cm}
-    \textbf{Objective:} Develop a Federated Personalized Drift-Aware Attention Framework (\textbf{FPDAF}) specifically for Smart Grid analytics that maintains local privacy while adapting to individual house behavior and shifting demand.
+% --- DATASET DEEP DIVE ---
+\begin{frame}{Domain Context: Pecan Street Dataset}
+    \begin{itemize}
+        \item \textbf{Nature:} The world's largest research-grade smart grid dataset.
+        \item \textbf{Features:} Multivariate time-series (Voltage, Power, Solar Gen, Temp).
+        \item \textbf{Granularity:} 15-minute intervals covering 100+ residential homes.
+        \item \textbf{Why it fits?} Perfect for simulating \textbf{client heterogeneity} (EV owners, student dorms, net-zero houses) in a Federated setting.
+    \end{itemize}
+    \begin{block}{The Non-IID Problem}
+        Local distributions differ significantly — standard global averaging (FedAvg) leads to high variance and unstable local convergence.
+    \end{block}
 \end{frame}
 
 % --- SYSTEM ARCHITECTURE ---
 \begin{frame}{System Architecture}
     \centering
-    \includegraphics[width=0.8\linewidth, height=0.75\textheight, keepaspectratio]{SA_1.png}
-    \caption{\small Hybrid Global-Personalized Federated Architecture with Attention}
+    \includegraphics[width=0.75\linewidth, height=0.7\textheight, keepaspectratio]{SA_1.png}
+    \caption{\small \textbf{FPDAF Architecture:} Integrating Global Pattern Sharing with Localized Personality Heads.}
 \end{frame}
 
 % --- NOVELTY & DRIFT HANDLING ---
@@ -134,10 +156,9 @@
             \textbf{CUSUM Trigger Mechanism:}
             \[ S_t = \max(0, S_{t-1} + (e_t - \mu - k)) \]
             \begin{itemize}
-                \item \textbf{Phase 1:} Local loss residual monitoring.
-                \item \textbf{Phase 2:} Threshold $h$ violation detection.
-                \item \textbf{Phase 3:} On-demand local head retraining.
-                \item \textbf{Phase 4:} Communication-efficient sync.
+                \item \textbf{Monitor:} Tracking cumulative local loss $\varepsilon_t$.
+                \item \textbf{Detect:} Flagging $S_t > h$ as a behavioral shift.
+                \item \textbf{Adapt:} Triggering local-only retraining to reset the personality head.
             \end{itemize}
         \end{column}
         \begin{column}{0.5\textwidth}
@@ -147,30 +168,51 @@
     \end{columns}
 \end{frame}
 
-% --- TECHNICAL OVERVIEW ---
-\begin{frame}{Internal Mechanics: Components}
+% --- ATTENTION MATHEMATICS ---
+\begin{frame}{Internal Mechanics: Explainable Attention}
+    \small
+    \textbf{Problem:} Black-box LSTMs don't explain why a peak was predicted.
+    \textbf{Our Solution:} Attention weights that assign importance to historical lags.
+
+    \begin{block}{Attention Score Calculation}
+        \[ e_t = \text{score}(h_t, h_T) \]
+        \[ \alpha_t = \frac{\exp(e_t)}{\sum_{k=1}^{T} \exp(e_k)} \]
+    \end{block}
+
+    \begin{itemize}
+        \item \textbf{High $\alpha_t$:} Indicates the model is relying on that specific hour (e.g., "Last Monday at 6 PM").
+        \item \textbf{Trust:} Grid operators can verify if the prediction aligns with known trends (e.g., Cooking peaks, AC usage).
+    \end{itemize}
+\end{frame}
+
+% --- EVALUATION METRICS ---
+\section{Evaluation}
+\begin{frame}{Experimental Setup \& Metrics}
     \begin{columns}
         \begin{column}{0.5\textwidth}
-            \begin{block}{Personalized Model Head}
-                \small Mapping shared patterns to house-specific habits via local MLP layers. Handles \textbf{Non-IID} data.
-            \end{block}
-            \begin{block}{Temporal Attention}
-                \small Weighs historical timesteps based on importance. Explains \textit{when} the demand spike originated.
-            \end{block}
+            \textbf{Baseline Comparison:}
+            \begin{itemize}
+                \item \textbf{FedAvg:} Global only.
+                \item \textbf{FedPer:} Personalization only.
+                \item \textbf{Our FPDAF:} Drift-aware + Personalized.
+            \end{itemize}
         \end{column}
         \begin{column}{0.5\textwidth}
-            \begin{block}{Differential Privacy ($\epsilon$-DP)}
-                \small Adding Laplacian noise to model updates. Ensures formal mathematical guarantee against model inversion.
-            \end{block}
-            \begin{block}{Weighted Aggregation}
-                \small Communication-efficient merge of local updates based on data volume ($n_i/n$).
-            \end{block}
+            \textbf{Target Metrics:}
+            \begin{itemize}
+                \item \textbf{RMSE:} Root Mean Squared Error.
+                \item \textbf{MAE:} Mean Absolute Error.
+                \item \textbf{MAPE:} Percentage Error (for utility scale).
+            \end{itemize}
         \end{column}
     \end{columns}
+    \vspace{0.3cm}
+    \begin{block}{Hypothesis}
+        Drift-aware adaptation will reduce MAPE by \textbf{>12\%} during seasonal transitions compared to static federated models.
+    \end{block}
 \end{frame}
 
 % --- COMPARATIVE STUDY ---
-\section{Evaluation}
 \begin{frame}{Comparative Discussion of Federated Methods}
     \centering
     \small
@@ -188,27 +230,52 @@
         \end{tabular}
     \end{table}
     \vspace{0.3cm}
-    \textbf{Choice Justification:} Only FPDAF addresses the triad of \textit{Privacy, Adaptability, and Interpretability} required for trustworthy grid management.
+    \textbf{Choice Justification:} Ensures trust (XAI) and accuracy (Drift detection) in mission-critical smart grids.
+\end{frame}
+
+% --- ROADMAP ---
+\section{Future Plan}
+\begin{frame}{Project Roadmap: Towards Phase 1 Completion}
+    \begin{table}
+        \centering
+        \small
+        \begin{tabular}{|l|l|l|}
+            \hline
+            \textbf{Milestone} & \textbf{Target Date} & \textbf{Status} \\
+            \hline
+            Mathematical Modeling & March 15 & Completed \\
+            \hline
+            Baseline implementation & March 20 & In-Progress \\
+            \hline
+            CUSUM \& Attention Integration & March 25 & Planned \\
+            \hline
+            \textbf{Panel Review 2} & \textbf{March 30} & \textbf{Current} \\
+            \hline
+            Evaluation \& Results Synthesis & April 10 & Upcoming \\
+            \hline
+            Final Phase 1 Documentation & April 20 & Upcoming \\
+            \hline
+        \end{tabular}
+    \end{table}
 \end{frame}
 
 % --- STATUS & REPOSITORY ---
-\section{Progress}
-\begin{frame}{Current Status \& Evidence}
+\begin{frame}{Current Status \& Implementation Progress}
     \begin{itemize}
-        \item \textbf{Git Repository:} Active version control with 20+ commits and structured reviews.
-        \item \textbf{Technical Proof:} Mathematical simulation of CUSUM-FL completed.
-        \item \textbf{Baseline Results:} Initial FedAvg benchmarks on Pecan Street dataset.
-        \item \textbf{Future Plan:} Integration of $\epsilon$-Differential Privacy noise layers.
+        \item \textbf{Data Pipeline:} Completed automated ingestion for Pecan Street Multivariate CSVs.
+        \item \textbf{Baselines:} Established LSTM-FedAvg benchmarks; documented accuracy drop under drift.
+        \item \textbf{Privacy:} Initial implementation of Laplacian noise layers ($\epsilon$-DP) for gradients.
+        \item \textbf{Repository:} Active at \texttt{github.com/aksharsakhi/23CSE399-Project-Phase-1}.
     \end{itemize}
     \centering
     \vspace{0.3cm}
-    \textbf{Repo:} [github.com/aksharsakhi/23CSE399-Project-Phase-1]
+    \textbf{Phase 1 Mathematical Proof \& Architecture Finalized.}
 \end{frame}
 
 % --- REFERENCES ---
 \begin{frame}[allowframebreaks]{Selected References}
     \tiny
-    \nocite{mcmahan2017,arivazhagan2020,jothimurugesan2022,larocca2021attention,kalakoti2025fedxai}
+    \nocite{mcmahan2017,arivazhagan2020,jothimurugesan2022,larocca2021attention}
     \bibliographystyle{IEEEtran}
     \bibliography{ref}
 \end{frame}
