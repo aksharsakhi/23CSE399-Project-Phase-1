@@ -176,7 +176,7 @@
 
     \begin{block}{Attention Score Calculation}
         \[ e_t = \text{score}(h_t, h_T) \]
-        \[ \alpha_t = \frac{\exp(e_t)}{\sum_{k=1}^{T} \exp(\alpha_k)} \]
+        \[ \alpha_t = \frac{\exp(e_t)}{\sum_{k=1}^{T} \exp(e_k)} \]
     \end{block}
 
     \begin{itemize}
@@ -260,15 +260,16 @@
 \end{frame}
 
 % --- STATUS & REPOSITORY ---
-\begin{frame}{Current Status \& Evidence}
+\begin{frame}{Current Status \& Implementation Progress}
     \begin{itemize}
-        \item \textbf{Git Repository:} Active version control with 30+ commits.
-        \item \textbf{Technical Proof:} Mathematical simulation and dataset ingestion scripts.
-        \item \textbf{Privacy Mechanism:} Designed Laplacian noise ($\epsilon$-DP) layer.
+        \item \textbf{Data Pipeline:} Completed automated ingestion for Pecan Street Multivariate CSVs.
+        \item \textbf{Baselines:} Established LSTM-FedAvg benchmarks; documented accuracy drop under drift.
+        \item \textbf{Privacy:} Initial implementation of Laplacian noise layers ($\epsilon$-DP) for gradients.
+        \item \textbf{Repository:} Active at \texttt{github.com/aksharsakhi/23CSE399-Project-Phase-1}.
     \end{itemize}
     \centering
     \vspace{0.3cm}
-    \textbf{GitHub:} [github.com/aksharsakhi/23CSE399-Project-Phase-1]
+    \textbf{Phase 1 Mathematical Proof \& Architecture Finalized.}
 \end{frame}
 
 % --- REFERENCES ---
