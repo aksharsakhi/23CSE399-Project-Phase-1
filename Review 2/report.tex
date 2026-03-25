@@ -116,30 +116,14 @@ CB.SC.U4CSE23753 & V.Chakravarthy & & & \\
 % =========================================================================================
 \section{Technical Evidence \& Implementation Status}
 
-\textbf{Repository Evidence:} The project is actively maintained on GitHub (\texttt{github.com/aksharsakhi/23CSE399-Project-Phase-1}). 
-Current technical artifacts include:
-\begin{itemize}[noitemsep, leftmargin=1.5em]
-    \item \textbf{Pre-processing Scripts:} Automated cleansing and normalization of MIMIC-III ICU data records.
-    \item \textbf{FL Baselines:} Implementation of standard FedAvg and FedPer benchmarks to quantify baseline performance.
-    \item \textbf{Mathematical Validation:} Verified convergence profiles for the CUSUM trigger under simulated synthetic drift.
-\end{itemize}
+\textbf{Project Milestones & Next Steps:}
+The primary deliverable for Phase 1 is the finalized mathematical framework, gap formulation, and system architectural formulation. Following this review, Phase 2 will commence with the following steps:
+\begin{enumerate}[noitemsep, leftmargin=1.5em]
+    \item \textbf{Data Pipeline Development:} Building ingestion and preprocessing scripts for the MIMIC-III database.
+    \item \textbf{Baseline Implementation:} Establishing FedAvg benchmarks using PyTorch to quantify standard performance.
+    \item \textbf{CUSUM Integration:} Translating the mathematical drift detection triggers into code.
+\end{enumerate}
 
-\textbf{Preliminary Findings:} Initial simulations show that while FedAvg experiences an accuracy drop of up to 18\% during subtle concept drifts (e.g., gradual patient deterioration), our \textbf{FPDAF} detects the shift within a small window and recovers accuracy within 8 epochs, maintaining a stable \textbf{MAE of 0.044} compared to FedAvg's 0.062.
-
-\begin{figure}[H]
-\centering
-\begin{minipage}{0.48\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{drift_adaptation_graph.png}
-    \caption{Model recovery under concept drift.}
-\end{minipage}
-\hfill
-\begin{minipage}{0.48\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{attention_visualization.png}
-    \caption{Attention visualization for ICU risk detection.}
-\end{minipage}
-\end{figure}
 
 \section{Conclusion \& Deliverables}
 Phase 1 has successfully finalized the mathematical framework, system design, and baseline validation. The upcoming phase will focus on scaling the framework to multi-hospital simulation and quantifying the personalization gain on heterogeneous patient cohorts.

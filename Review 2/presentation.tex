@@ -158,62 +158,46 @@
     \end{columns}
 \end{frame}
 
-% --- ATTENTION VISUALIZATION ---
-\begin{frame}{Explainability Visualization}
-    \centering
-    \includegraphics[width=0.85\linewidth, height=0.7\textheight, keepaspectratio]{attention_visualization.png}
-    \caption{\small \textbf{XAI Insight:} Attention weights highlighting critical surges in vitals preceding a 'Risk' alert.}
-\end{frame}
-
-% --- TECHNICAL EVIDENCE ---
-\begin{frame}{Technical Evidence: Repository & Scripts}
-    \begin{itemize}
-        \item \textbf{Repository:} \texttt{github.com/aksharsakhi/23CSE399-Project-Phase-1}
-        \item \textbf{Active Commits:} Documenting codebase structure, data ingestion, and baseline LSTM.
-        \item \textbf{Initial Scripts:}
-        \begin{itemize}
-            \item \texttt{mimic\_preproc.py}: Automated ingestion for ICU time-series.
-            \item \texttt{fed\_avg\_baseline.py}: Framework for model weight aggregation.
-            \item \texttt{attention\_viz.py}: Logic for extracting and plotting attention weights.
-        \end{itemize}
-    \end{itemize}
-    \centering
-    \vspace{0.4cm}
-    \begin{block}{Design Feasibility}
-        Proven through successful baseline training and verified mathematical convergence of the CUSUM trigger.
-    \end{block}
-\end{frame}
-
-% --- PRELIMINARY RESULTS ---
-\begin{frame}{Technical Validation: Preliminary Results}
+% --- EVALUATION STRATEGY ---
+\begin{frame}{Evaluation Strategy \& Expected Outcomes}
     \begin{columns}
         \begin{column}{0.5\textwidth}
-            \centering
-            \includegraphics[width=1\textwidth, trim={0 0 0 2cm}, clip]{drift_adaptation_graph.png}
+            \textbf{Evaluation Metrics:}
+            \begin{itemize}
+                \item \textbf{RMSE \& MAE:} To measure forecasting accuracy.
+                \item \textbf{Personalization Gain:} Computing improvement of local heads over basic FedAvg.
+                \item \textbf{Drift Detection Delay:} Number of epochs required to detect and adapt to synthetic physiological shifts.
+            \end{itemize}
         \end{column}
         \begin{column}{0.5\textwidth}
-            \textbf{Performance Analysis:}
+            \textbf{Theoretical Expected Outcomes:}
             \begin{itemize}
-                \item \textbf{FedAvg (Baseline):} Struggles to recover accuracy when customer distribution shifts.
-                \item \textbf{FPDAF (Proposed):} CUSUM trigger detects shift within 5 epochs $\rightarrow$ resets local head $\rightarrow$ recovers accuracy by \textbf{15\%} above baseline.
+                \item \textbf{FedAvg (Baseline):} We expect a sharp drop in accuracy when patient distribution shifts.
+                \item \textbf{FPDAF (Proposed):} CUSUM trigger is theoretically designed to detect the shift and reset the local head, rapidly restoring accuracy.
             \end{itemize}
-            \vspace{0.2cm}
-            \begin{table}
-                \centering
-                \tiny
-                \begin{tabular}{|l|c|c|}
-                    \hline
-                    \textbf{Method} & \textbf{RMSE} & \textbf{MAE} \\
-                    \hline
-                    FedAvg & 0.084 & 0.062 \\
-                    FedPer & 0.071 & 0.051 \\
-                    \textbf{FPDAF (Ours)} & \textbf{0.062} & \textbf{0.044} \\
-                    \hline
-                \end{tabular}
-            \end{table}
         \end{column}
     \end{columns}
 \end{frame}
+
+% --- TECHNICAL EVIDENCE ---
+\begin{frame}{Technical Evidence \& Project Status}
+    \begin{itemize}
+        \item \textbf{Repository Setup:} \texttt{github.com/aksharsakhi/23CSE399-Project-Phase-1}
+        \item \textbf{Phase 1 Progress:} 
+        \begin{itemize}
+            \item Finalized Domain Scope and Mathematical Models.
+            \item Designed the FPDAF architecture framework.
+            \item Researched and identified the MIMIC-III database for clinical simulation.
+        \end{itemize}
+        \item \textbf{Next Steps (Implementation Phase):}
+        \begin{itemize}
+            \item Develop data ingestion pipeline for ICU time-series.
+            \item Build FedAvg baseline framework in PyTorch/TensorFlow.
+            \item Implement CUSUM trigger logic mathematically in code.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
 
 % --- PROJECT ROADMAP ---
 \begin{frame}{Project Roadmap: Current Milestone}
