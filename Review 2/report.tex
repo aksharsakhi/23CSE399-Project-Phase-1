@@ -113,22 +113,20 @@ The FPDAF architecture is a split-layer design. The \textbf{Global Temporal Back
 
 \begin{figure}[H]
 \centering
-\begin{minipage}{0.48\textwidth}
-\centering
-\includegraphics[width=\linewidth]{architecture2.png}
-\caption{\small System Architecture highlighting global vs local separation.}
-\end{minipage}\hfill
-\begin{minipage}{0.48\textwidth}
-\centering
-\includegraphics[width=\linewidth]{Dataflow2.png}
-\caption{\small FPDAF System Dataflow Mapping.}
-\end{minipage}
+\includegraphics[width=0.85\linewidth]{architecture2.png}
+\caption{System Architecture highlighting separation of Global Backbone (server-synced) and Local Heads (hospital-isolated).}
 \end{figure}
 
 The \textbf{Attention Layer} sits atop the backbone to compute temporal context vectors based on recent physiological spikes, giving transparent $x_i$ timestamps feature importance. Finally, the \textbf{Personalization Head} is isolated completely to the hospital node; it never transfers its gradients to the server, ensuring the final clinical decision is strictly correlated to the local hospital's demographic distribution.
 
-\section{Summary of works completed / research findings etc}
-During this semester (Phase 1), the following milestones were completed:
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\linewidth]{Dataflow2.png}
+\caption{FPDAF System Dataflow Mapping - Illustrating end-to-end data processing.}
+\end{figure}
+
+\section{Summary of works completed / research findings (Technical Evidence)}
+During this semester (Phase 1), the following milestones were completed mapping to our \textbf{Technical Validation & Evidence} requirements:
 \begin{enumerate}[noitemsep, leftmargin=1.5em]
     \item \textbf{Domain Consolidation:} Successfully shifted use-case entirely into ICU Healthcare datasets.
     \item \textbf{Mathematical Definition:} Derived the CUSUM threshold trigger mechanism $S_t = \max(0, S_{t-1} + (e_t - \mu - k))$ specifically for linking to local model resets.
