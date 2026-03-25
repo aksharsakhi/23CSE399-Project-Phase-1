@@ -217,6 +217,21 @@ Balances privacy, efficiency, and interpretability in a single framework \\
     \end{columns}
 \end{frame}
 
+% --- DATA PREPROCESSING ---
+\begin{frame}{Data Preprocessing \& Imputation Pipeline}
+    \textbf{Challenge \& Why it looks like a mess:} 
+    Real clinical records in PhysioNet contain massive sparsity and \texttt{NaN} gaps. High-frequency vitals (Heart Rate) are logged continuously by bedside monitors, while low-frequency lab tests (Bilirubin, Calcium) are only drawn manually by nurses every 12-24 hours.
+    
+    \vspace{0.2cm}
+    \textbf{Engineered PyTorch Pipeline:}
+    We developed a local Python preprocessing engine to dynamically ingest the 40,000+ `.psv` files and render clean PyTorch Tensors:
+    \begin{enumerate}
+        \item \textbf{Forward-Filling (Time-Series Carry):} Carries the last-known medical lab value forward in the sequence until a new blood measurement is taken.
+        \item \textbf{Backward-Filling \& Zero-Padding:} Synthesizes initial missing conditions and replaces completely unmeasured lab variables with \texttt{0}s to prevent Neural Network failure.
+        \item \textbf{Tensor Standardization:} Aggregates parameters via \texttt{StandardScaler} so highly varying units (e.g., Blood Pressure vs pH levels) do not skew the FPDAF gradient descent.
+    \end{enumerate}
+\end{frame}
+
 % --- EXECUTION PLAN ---
 \begin{frame}{Execution Plan (Components \& Flow)}
     \small
