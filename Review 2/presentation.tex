@@ -95,30 +95,76 @@
     \end{itemize}
 \end{frame}
 
-% --- LITERATURE SURVEY (TABULATED) ---
-\begin{frame}{Existing Literature Survey}
-    \tiny
-    \resizebox{\textwidth}{!}{%
-    \begin{tabular}{p{0.6cm}p{2.6cm}p{3.2cm}p{2.8cm}p{2.6cm}p{2.8cm}}
-    \toprule
-    \textbf{No.} & \textbf{Author/Year} & \textbf{Method Used} & \textbf{Research Focus} & \textbf{Limitations} & \textbf{Research Gap} \\
-    \midrule
-    \textbf{1} & McMahan et al. (PMLR, 2017) & FedAvg; local SGD; model averaging & Privacy-preserving decentralized training & No personalization or explainability & Extend FedAvg with personalization and analytics. \\
-    \midrule
-    \textbf{2} & Arivazhagan et al. (AISTATS, 2020) & FedPer with shared base and local heads & Personalized federated learning & No drift handling; no analytics layer & Add drift-aware personalized forecasting. \\
-    \midrule
-    \textbf{3} & Jothimurugesan et al. (Springer, 2022) & CDA-FedAvg; CUSUM drift detection & Concept drift handling in federated learning & High computation; no time-series focus & Drift-aware explainable time-series analytics. \\
-    \midrule
-    \textbf{4} & Kalakoti et al. (Elsevier, 2025) & FedXAI; SHAP; LIME; FedAvg & Explainable federated intrusion detection & Classification-only; not time-series based & XAI for federated time-series forecasting. \\
-    \midrule
-    \textbf{5} & Yin et al. (arXiv, 2025) & Attention-LSTM; FedAvg; sliding window & Early sepsis prediction & Black-box predictions without patient adaptation & Explainable, adaptive clinical forecasting. \\
-    \bottomrule
-    \end{tabular}
-    }
-    \vspace{0.3cm}
-    \begin{block}{Identified Research Gap}
-        No existing framework simultaneously integrates \textbf{Personalization + Active Concept Drift Monitoring + Explainable Attention} specifically for Healthcare Time-Series Data.
-    \end{block}
+% --- RESEARCH GAP ---
+\begin{frame}{Research Gap Analysis}
+\tiny
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{p{3.8cm}p{4.2cm}p{4.4cm}p{4.2cm}}
+\toprule
+\textbf{Existing Research} &
+\textbf{Identified Limitations / Gap} &
+\textbf{Need / Why Gap Matters} &
+\textbf{Project Contribution} \\
+\midrule
+
+Centralized ML and on-device analytics systems
+(Papers 1, 17, 19, 23) &
+Do not support federated learning or privacy-preserving collaboration &
+Centralized data sharing violates privacy laws and is unsuitable for distributed environments &
+Enables collaborative analytics using federated learning without sharing raw data \\
+
+\midrule
+Basic Federated Learning frameworks (FedAvg)
+(Papers 2, 4, 5) &
+Lack personalization, explainability, and analytics-level insights &
+A single global model performs poorly on heterogeneous client data &
+Introduces personalized local models with global aggregation and analytics \\
+
+\midrule
+Personalized Federated Learning methods
+(FedPer, pFL) (Papers 3, 10, 16, 20) &
+Personalization exists but lacks explainability and drift awareness &
+Without explainability and adaptation, predictions cannot be trusted over time &
+Combines personalization with explainable analytics and drift handling \\
+
+\midrule
+Concept drift–aware FL approaches
+(Papers 2, 9) &
+Drift handling is not integrated with analytics or forecasting pipelines &
+Real-world data behavior changes over time, degrading prediction accuracy &
+Integrates drift detection with time-series analytics and forecasting \\
+
+\midrule
+Federated Time-Series Forecasting works
+(Papers 6, 8, 10–15, 18) &
+Primarily focus on accuracy; limited explainability and personalization &
+Stakeholders require transparency to trust and act on predictions &
+Provides explainable insights alongside federated forecasting \\
+
+\midrule
+Explainable AI approaches
+(Papers 7, 17, 19, 23) &
+Explainability mostly exists in centralized or non-time-series settings &
+Explainability is critical for trust in sensitive domains like healthcare and energy &
+Adapts explainable AI techniques to federated time-series analytics \\
+
+\midrule
+Healthcare-focused FL applications
+(Papers 9, 21, 22, 24, 25) &
+Application-specific solutions with limited generalization &
+A reusable framework is required across multiple domains &
+Proposes a domain-agnostic federated analytics framework \\
+
+\midrule
+Security- and privacy-enhanced FL methods
+(Papers 13, 24, 25) &
+High complexity and low usability despite strong privacy guarantees &
+Practical systems must balance privacy, performance, and usability &
+Balances privacy, efficiency, and interpretability in a single framework \\
+
+\bottomrule
+\end{tabular}
+}
 \end{frame}
 
 % --- DATASET USED ---
@@ -251,6 +297,18 @@
             \hline
         \end{tabular}
     \end{table}
+\end{frame}
+
+% --- REFERENCES ---
+\begin{frame}[allowframebreaks]{References}
+    \tiny
+    \nocite{churaev2023,jothimurugesan2022,arivazhagan2020,mcmahan2017,liu2022}
+    \nocite{yang2025mvfl,kalakoti2025fedxai,noseda2025financial,karamanlioglu2025clinical,wang2025personalized}
+    \nocite{abdelsater2024llama,maher2025automl,gupta2025privacy,yuan2024trend,tang2025horizon}
+    \nocite{zhang2022multitask,larocca2021attention,amato2023clustering,larocca2022shap,bernardi2023adaptive}
+    \nocite{dusing2025sepsis,qayyum2023fedsepsis,lei2025supervised,pan2025multiprog,maurya2025secure}
+    \bibliographystyle{IEEEtran}
+    \bibliography{ref}
 \end{frame}
 
 % --- THANK YOU ---
