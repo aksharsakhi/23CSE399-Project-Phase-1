@@ -307,19 +307,19 @@ Balances privacy, efficiency, and interpretability in a single framework \\
     \begin{table}
         \centering
         \small
-        \begin{tabular}{|p{4cm}|p{9cm}|}
+        \begin{tabular}{|p{3.5cm}|p{9.5cm}|}
             \hline
             \textbf{Target Area} & \textbf{Objective for Phase 2} \\
             \hline
-            \textbf{Dataset Setup} & Download and process the full PhysioNet 2019 ICU Time-Series database. \\
+            \textbf{Data Preprocessing} & Implement normalization, handle missing values, and construct sequential time windows for the acquired PhysioNet dataset. \\
             \hline
-            \textbf{Baseline Benchmarking} & Train standard \textit{FedAvg} on PyTorch to establish RMSE/MAE baselines. \\
+            \textbf{Baseline Training} & Code standard \textit{FedAvg} on PyTorch locally to establish stable forecasting baselines. \\
             \hline
-            \textbf{Sub-Model Integration} & Code the \textit{CUSUM} mathematical trigger and the \textit{Attention} weight visualizer. \\
+            \textbf{FPDAF Integration} & Embed \textit{CUSUM} threshold triggering and \textit{Attention} layers into the personalized model heads. \\
             \hline
-            \textbf{Simulation Runs} & Simulate 3-5 distinct Hospital "Clients" locally to monitor Federated convergence. \\
+            \textbf{Federated Simulation} & Deploy 3-5 independent simulated Hospital "Clients" to test concept drift adaptation latency. \\
             \hline
-            \textbf{Final Evaluation} & Quantify percentage gains in accuracy and personalization against baselines. \\
+            \textbf{Evaluation Metrics} & Benchmark system performance utilizing \textbf{Accuracy, Precision, Recall, F1-Score, and AUC-ROC}. \\
             \hline
         \end{tabular}
     \end{table}
