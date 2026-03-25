@@ -81,6 +81,30 @@
     \end{block}
 \end{frame}
 
+% --- REVIEW 1 COMMENTS ---
+\begin{frame}{Addressing Review 1 Panel Comments}
+    \small
+    \begin{table}
+        \centering
+        \renewcommand{\arraystretch}{1.3}
+        \begin{tabular}{|p{5.5cm}|p{8cm}|}
+            \hline
+            \textbf{Review 1 Panel Feedback} & \textbf{Adjustments Made for Review 2} \\
+            \hline
+            \textbf{1. Define application scope strictly} & Narrowed domain completely out of generalized data into \textbf{Healthcare ICU Time-Series (Sepsis / Deterioration Profiling)}. \\
+            \hline
+            \textbf{2. Target a well-defined dataset} & Selected the \textbf{PhysioNet Challenge 2019 Dataset} (40,000+ real multivariate ICU records). \\
+            \hline
+            \textbf{3. Articulate research novelty \& Drift} & Defined the exact \textbf{CUSUM mathematical mechanism} triggering dynamic retraining when a patient's physiological state aggressively changes. \\
+            \hline
+            \textbf{4. Improve technical depth \& XAI} & Designed a formal split-architecture using \textbf{Temporal Attention} so clinicians visually see \textit{which} vital signs cause risk alerts. \\
+            \hline
+            \textbf{5. Comparative FL Discussion} & Contrasted generalized \textit{FedAvg} with our localized \textit{FedPer} nodes to prove handling of hospital heterogeneity. \\
+            \hline
+        \end{tabular}
+    \end{table}
+\end{frame}
+
 % --- INTRODUCTION AND BACKGROUND ---
 \begin{frame}{Introduction and Background}
     \textbf{Introduction to the Problem:}
@@ -193,6 +217,21 @@ Balances privacy, efficiency, and interpretability in a single framework \\
     \end{columns}
 \end{frame}
 
+% --- DATA PREPROCESSING ---
+\begin{frame}{Data Preprocessing \& Imputation Pipeline}
+    \textbf{Challenge \& Why it looks like a mess:} 
+    Real clinical records in PhysioNet contain massive sparsity and \texttt{NaN} gaps. High-frequency vitals (Heart Rate) are logged continuously by bedside monitors, while low-frequency lab tests (Bilirubin, Calcium) are only drawn manually by nurses every 12-24 hours.
+    
+    \vspace{0.2cm}
+    \textbf{Engineered PyTorch Pipeline:}
+    We developed a local Python preprocessing engine to dynamically ingest the 40,000+ `.psv` files and render clean PyTorch Tensors:
+    \begin{enumerate}
+        \item \textbf{Forward-Filling (Time-Series Carry):} Carries the last-known medical lab value forward in the sequence until a new blood measurement is taken.
+        \item \textbf{Backward-Filling \& Zero-Padding:} Synthesizes initial missing conditions and replaces completely unmeasured lab variables with \texttt{0}s to prevent Neural Network failure.
+        \item \textbf{Tensor Standardization:} Aggregates parameters via \texttt{StandardScaler} so highly varying units (e.g., Blood Pressure vs pH levels) do not skew the FPDAF gradient descent.
+    \end{enumerate}
+\end{frame}
+
 % --- EXECUTION PLAN ---
 \begin{frame}{Execution Plan (Components \& Flow)}
     \small
@@ -293,7 +332,7 @@ Balances privacy, efficiency, and interpretability in a single framework \\
         \item \textbf{Architecture Design:} Finalized the multi-layered system diagram.
         \item \textbf{Repository Framework Setup (Baseline Code):}
         \begin{itemize}
-            \item Initialized project GitHub repository.
+            \item Initialized project GitHub repository \\ (\url{https://github.com/aksharsakhi/23CSE399-Project-Phase-1}).
             \item Pulled and set up the foundational **FedAvg-PyTorch base framework**.
             \item Built initial custom PyTorch stubs simulating the isolated `LocalPersonalizedModel` and a synthetic `SimulatedICUDataset` proxy.
         \end{itemize}

@@ -1,54 +1,55 @@
-# FPDAF: Explainable Federated Analytics for Multivariate Time-Series Forecasting
+# FPDAF: Explainable Federated Learning for Healthcare Time-Series Forecasting
 
 ## Project Overview
-This repository contains the work for **23CSE399 -- Project Phase 1** at **Amrita Vishwa Vidyapeetham**. Our research focuses on developing a unified federated architecture—**FPDAF (Federated Personalized Drift-Aware Attention Framework)**. This system integrates:
-1.  **Personalization** for client heterogeneity.
-2.  **CUSUM-based Concept Drift Adaptation**.
-3.  **Attention-driven Explainability** for Multivariate Time-Series (MVTS) forecasting.
+This repository contains the evolving work for **23CSE399 -- Project Phase 1** at **Amrita Vishwa Vidyapeetham**. Our research proposes a highly specialized decentralized architecture: the **Federated Personalized Drift-Aware Attention Framework (FPDAF)**. 
 
-The project specifically targets **Smart Energy Grids (Household Load Forecasting)** to solve accuracy-degradation issues caused by non-IID distributions and seasonal behavior shifts.
+The domain of this project is strictly **Healthcare Intensive Care Unit (ICU) Patient Monitoring**, utilizing the **PhysioNet Challenge 2019 (Early Prediction of Sepsis)** multivariate time-series database.
 
----
-
-## 🏗 System Architecture & Workflow
-
-### 🛠 Architecture Overview
-The framework consists of a **Shared Global Backbone** capturing temporal periodicity and a **Personalization Head** mapped to specific household energy consumption habits.
-
-![System Architecture](Review%202/SA_1.png)
-
-### 📈 Adaptive Workflow
-We integrate the **Cumulative Sum (CUSUM)** algorithm directly into the federated training loop to trigger specialized retraining when local behavioral shifts (e.g., festive seasons, holidays) are detected.
-
-![Adaptive Workflow](Review%202/AWF.png)
+We aim to solve three critical clinical ML challenges:
+1.  **Strict Privacy Preservation:** Training deep learning predictive models across entirely siloed hospitals without violating HIPAA/GDPR data-sharing laws.
+2.  **Hospital Heterogeneity:** Solving the "Global Model Failure" phenomenon where generalized FedAvg collapses due to distinct regional clinical treatment protocols, solved via **Local Personalization Heads** (FedPer architecture).
+3.  **Temporal Patient Deterioration:** Handling rapid physiological degradation over time using continuous **CUSUM Concept Drift Monitoring** tied directly to local attention-driven model retraining.
 
 ---
 
-## 🚀 Key Features & Novelty
-- **Privacy Preservation**: raw sensitive meter data never leaves the household gateway; gradients are protected via **Laplacian Differential Privacy ($\epsilon$-DP)**.
-* **Non-IID Handling**: Addresses the 15%+ error gap in standard FedAvg by using localized personalized layers (FedPer).
-* **Drift-Awareness**: Actively monitors model residuals to detect environmental shifts before they pollute the global model.
-* **Interpretable Analytics**: Temporal attention weights highlight exactly *when* demand spikes originate, building trust with grid operators.
+## 🏗 System Architecture & Dataflow
+
+### 🏥 Architecture Overview
+The framework intentionally decouples the neural network graph. A **Shared Global Temporal Backbone** captures generalized physiological boundaries (e.g., normal adult human heart rates). An extreme **Personalization Head** remains strictly isolated inside the hospital edge server, mapping exact predictions to the local localized cohort distributions. 
+
+![System Architecture](Review%202/architecture2.png)
+
+### 📊 Adaptive System Dataflow
+The runtime dataflow processes temporal multivariate arrays (Heart Rate, BP, SpO2) sequentially. A **CUSUM** algorithm actively inspects the residual prediction streams $e_t$ inside the client. If cumulative error exceeds a statistical threshold $H$, a localized concept drift is declared, enforcing a dynamic un-freezing of the personalization head to adapt to the patient's deteriorating condition immediately.
+
+![System Dataflow](Review%202/Dataflow2.png)
+
+---
+
+## 🚀 Key Framework Features
+- **Decentralization (FedAvg)**: Only encrypted local gradients ($w_{t+1}^k$) are securely uploaded to the central aggregation server.
+- **Mathematical Drift Triggers**: Driven by $S_t = \max(0, S_{t-1} + (e_t - \mu - k))$ rather than arbitrary epoch restarts.
+- **Interpretable Clinical Analytics**: Time-Series Attention Weights highlight specifically *which historical vital sign spike* (e.g., sudden lack of oxygen saturation) triggered the eventual risk prediction, ensuring XAI transparency for doctors.
 
 ---
 
 ## 📂 Repository Structure
-* **[Review 1/](Review%201/)**: Baseline research and Literature Survey of 25 peer-reviewed papers.
-  * `literature_survey_summary.md`: Detailed breakdown of 25 research gaps.
-* **[Review 2/](Review%202/)**: Technical progress addressing panel feedback.
-  * `report.tex`: 2-page Technical Summary of FPDAF.
-  * `presentation.tex`: Beamer Slides for Technical Progress.
-  * `ref.bib`: Unified bibliography for the phase.
-  * `review_one_comments_addressed.md`: Feedback traceability matrix.
+* **[Implementation/](Implementation/)**: (Phase 2 Initialization)
+  * `models.py`: Structural code initializing PyTorch FPDAF modules (LSTM backbone + Local Head).
+  * `fed_train.py`: Basic Federated Learning loop simulating PyTorch gradient aggregation.
+  * `data_simulation.py`: Sub-routine scripts for simulating ICU vitals prior to full PhysioNet ingestion.
+* **[Review 1/](Review%201/)**: Baseline literature survey mapping 25 peer-reviewed papers.
+* **[Review 2/](Review%202/)**: Technical progress and methodology documents.
+  * `report.pdf` & `presentation.pdf`: The final formulated Architecture mappings and execution plans natively compiled in LaTeX.
 
 ---
 
-## 📊 Phase 1 Implementation Status (Review 2 Update)
-- [x] **Literature Survey Completion** (25 Peer-reviewed papers)
-- [x] **Domain definition**: Residential Energy Analytics (Pecan Street Dataset)
-- [x] **Mathematical Modeling**: CUSUM-FL integration logic finalized.
-- [x] **Baseline Simulation**: Initial LSTM-FedAvg benchmarks established.
-- [p] **Technical Proof**: Differential Privacy noise layers (In-progress).
+## 📈 Phase 1 Accomplishments & Phase 2 Roadmap
+- [x] **Problem Formulation:** Redefined bounds directly targeting Healthcare Time-Series.
+- [x] **Conceptual Architecture:** Finalized the split-server decentralized blueprint.
+- [x] **Mathematical Definitions:** Extracted the necessary CUSUM statistical triggers.
+- [x] **Baseline Code Initialization:** Bootstrapped the GitHub PyTorch environment.
+- [ ] **Phase 2 Pipeline (Pending):** Implement PhysioNet normalization sequences, simulate local PyTorch hospital clients, and rigorously benchmark across (Accuracy, Precision, Recall, F1-Score, and AUC-ROC). 
 
 ---
 
