@@ -96,7 +96,7 @@ Continuous monitoring systems in Intensive Care Units (ICUs) collect immense str
 Our literature review explored standard Federated methods. FedAvg (McMahan 2017) trains efficiently but lacks personalization. FedPer (Arivazhagan 2020) personalizes models to local distributions but lacks any mathematical mechanism for tracking concept drift over time. FedXAI works (Kalakoti 2025) focus mostly on classification datasets, not complex high-frequency critical care time-series. Thus, a significant gap exists in achieving privacy, personalization, drift monitoring, and clinical explainability simultaneously.
 
 \section{Execution plan}
-The subdomains required to solve this problem include \textbf{Data Engineering} (MIMIC-III ingestion, structuring temporal windows), \textbf{Deep Learning Architecture} (LSTM backbone and Softmax attention mechanics), \textbf{Decentralized Systems} (FedAvg aggregation protocols), \textbf{Model Customization} (extracting independent local decision heads), and \textbf{Bayesian Statistics/Math} (using CUSUM residual monitoring). 
+The subdomains required to solve this problem include \textbf{Data Engineering} (PhysioNet Challenge 2019 dataset ingestion, structuring temporal windows), \textbf{Deep Learning Architecture} (LSTM backbone and Softmax attention mechanics), \textbf{Decentralized Systems} (FedAvg aggregation protocols), \textbf{Model Customization} (extracting independent local decision heads), and \textbf{Bayesian Statistics/Math} (using CUSUM residual monitoring). 
 
 Our plan mapped these subdomains to execution steps: initially solidifying the theoretical bounds and mathematical triggers in Phase 1, followed by developing the PyTorch dataset pipeline, establishing the generic FedAvg baseline model locally, and finally attaching our novel drift-detector and attention overlays in Phase 2.
 
@@ -129,6 +129,6 @@ During this semester (Phase 1), the following milestones were completed:
 \end{enumerate}
 
 \section{Plans for the oncoming semesters}
-The comprehensive plan for Phase 2 includes processing the real Mimic-III ICU Time-Series dataset. The team will construct the FedAvg base control and train the custom FPDAF model across simulated partitioned nodes using PyTorch. Finally, experiments measuring RMSE, MAE, Personalization Gain, and Drift Recovery Delay will be formally documented, benchmarked, and synthesized for final presentation.
+The comprehensive plan for Phase 2 includes processing the complete \textbf{PhysioNet Challenge 2019 (Sepsis Prediction)} open-access dataset. The team will construct the FedAvg base control and train the custom FPDAF model across simulated partitioned nodes using PyTorch. Finally, experiments measuring RMSE, MAE, Personalization Gain, and Drift Recovery Delay will be formally documented, benchmarked, and synthesized for final presentation.
 
 \end{document}

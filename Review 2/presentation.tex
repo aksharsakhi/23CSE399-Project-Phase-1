@@ -123,6 +123,33 @@
     \end{block}
 \end{frame}
 
+% --- DATASET USED ---
+\section{Dataset Selection}
+\begin{frame}{Dataset: PhysioNet Challenge 2019 (Sepsis Prediction)}
+    \begin{columns}
+        \begin{column}{0.65\textwidth}
+            \textbf{Dataset Overview:}
+            \begin{itemize}
+                \item \textbf{Source:} PhysioNet (Public Healthcare Dataset).
+                \item \textbf{Data Type:} Real-world multivariate ICU patient monitoring time-series.
+                \item \textbf{Structure:} ~40,000 patient files (\texttt{.psv}), with each row representing one hourly observation.
+                \item \textbf{Key Features:} Heart Rate, BP, SpO2, Temperature, ICULOS.
+                \item \textbf{Target:} \texttt{SepsisLabel} (predicting deterioration).
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.35\textwidth}
+            \begin{block}{Why PhysioNet?}
+                \small
+                \begin{itemize}
+                    \item \textbf{Heterogeneity:} \texttt{setA} \& \texttt{setB} come from different hospitals (perfect for FL).
+                    \item \textbf{Time-Series:} Sequences support LSTM \& Drift tracking.
+                    \item \textbf{Clinical:} Interpretable vitals support our XAI mechanism.
+                \end{itemize}
+            \end{block}
+        \end{column}
+    \end{columns}
+\end{frame}
+
 % --- 3. EXECUTION PLAN ---
 \section{Execution Plan}
 \begin{frame}{3. Execution Plan (Components \& Flow)}
@@ -133,7 +160,7 @@
             \hline
             \textbf{Subdomain} & \textbf{Matching Components Identified} & \textbf{Execution Target} \\
             \hline
-            \textbf{Data Engineering} & MIMIC-III database, Time-series normalization, Sequential chunking. & Preprocessing Pipeline \\
+            \textbf{Data Engineering} & PhysioNet Sepsis Database, Time-series normalization, Sequential chunking. & Preprocessing Pipeline \\
             \hline
             \textbf{Deep Learning Base} & LSTM/Transformer backbone, Temporal Attention Layer. & Global Model \\
             \hline
@@ -214,7 +241,7 @@
             \hline
             \textbf{Target Area} & \textbf{Objective for Phase 2} \\
             \hline
-            \textbf{Dataset Setup} & Download and process the full MIMIC-III ICU Time-Series database. \\
+            \textbf{Dataset Setup} & Download and process the full PhysioNet 2019 ICU Time-Series database. \\
             \hline
             \textbf{Baseline Benchmarking} & Train standard \textit{FedAvg} on PyTorch to establish RMSE/MAE baselines. \\
             \hline
