@@ -76,60 +76,59 @@ CB.SC.U4CSE23753 & V.Chakravarthy & & & \\
 \vspace{0.3cm}
 
 % =========================================================================================
-% 1. PROBLEM FORMULATION & GAP
+% SECTIONS BASED ON COORDINATOR'S DIRECTIVE
 % =========================================================================================
-\section{Problem Formulation \& Research Gap}
 
-\textbf{Healthcare Context:} In Intensive Care Units (ICUs), continuous monitoring of patient vitals (Heart Rate, Blood Pressure, Oxygen Saturation) generates high-frequency multivariate time-series data. Predicting life-threatening risks (e.g., Sepsis, Cardiac Arrest) is critical for early intervention.
+\section{Project Proposal and objectives}
+\textbf{Overall Project Idea:} To design a fully decentralized, privacy-preserving \textbf{Federated Personalized Drift-Aware Attention Framework (FPDAF)} specifically tailored for multivariate healthcare time-series analysis (e.g., ICU patient risk monitoring and forecasting).
 
-\textbf{The Challenges:}
+\textbf{Objectives to Achieve:}
 \begin{enumerate}[noitemsep, leftmargin=1.5em]
-    \item \textbf{Privacy Constraints:} Legal frameworks (HIPAA, GDPR) prohibit sharing raw patient data between hospitals.
-    \item \textbf{Patient Heterogeneity:} Differences in patient demographics, medical history, and hospital protocols create non-IID data distributions.
-    \item \textbf{Internal Concept Drift:} A patient’s physiological state shifts over time (deterioration vs. recovery), rendering static models obsolete.
-    \item \textbf{Explainability Need:} Clinicians require transparent reasoning (XAI) to trust AI-driven risk alerts.
+    \item Enable cross-hospital predictive modeling on patient data without violating HIPAA/GDPR privacy constraints.
+    \item Manage high patient heterogeneity across hospitals using explicit \textbf{Local Personalization Heads}.
+    \item Detect when a patient's core physiological state changes using \textbf{CUSUM Drift Detection} algorithms to automatically retrain and dynamically adapt models locally.
+    \item Integrate \textbf{Temporal Attention weights} to provide clinicians with transparent insights into exactly \textit{what} historical vital signs caused a risk prediction.
 \end{enumerate}
 
-\textbf{Research Gap:} Existing Federated Learning (FL) methods like \textit{FedAvg} lack personalization and drift awareness, while personalized methods like \textit{FedPer} do not provide explainability or monitor for active behavioral shifts. Our proposed \textbf{FPDAF} (Federated Personalized Drift-Aware Attention Framework) bridges this gap by integrating all four components into a unified healthcare analytics pipeline.
+\section{Introduction and Background}
+Continuous monitoring systems in Intensive Care Units (ICUs) collect immense streams of physiological data (HR, BP, SpO2). Early detection of patient deterioration using Deep Learning models can prevent fatalities like Sepsis or Cardiac Arrest. However, massive clinical models require centralized data, violating privacy laws. While Federated Learning (e.g., FedAvg) resolves the data-sharing issue, it fails to account for non-IID data distributions (how demographics and hospital protocols vary significantly between facilities).
 
-% =========================================================================================
-% 2. TECHNICAL VALIDATION & METHODOLOGY
-% =========================================================================================
-\section{Technical Validation \& Methodology}
+Our literature review explored standard Federated methods. FedAvg (McMahan 2017) trains efficiently but lacks personalization. FedPer (Arivazhagan 2020) personalizes models to local distributions but lacks any mathematical mechanism for tracking concept drift over time. FedXAI works (Kalakoti 2025) focus mostly on classification datasets, not complex high-frequency critical care time-series. Thus, a significant gap exists in achieving privacy, personalization, drift monitoring, and clinical explainability simultaneously.
 
-\textbf{Proposed Architecture (FPDAF):} The framework utilizes a split-layer Federated Learning approach. A \textbf{Global Temporal Backbone} (LSTM/Transformer) captures general medical patterns across hospitals, while local \textbf{Personalization Heads} and \textbf{Temporal Attention Layers} adapt to specific patient distributions.
+\section{Execution plan}
+The subdomains required to solve this problem include \textbf{Data Engineering} (MIMIC-III ingestion, structuring temporal windows), \textbf{Deep Learning Architecture} (LSTM backbone and Softmax attention mechanics), \textbf{Decentralized Systems} (FedAvg aggregation protocols), \textbf{Model Customization} (extracting independent local decision heads), and \textbf{Bayesian Statistics/Math} (using CUSUM residual monitoring). 
+
+Our plan mapped these subdomains to execution steps: initially solidifying the theoretical bounds and mathematical triggers in Phase 1, followed by developing the PyTorch dataset pipeline, establishing the generic FedAvg baseline model locally, and finally attaching our novel drift-detector and attention overlays in Phase 2.
+
+\section{Fundamentals which you have learned in the semester}
+To prepare for implementation, the team completed an extensive curriculum covering the fundamental requirements:
+\begin{itemize}[noitemsep, leftmargin=1.5em]
+    \item \textbf{Textbooks \& Papers:} Thoroughly studied the foundational architectures of Federated Learning (FedAvg, pFL, and FedPer) to mathematically understand secure aggregation.
+    \item \textbf{PyTorch Engineering:} Used MOOCs and official documentation to learn how to explicitly sever Neural Network graphs in PyTorch (allowing us to separate "Global Backbones" from isolated "Local Heads") and simulate custom training loops iteratively without data centralization.
+    \item \textbf{Statistical Mechanics:} Learned the equations and thresholds defining the Cumulative Sum (CUSUM) drift detection standard to track temporal shifts in residual streams.
+\end{itemize}
+
+\section{Architecture diagram and explanation of the design}
+The FPDAF architecture is a split-layer design. The \textbf{Global Temporal Backbone} consists of the LSTM layers responsible for learning generalized physiological laws across all participating hospitals.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.65\linewidth]{healthcare_fl_architecture.png}
-\caption{System Architecture showing Federated Aggregation with Local Personalization and Attention Mechanism at each hospital node.}
+\includegraphics[width=0.6\linewidth]{healthcare_fl_architecture.png}
+\caption{System Architecture highlighting separation of Global Backbone (server-synced) and Local Heads (hospital-isolated).}
 \end{figure}
 
-\textbf{Methodological Novelty:}
-\begin{itemize}[leftmargin=1.5em]
-    \item \textbf{CUSUM-based Drift Detection:} We monitor the cumulative sum of prediction residuals $S_t = \max(0, S_{t-1} + (e_t - \mu - k))$. When $S_t$ exceeds a threshold $H$, the local personalization head is reset and retrained on recent data, ensuring the model tracks the latest patient state.
-    \item \textbf{Attention-Driven Explainability:} The attention mechanism computes weights $\alpha_t$ for historical vitals, allowing clinicians to see which specific physiological event (e.g., a sudden BP drop at T-2 hours) triggered a risk prediction.
-\end{itemize}
+The \textbf{Attention Layer} sits atop the backbone to compute temporal context vectors based on recent physiological spikes, giving transparent $x_i$ timestamps feature importance. Finally, the \textbf{Personalization Head} is isolated completely to the hospital node; it never transfers its gradients to the server, ensuring the final clinical decision is strictly correlated to the local hospital's demographic distribution.
 
-% =========================================================================================
-% 3. TECHNICAL EVIDENCE & PROGRESS
-% =========================================================================================
-\section{Technical Evidence \& Implementation Status}
-
-\textbf{Project Milestones & Next Steps:}
-The primary deliverable for Phase 1 is the finalized mathematical framework, gap formulation, and system architectural formulation. Following this review, Phase 2 will commence with the following steps:
+\section{Summary of works completed / research findings etc}
+During this semester (Phase 1), the following milestones were completed:
 \begin{enumerate}[noitemsep, leftmargin=1.5em]
-    \item \textbf{Data Pipeline Development:} Building ingestion and preprocessing scripts for the MIMIC-III database.
-    \item \textbf{Baseline Implementation:} Establishing FedAvg benchmarks using PyTorch to quantify standard performance.
-    \item \textbf{CUSUM Integration:} Translating the mathematical drift detection triggers into code.
+    \item \textbf{Domain Consolidation:} Successfully shifted use-case entirely into ICU Healthcare datasets.
+    \item \textbf{Mathematical Definition:} Derived the CUSUM threshold trigger mechanism $S_t = \max(0, S_{t-1} + (e_t - \mu - k))$ specifically for linking to local model resets.
+    \item \textbf{Architecture Creation:} Finalized the fully decentralized, visually mapped FPDAF blueprint.
+    \item \textbf{PyTorch Baseline Simulation Setup:} Created the GitHub repository, synced a foundational FedAvg-PyTorch implementation baseline, mocked a \texttt{SimulatedICUDataset} class, and began structurally coding the decoupled model heads in Python.
 \end{enumerate}
 
-
-\section{Conclusion \& Deliverables}
-Phase 1 has successfully finalized the problem formulation, mathematical framework, and system design. The upcoming phase will focus on scaling the framework to multi-hospital simulation and quantifying the personalization gain on heterogeneous patient cohorts.
-
-\nocite{mcmahan2017,arivazhagan2020,jothimurugesan2022,larocca2021attention}
-\bibliographystyle{IEEEtran}
-\bibliography{ref}
+\section{Plans for the oncoming semesters}
+The comprehensive plan for Phase 2 includes processing the real Mimic-III ICU Time-Series dataset. The team will construct the FedAvg base control and train the custom FPDAF model across simulated partitioned nodes using PyTorch. Finally, experiments measuring RMSE, MAE, Personalization Gain, and Drift Recovery Delay will be formally documented, benchmarked, and synthesized for final presentation.
 
 \end{document}

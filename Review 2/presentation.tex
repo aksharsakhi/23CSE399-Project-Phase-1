@@ -25,7 +25,7 @@
     \begin{tikzpicture}[remember picture,overlay]
         \node[fill=amritaMaroon, text=white, font=\bfseries\footnotesize, anchor=north east, rounded corners=2pt, inner sep=5pt]
         at ($(current page.north east) + (-0.2cm,-0.2cm)$)
-        {Type 1: Research Project | Review 2};
+        {Type 1: Research Project | Phase 1 Review 2};
     \end{tikzpicture}
 
     \centering
@@ -35,7 +35,7 @@
 
     {\Large \textbf{\textcolor{amritaMaroon}{Explainable Federated Learning for Healthcare Time-Series Forecasting with Personalized Drift Adaptation}}} \\
     \vspace{0.1cm}
-    {\small \textbf{Team Number: 28 | Technical Progress Review}} \\
+    {\small \textbf{Team Number: 28}} \\
     \vspace{0.2cm}
 
     \begin{table}
@@ -65,170 +65,167 @@
     }
 \end{frame}
 
-% --- PANEL COMMENTS RESPONSE ---
-\begin{frame}{Addressing Review 1 Comments}
-    \textbf{Improvements Made based on Feedback:}
+% --- 1. PROJECT PROPOSAL AND OBJECTIVES ---
+\section{Project Proposal and Objectives}
+\begin{frame}{1. Project Proposal and Objectives}
+    \textbf{Overall Project Idea:}
+    To design a completely decentralized, \textbf{Federated Personalized Drift-Aware Attention Framework (FPDAF)} tailored specifically for Multivariate Healthcare Time-Series (e.g., predicting ICU risks like Sepsis from patient vitals). 
+
     \vspace{0.3cm}
-    \begin{itemize}
-        \item \textbf{Narrowed Domain:} Focused on \textbf{Healthcare (Patient Monitoring)} in ICU settings.
-        \item \textbf{Clear Use Case:} ICU patient risk prediction (e.g., Sepsis detection) using vital signals.
-        \item \textbf{Novelty Defined:} Explicit role of \textbf{CUSUM Drift Detection} for adapting to changing patient physiological states.
-        \item \textbf{Explainability:} Integrated \textbf{Temporal Attention} to map vitals to risk scores.
-        \item \textbf{Privacy:} Clarified that raw hospital data never leaves the local institution; only gradients/weights are shared.
-    \end{itemize}
-\end{frame}
-
-% --- PROBLEM FORMULATION ---
-\begin{frame}{Technical Validation: Problem Formulation}
-    \begin{columns}
-        \begin{column}{0.6\textwidth}
-            \textbf{Research Problem:}
-            \textit{How to build a privacy-preserving, personalized, and explainable forecasting system that adapts to changing patient conditions in distributed healthcare environments?}
-            
-            \vspace{0.3cm}
-            \textbf{Identified Gaps:}
-            \begin{itemize}
-                \item \textbf{Privacy vs. Collaboration:} Hospitals cannot share raw data.
-                \item \textbf{Non-IID Data:} Patients in different hospitals have diverse demographics.
-                \item \textbf{Concept Drift:} Patient health degrades/recovers over time (Concept Drift).
-                \item \textbf{Transparency:} Clinicians need to know \textit{why} a patient is at risk.
-            \end{itemize}
-        \end{column}
-        \begin{column}{0.4\textwidth}
-            \centering
-            \includegraphics[width=0.8\linewidth]{logo_square.png}\\
-            \vspace{0.2cm}
-            \begin{block}{The Gap}
-                No system combines \textbf{Privacy + Personalization + Drift Adaptation + Explainability}.
-            \end{block}
-        \end{column}
-    \end{columns}
-\end{frame}
-
-% --- OBJECTIVES & DELIVERABLES ---
-\begin{frame}{Objectives \& Deliverables}
-    \begin{block}{Primary Objectives}
+    \begin{block}{Objectives to Achieve}
         \begin{enumerate}
-            \item Design a \textbf{Federated LSTM} architecture for multivariate time-series.
-            \item Implement \textbf{Personalized Heads} to handle client heterogeneity.
-            \item Integrate \textbf{CUSUM Drift Detection} for real-time model adaptation.
-            \item Develop \textbf{Attention-based XAI} for clinical transparency.
+            \item \textbf{Privacy Preservation:} Train predictive models across multiple hospitals collaboratively without sharing raw patient data (Federated Learning).
+            \item \textbf{Personalization:} Use Local Personalization Heads to manage patient heterogeneity (Non-IID distributions).
+            \item \textbf{Drift Adaptation:} Implement CUSUM algorithms to detect when a patient's physiological state degrades and rapidly adapt the model locally.
+            \item \textbf{Clinical Trust:} Provide transparency using Temporal Attention mechanisms so doctors know \textit{why} the model predicted a risk.
         \end{enumerate}
     \end{block}
-    \vspace{0.2cm}
-    \begin{block}{Key Deliverables}
-        \begin{itemize}
-            \item \textbf{Phase 1:} Mathematical Framework & Architecture Design (Finalized).
-            \item \textbf{Phase 2:} Prototype implementation on MIMIC-III dataset (In-progress).
-            \item \textbf{Final:} Evaluation Report & Benchmarking against FedAvg/FedPer.
-        \end{itemize}
-    \end{block}
 \end{frame}
 
-% --- SYSTEM ARCHITECTURE ---
-\begin{frame}{Study Methodology: Proposed Architecture (FPDAF)}
-    \centering
-    \includegraphics[width=0.75\linewidth, height=0.7\textheight, keepaspectratio]{healthcare_fl_architecture.png}
-    \caption{\small \textbf{FPDAF Architecture:} Integrating Global Model Aggregation with Localized Personalization and Attention Mechanism.}
-\end{frame}
+% --- 2. INTRODUCTION AND BACKGROUND ---
+\section{Introduction and Background}
+\begin{frame}{2. Introduction and Background}
+    \textbf{Introduction to the Problem:}
+    In modern Intensive Care Units (ICUs), continuous monitoring systems generate vast amounts of high-frequency multivariate time-series data (Heart Rate, Blood Pressure, SpO2). Detecting critical deterioration early saves lives.
 
-% --- TECHNICAL DEPTH ---
-\begin{frame}{Technical Depth: CUSUM & Attention Mechanics}
-    \small
-    \begin{columns}
-        \begin{column}{0.5\textwidth}
-            \textbf{1. Concept Drift Adaptation (CUSUM)}
-            \[
-            S_t = \max(0, S_{t-1} + (x_t - \mu - k))
-            \]
-            \begin{itemize}
-                \item Monitors cumulative local prediction error.
-                \item Triggers retraining of the \textbf{personality head} when $S_t > H$.
-                \item Ensures the model remains accurate even as patient condition changes.
-            \end{itemize}
-        \end{column}
-        \begin{column}{0.5\textwidth}
-            \textbf{2. Explainable Attention}
-            \[ \alpha_t = \frac{\exp(e_t)}{\sum \exp(e_k)} \]
-            \begin{itemize}
-                \item Assigns weights to specific timestamps in patient history.
-                \item \textbf{Clinical Value:} Identifies that "Heart Rate surge 2 hours ago" was the primary risk factor.
-            \end{itemize}
-        \end{column}
-    \end{columns}
-\end{frame}
-
-% --- EVALUATION STRATEGY ---
-\begin{frame}{Evaluation Strategy \& Expected Outcomes}
-    \begin{columns}
-        \begin{column}{0.5\textwidth}
-            \textbf{Evaluation Metrics:}
-            \begin{itemize}
-                \item \textbf{RMSE \& MAE:} To measure forecasting accuracy.
-                \item \textbf{Personalization Gain:} Computing improvement of local heads over basic FedAvg.
-                \item \textbf{Drift Detection Delay:} Number of epochs required to detect and adapt to synthetic physiological shifts.
-            \end{itemize}
-        \end{column}
-        \begin{column}{0.5\textwidth}
-            \textbf{Theoretical Expected Outcomes:}
-            \begin{itemize}
-                \item \textbf{FedAvg (Baseline):} We expect a sharp drop in accuracy when patient distribution shifts.
-                \item \textbf{FPDAF (Proposed):} CUSUM trigger is theoretically designed to detect the shift and reset the local head, rapidly restoring accuracy.
-            \end{itemize}
-        \end{column}
-    \end{columns}
-\end{frame}
-
-% --- TECHNICAL EVIDENCE ---
-\begin{frame}{Technical Evidence \& Project Status}
+    \vspace{0.3cm}
+    \textbf{Motivation to Solve This Specific Problem:}
     \begin{itemize}
-        \item \textbf{Repository Setup:} \texttt{github.com/aksharsakhi/23CSE399-Project-Phase-1}
-        \item \textbf{Phase 1 Progress:} 
-        \begin{itemize}
-            \item Finalized Domain Scope and Mathematical Models.
-            \item Designed the FPDAF architecture framework.
-            \item Researched and identified the MIMIC-III database for clinical simulation.
-        \end{itemize}
-        \item \textbf{Next Steps (Implementation Phase):}
-        \begin{itemize}
-            \item Develop data ingestion pipeline for ICU time-series.
-            \item Build FedAvg baseline framework in PyTorch/TensorFlow.
-            \item Implement CUSUM trigger logic mathematically in code.
-        \end{itemize}
+        \item \textbf{The Data Silo Problem:} High-accuracy Deep Learning models require massive datasets, but rigid healthcare privacy laws (e.g., HIPAA) forbid combining data into a centralized server.
+        \item \textbf{The Global Model Failure:} If multiple hospitals successfully engage in standard Federated Learning (FedAvg), the resulting "global model" fails because hospital demographics and local treatment protocols vary wildly.
+        \item \textbf{The Black Box Problem:} Doctors cannot act on an AI alert if the model cannot explain the physiological basis for its warning.
     \end{itemize}
 \end{frame}
 
+% --- LITERATURE SURVEY (TABULATED) ---
+\begin{frame}{2. Existing Literature Survey}
+    \tiny
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{p{0.6cm}p{2.6cm}p{3.2cm}p{2.8cm}p{2.6cm}p{2.8cm}}
+    \toprule
+    \textbf{No.} & \textbf{Author/Year} & \textbf{Method Used} & \textbf{Research Focus} & \textbf{Limitations} & \textbf{Research Gap} \\
+    \midrule
+    \textbf{1} & McMahan et al. (PMLR, 2017) & FedAvg; local SGD; model averaging & Privacy-preserving decentralized training & No personalization or explainability & Extend FedAvg with personalization and analytics. \\
+    \midrule
+    \textbf{2} & Arivazhagan et al. (AISTATS, 2020) & FedPer with shared base and local heads & Personalized federated learning & No drift handling; no analytics layer & Add drift-aware personalized forecasting. \\
+    \midrule
+    \textbf{3} & Jothimurugesan et al. (Springer, 2022) & CDA-FedAvg; CUSUM drift detection & Concept drift handling in federated learning & High computation; no time-series focus & Drift-aware explainable time-series analytics. \\
+    \midrule
+    \textbf{4} & Kalakoti et al. (Elsevier, 2025) & FedXAI; SHAP; LIME; FedAvg & Explainable federated intrusion detection & Classification-only; not time-series based & XAI for federated time-series forecasting. \\
+    \midrule
+    \textbf{5} & Yin et al. (arXiv, 2025) & Attention-LSTM; FedAvg; sliding window & Early sepsis prediction & Black-box predictions without patient adaptation & Explainable, adaptive clinical forecasting. \\
+    \bottomrule
+    \end{tabular}
+    }
+    \vspace{0.3cm}
+    \begin{block}{Identified Research Gap}
+        No existing framework simultaneously integrates \textbf{Personalization + Active Concept Drift Monitoring + Explainable Attention} specifically for Healthcare Time-Series Data.
+    \end{block}
+\end{frame}
 
-% --- PROJECT ROADMAP ---
-\begin{frame}{Project Roadmap: Current Milestone}
+% --- 3. EXECUTION PLAN ---
+\section{Execution Plan}
+\begin{frame}{3. Execution Plan (Components \& Flow)}
+    \small
     \begin{table}
         \centering
-        \small
-        \begin{tabular}{|l|l|l|}
+        \begin{tabular}{|p{3cm}|p{6.5cm}|p{3.5cm}|}
             \hline
-            \textbf{Milestone} & \textbf{Target Date} & \textbf{Status} \\
+            \textbf{Subdomain} & \textbf{Matching Components Identified} & \textbf{Execution Target} \\
             \hline
-            Mathematical Modeling & March 15 & Completed \\
+            \textbf{Data Engineering} & MIMIC-III database, Time-series normalization, Sequential chunking. & Preprocessing Pipeline \\
             \hline
-            Baseline implementation & March 20 & Completed \\
+            \textbf{Deep Learning Base} & LSTM/Transformer backbone, Temporal Attention Layer. & Global Model \\
             \hline
-            CUSUM & Attention Integration & March 25 & In-Progress \\
+            \textbf{Decentralization} & Federated Averaging (FedAvg) algorithm, Secure Gradient Aggregation. & Federated Loop \\
             \hline
-            \textbf{Panel Review 2} & \textbf{March 30} & \textbf{Current} \\
+            \textbf{Customization} & Local Personalization Heads ($FedPer$). & Client Local Model \\
             \hline
-            Evaluation & Results Synthesis & April 10 & Upcoming \\
-            \hline
-            Final Documentation & April 20 & Upcoming \\
+            \textbf{Statistical Math} & Cumulative Sum (CUSUM) for tracking prediction residual drift. & Drift Tracker Module \\
             \hline
         \end{tabular}
     \end{table}
+
+    \vspace{0.2cm}
+    \textbf{Solution Pipeline:} Extract Data $\rightarrow$ Train Local Models $\rightarrow$ Identify Attention Metrics $\rightarrow$ Sync Shared Layers Globally $\rightarrow$ Monitor Sub-populations for Drift $\rightarrow$ Adapt Local Heads.
 \end{frame}
 
-% --- REFERENCES ---
-\begin{frame}[allowframebreaks]{Selected References}
-    \tiny
-    \bibliographystyle{IEEEtran}
-    \bibliography{ref}
+% --- 4. FUNDAMENTALS LEARNED ---
+\section{Fundamentals Learned}
+\begin{frame}{4. Fundamentals Learned in the Semester}
+    To execute the plan above, our team embarked on extensive upskilling over this semester:
+    \vspace{0.3cm}
+    \begin{itemize}
+        \item \textbf{Federated Learning Architecture:} Extensively reviewed \textit{McMahan et al.'s} fundamental papers to understand gradient averaging and the shift from Centralized ML to Decentralized ML.
+        \item \textbf{PyTorch Framework Fundamentals:} Completed MOOCs \& online tutorials to transition our team's technical skills into PyTorch (specifically custom \texttt{nn.Module} networks, \texttt{DataLoaders}, and customized training loops).
+        \item \textbf{Time-Series Analytics:} Studied LSTM sequence modeling and Attention-mechanism math (computing context vectors via softmax weights).
+        \item \textbf{Statistical Process Control:} Learned the \textit{CUSUM} (Cumulative Sum) statistical methodology for detecting small shifts in ongoing time-series data.
+    \end{itemize}
+\end{frame}
+
+% --- 5. ARCHITECTURE DIAGRAM ---
+\section{Architecture Diagram and Explanation}
+\begin{frame}{5. Architecture Diagram and Explanation of Design}
+    \begin{columns}
+        \begin{column}{0.4\textwidth}
+            \textbf{Why this design?}
+            \small
+            \begin{itemize}
+                \item \textbf{Privacy:} Only encrypted gradients travel upward.
+                \item \textbf{Local LSTM Base:} Captures generalized physiological rules.
+                \item \textbf{Attention Layer:} Provides XAI (feature importance) right before the local prediction.
+                \item \textbf{Personalization Head:} NEVER shared with the server. Tailors risk predictions to the specific local patient cohort.
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.6\textwidth}
+            \centering
+            \includegraphics[width=1\linewidth, keepaspectratio]{healthcare_fl_architecture.png}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% --- 6. SUMMARY OF WORKS COMPLETED ---
+\section{Summary of Works Completed}
+\begin{frame}{6. Summary of Works Completed / Findings}
+    \textbf{Phase 1 Contributions and Deliverables to Date:}
+    \vspace{0.3cm}
+    \begin{enumerate}
+        \item \textbf{Problem Formulation:} Successfully scoped the application domain specifically to healthcare ICU telemetry.
+        \item \textbf{Mathematical Formulation:} Defined formulas for exactly how CUSUM and Attention will be mathematically integrated into the $FedPer$ pipeline.
+        \item \textbf{Architecture Design:} Finalized the multi-layered system diagram.
+        \item \textbf{Repository Framework Setup (Baseline Code):}
+        \begin{itemize}
+            \item Initialized project GitHub repository.
+            \item Pulled and set up the foundational **FedAvg-PyTorch base framework**.
+            \item Built initial custom PyTorch stubs simulating the isolated `LocalPersonalizedModel` and a synthetic `SimulatedICUDataset` proxy.
+        \end{itemize}
+    \end{enumerate}
+\end{frame}
+
+% --- 7. PLANS FOR ONCOMING SEMESTERS ---
+\section{Plans for Oncoming Semesters}
+\begin{frame}{7. Plans for the Oncoming Semesters (Phase 2)}
+    \textbf{The direct roadmap to full implementation:}
+    \vspace{0.3cm}
+    \begin{table}
+        \centering
+        \small
+        \begin{tabular}{|l|l|}
+            \hline
+            \textbf{Target Area} & \textbf{Objective for Phase 2} \\
+            \hline
+            \textbf{Dataset Setup} & Download and process the full MIMIC-III ICU Time-Series database. \\
+            \hline
+            \textbf{Baseline Benchmarking} & Train standard \textit{FedAvg} on PyTorch to establish RMSE/MAE baselines. \\
+            \hline
+            \textbf{Sub-Model Integration} & Code the \textit{CUSUM} mathematical trigger and the \textit{Attention} weight visualizer. \\
+            \hline
+            \textbf{Simulation Runs} & Simulate 3-5 distinct Hospital "Clients" locally to monitor Federated convergence. \\
+            \hline
+            \textbf{Final Evaluation} & Quantify percentage gains in accuracy and personalization against baselines. \\
+            \hline
+        \end{tabular}
+    \end{table}
 \end{frame}
 
 % --- THANK YOU ---
