@@ -113,8 +113,16 @@ The FPDAF architecture is a split-layer design. The \textbf{Global Temporal Back
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.6\linewidth]{healthcare_fl_architecture.png}
-\caption{System Architecture highlighting separation of Global Backbone (server-synced) and Local Heads (hospital-isolated).}
+\begin{minipage}{0.48\textwidth}
+\centering
+\includegraphics[width=\linewidth]{architecture2.png}
+\caption{\small System Architecture highlighting global vs local separation.}
+\end{minipage}\hfill
+\begin{minipage}{0.48\textwidth}
+\centering
+\includegraphics[width=\linewidth]{Dataflow2.png}
+\caption{\small FPDAF System Dataflow Mapping.}
+\end{minipage}
 \end{figure}
 
 The \textbf{Attention Layer} sits atop the backbone to compute temporal context vectors based on recent physiological spikes, giving transparent $x_i$ timestamps feature importance. Finally, the \textbf{Personalization Head} is isolated completely to the hospital node; it never transfers its gradients to the server, ensuring the final clinical decision is strictly correlated to the local hospital's demographic distribution.
