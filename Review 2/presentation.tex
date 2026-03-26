@@ -296,6 +296,19 @@ Balances privacy, efficiency, and interpretability in a single framework \\
     \end{itemize}
 \end{frame}
 
+% --- ALGORITHMIC NOVELTY ---
+\begin{frame}{Algorithmic Novelty \& Innovation Plan}
+    \textbf{The Research Novelty of FPDAF:}
+    We are not utilizing standard implementations of \textit{FedAvg} or \textit{CUSUM}. We are proposing a mathematical extension that fuses them into a single, responsive clinical algorithm.
+    
+    \vspace{0.3cm}
+    \textbf{The Novel Plan:}
+    \begin{itemize}
+        \item \textbf{CUSUM as a Neural Trigger:} We mathematically repurpose \textit{CUSUM} from a simple statistical quality-control tool into an active Neural Network manipulator. When the formulation $S_t > H$ alerts, our novel code aggressively unfreezes the isolated Local Personalization Head, forcing immediate recalibration without destroying the global backbone.
+        \item \textbf{Attention-Weighted Decentralization:} Standard \textit{FedAvg} treats all hospitals equally based on sample size. FPDAF will introduce a novel extension aggregating weights locally, prioritized by our \textit{Attention Mechanism}'s confidence, preventing outlier clinical anomalies from polarizing the central server.
+    \end{itemize}
+\end{frame}
+
 % --- ARCHITECTURE DIAGRAM ---
 \begin{frame}{Architecture Diagram and Explanation of Design}
     \begin{columns}
