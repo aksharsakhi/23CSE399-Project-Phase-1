@@ -164,7 +164,7 @@ If $S_t > H$ (the statistical threshold), the framework automatically declares a
 \section{Summary of works completed / research findings (Technical Evidence)}
 During this semester (Phase 1), the following milestones were completed mapping to our \textbf{Technical Validation \& Evidence} requirements:
 \begin{enumerate}[noitemsep, leftmargin=1.5em]
-    \item \textbf{Heterogeneous Dataset Aggregation:} Secured a multi-era data stack including the primary \textbf{PhysioNet Sepsis 2019} (40k sequences), the \textbf{PhysioNet 2012 Mortality Dataset} (12k patients), and the recently published \textbf{March 2026 Trajectory Flow Matching} datasets. This enables multi-task benchmarking (Sepsis vs. Mortality) within a single federated framework.
+    \item \textbf{Heterogeneous Dataset Aggregation:} Secured a multi-era clinical stack including \textbf{PhysioNet (2019, 2012, 2026)}, high-density waveforms from \textbf{VitalDB (2020)}, and emergency telemetry from \textbf{EDT-Datasets (2021)}. This enables robust multi-task benchmarking (Sepsis, Mortality, and Trajectory) within a single longitudinal framework.
     \item \textbf{Longitudinal Validation Strategy:} We demonstrate novelty by validating drift recovery across a \textbf{14-year technological gap (2012--2026)}, proving that FPDAF's attention layers can bridge shifts in historical clinical protocols.
     \item \textbf{Mathematical Definition:} Derived the formal CUSUM trigger logic and the split-weight optimization framework for localized personalization.
     \item \textbf{Data Engineering Engine:} Developed the Python sequence profiling script to handle ICU \texttt{NaN} issues using \textbf{Bi-Directional Forward-Filling} and \textbf{Standardization} for multivariate time-series.
