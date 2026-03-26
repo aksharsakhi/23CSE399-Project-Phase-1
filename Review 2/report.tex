@@ -60,16 +60,16 @@ DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING}}}
 \hline
 \multicolumn{2}{|c|}{\textbf{Team Members}} & \textbf{Guide} & \textbf{Project Type} & \textbf{Marks} \\
 \hline
-CB.SC.U4CSE23547 & Sheela Akshar Sakhi &
-\multirow{5}{=}{\raggedright \small \textbf{Dr. G R RAMYA, Dr. VANDHANA S}\\
+CB.SC.U4CSE23547 & SHEELA AKSHAR SAKHI &
+\multirow{5}{=}{\raggedright \small \textbf{DR. G R RAMYA, DR. VANDHANA S}\\
 \textit{Dept. of CSE}} &
-\multirow{5}{=}{\raggedright \small \textbf{Type 1}\\Research} &
-\multirow{5}{*}{\textbf{\huge \dots / 50}} \\ \cline{1-2}
+\multirow{5}{=}{\raggedright \small \textbf{TYPE 1}\\RESEARCH} &
+\multirow{5}{*}{\textbf{\huge \dots / 5}} \\ \cline{1-2}
 
-CB.SC.U4CSE23529 & Hasini Reddy M & & & \\ \cline{1-2}
-CB.SC.U4CSE23761 & Kousik Sarma Lakkaraju & & & \\ \cline{1-2}
-CB.SC.U4CSE23363 & Haswitha K & & & \\ \cline{1-2}
-CB.SC.U4CSE23753 & V.Chakravarthy & & & \\
+CB.SC.U4CSE23529 & HASINI REDDY M & & & \\ \cline{1-2}
+CB.SC.U4CSE23761 & KOUSIK SARMA LAKKARAJU & & & \\ \cline{1-2}
+CB.SC.U4CSE23363 & HASWITHA K & & & \\ \cline{1-2}
+CB.SC.U4CSE23753 & V. CHAKRAVARTHY & & & \\
 \hline
 \end{tabular}
 \end{center}
@@ -90,10 +90,10 @@ The definitive novelty of FPDAF lies in its dynamic hybrid integration. Unlike c
 \vspace{0.2cm}
 \textbf{Objectives to Achieve:}
 \begin{enumerate}[noitemsep, leftmargin=1.5em]
-    \item Enable cross-hospital predictive modeling on patient data without violating HIPAA/GDPR privacy constraints.
-    \item Manage high patient heterogeneity across hospitals using explicit \textbf{Local Personalization Heads}.
-    \item Detect when a patient's core physiological state changes using \textbf{CUSUM Drift Detection} algorithms to automatically retrain and dynamically adapt models locally.
-    \item Integrate \textbf{Temporal Attention weights} to provide clinicians with transparent insights into exactly \textit{what} historical vital signs caused a risk prediction.
+    \item \textbf{Privacy-Preserving Decentralized Training:} Implement a multi-hospital training cycle using PyTorch that ensures individual patient records never leave the local client node.
+    \item \textbf{Mitigate Client Heterogeneity:} Resolve the global averaging mismatch by implementing \textbf{Local Personalization Heads} (\textit{FedPer}) for site-specific clinical fine-tuning.
+    \item \textbf{Active Temporal Drift Detection:} Embed a mathematical \textbf{CUSUM Drift Tracker} to monitor prediction confidence and trigger automated local weight resets upon patient physiological status shift.
+    \item \textbf{Clinician-Centric Explainability:} Deploy \textbf{Temporal Attention Mechanisms} to highlight precisely which ICU vital signs (e.g., Blood Pressure drop + Heart Rate spike) contributed to the risk prediction.
 \end{enumerate}
 
 \section{Introduction and Background}
@@ -125,23 +125,63 @@ The FPDAF architecture is a split-layer design. The \textbf{Global Temporal Back
 
 The \textbf{Attention Layer} sits atop the backbone to compute temporal context vectors based on recent physiological spikes, giving transparent $x_i$ timestamps feature importance. Finally, the \textbf{Personalization Head} is isolated completely to the hospital node; it never transfers its gradients to the server, ensuring the final clinical decision is strictly correlated to the local hospital's demographic distribution.
 
+\vspace{0.3cm}
+\noindent \textbf{Comparative Framework Analysis:}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\scriptsize
+\begin{tabular}{|l|p{3.8cm}|p{3.8cm}|p{3.8cm}|}
+\hline
+\textbf{Mechanism} & \textbf{Standard FedAvg} & \textbf{Standard FedPer} & \textbf{Proposed FPDAF} \\
+\hline
+\textbf{Aggregation} & Full global averaging & Partial local-global split & \textbf{Attention-Weighted Syncing} \\
+\hline
+\textbf{Drift Handling} & Manual Retraining & Static Personalization & \textbf{CUSUM Neural Trigger} \\
+\hline
+\textbf{Explainability} & Black-box predictions & Local feature importance & \textbf{Temporal Attention Weights} \\
+\hline
+\textbf{Personalization} & None (One Global Model) & Multi-hospital site tuning & \textbf{Dynamic Personalization} \\
+\hline
+\end{tabular}
+\end{center}
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.85\linewidth]{images/Dataflow2.png}
 \caption{FPDAF System Dataflow Mapping - Illustrating end-to-end data processing.}
 \end{figure}
 
+\section{Scientific Methodology \& Neural Formalism}
+The innovation of FPDAF is formalized as a split-weight optimization problem across $K$ hospital nodes. The local predictive output $\hat{y}_t^k$ is defined by:
+\[ \hat{y}_t^k = h_{\phi^k} \left( g_{\theta} (X_{1:t}^k) \cdot \alpha_t \right) \] 
+where $g_{\theta}$ is the \textbf{Global Temporal Backbone} (synchronized via FedAvg), $h_{\phi^k}$ is the \textbf{Private Personalization Head} (site-specific), and $\alpha_t$ represents the \textbf{Temporal Attention context vector}. 
+
+\vspace{0.2cm}
+To handle temporal drift, we implement the \textbf{CUSUM Neural Trigger}. The system monitors the cumulative deviation of local prediction residuals:
+\[ S_t = \max(0, S_{t-1} + |y_t - \hat{y}_t| - \mu - k) \]
+If $S_t > H$ (the statistical threshold), the framework automatically declares a patient state-drift, triggering a local backpropagation cycle on the personalization head $\phi^k$ while keeping $\theta$ frozen, preserving the global model's generalizability while adapting to the patient's acute deterioration.
+
 \section{Summary of works completed / research findings (Technical Evidence)}
 During this semester (Phase 1), the following milestones were completed mapping to our \textbf{Technical Validation \& Evidence} requirements:
 \begin{enumerate}[noitemsep, leftmargin=1.5em]
-    \item \textbf{Domain Consolidation:} Successfully shifted use-case entirely into ICU Healthcare datasets.
-    \item \textbf{Mathematical Definition:} Derived the CUSUM threshold trigger mechanism $S_t = \max(0, S_{t-1} + (e_t - \mu - k))$ specifically for linking to local model resets.
-    \item \textbf{Architecture Creation:} Finalized the fully decentralized, visually mapped FPDAF blueprint.
-    \item \textbf{PyTorch Baseline Simulation Setup:} Created the GitHub repository (\url{https://github.com/aksharsakhi/23CSE399-Project-Phase-1}), synced a foundational FedAvg-PyTorch implementation baseline, mocked a \texttt{SimulatedICUDataset} class, and began structurally coding the decoupled model heads in Python.
+    \item \textbf{Dataset Acquisition \& Multi-Tier Strategy:} Secured the primary \textbf{PhysioNet Sepsis Challenge 2019} dataset (40k sequences), supplementary high-density waveforms from \textbf{VitalDB (2020)}, and testing streams from \textbf{EDT-Datasets (2021)}.
+    \item \textbf{Mathematical Definition:} Derived the formal CUSUM trigger logic and the split-weight optimization framework for localized personalization.
+    \item \textbf{Data Engineering Engine:} Developed the Python sequence profiling script to handle ICU \texttt{NaN} issues using \textbf{Bi-Directional Forward-Filling} and \textbf{Standardization} for multivariate time-series.
+    \item \textbf{Repository Finalization:} Established the official GitHub repository (\url{https://github.com/23CSE-TEAM-28/23CSE399-Project-Phase-1.git}) with functional FedAvg baseline code and project blueprints.
 \end{enumerate}
 
 \section{Plans for the oncoming semesters}
 Having successfully acquired the \textbf{PhysioNet Challenge 2019 (Sepsis Prediction)} open-access dataset, along with supplementary high-fidelity and testing streams from \textbf{VitalDB (2020)} and the \textbf{EDT-Datasets (2021)}, Phase 2 will aggressively focus on data preprocessing, missing value imputation, and constructing sequential time-windows. The team will establish the foundational generic \textit{FedAvg} baseline locally, and subsequently train the custom decoupled FPDAF pipeline across dynamically simulated hospital nodes using PyTorch. Finally, rigorous benchmarking will be conducted, measuring drift recovery delays alongside formal evaluation metrics including \textbf{Accuracy, Precision, Recall, F1-Score, and AUC-ROC} to definitively quantify the optimization \& personalization gains.
+
+\vspace{0.2cm}
+\section*{Appendix: Data \& Resource Access}
+\scriptsize
+\textbf{Primary Project Repository:} \url{https://github.com/23CSE-TEAM-28/23CSE399-Project-Phase-1.git} \\
+\textbf{Sepsis Challenge Data:} \url{https://physionet.org/content/challenge-2019/1.0.0/} \\
+\textbf{VitalDB Dataset (2020):} \url{https://physionet.org/content/vitaldb/1.0.0/} \\
+\textbf{EDT-Datasets (2021):} \url{https://github.com/mommand/EDT-Datasets} \\
+\textbf{Full Literature Review (25 Papers):} Available as \texttt{Literature\_Survey.xlsx} in the GitHub repository.
+\normalsize
 
 \nocite{churaev2023,jothimurugesan2022,arivazhagan2020,mcmahan2017,liu2022}
 \nocite{yang2025mvfl,kalakoti2025fedxai,noseda2025financial,karamanlioglu2025clinical,wang2025personalized}

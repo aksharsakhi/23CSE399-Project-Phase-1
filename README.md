@@ -24,12 +24,22 @@ Our novel master plan integrates **Decentralization** (global weight syncing via
 
 ![Implementation Logic](Review%202/images/FPDAF%20Detailed%20Implementation%20Logic_visul.png)
 
+### 🔍 Research Gap Visual Summary
+The following diagram highlights the core limitations identified in existing literature (FedAvg, FedPer) and how the proposed **FPDAF** framework bridges these gaps through integrated explainability and drift adaptation.
+
+![Research Gap Summary](Review%202/images/research_gap_vislu.png)
+
+### 📈 Adaptive System Dataflow
+The runtime dataflow processes temporal multivariate arrays sequentially. If the **CUSUM** trigger detects a statistical deviation in prediction residuals, it automatically initiates local personalization.
+
+![System Dataflow](Review%202/images/Dataflow2.png)
+
 ---
 
 ## 🚀 Key Framework Features
 - **Decentralization (FedAvg)**: Only encrypted local gradients ($w_{t+1}^k$) are securely uploaded to the central aggregation server.
 - **Mathematical Drift Triggers**: Driven by $S_t = \max(0, S_{t-1} + (e_t - \mu - k))$ rather than arbitrary epoch restarts.
-- **Interpretable Clinical Analytics**: Time-Series Attention Weights highlight specifically *which historical vital sign spike* (e.g., sudden lack of oxygen saturation) triggered the eventual risk prediction, ensuring XAI transparency for doctors.
+- **Interpretable Clinical Analytics**: Time-Series Attention Weights highlight specifically *which historical vital sign spike* triggered the eventual risk prediction.
 
 ---
 
@@ -41,30 +51,21 @@ Our novel master plan integrates **Decentralization** (global weight syncing via
 * **[Review 1/](Review%201/)**: Baseline literature survey mapping 25 peer-reviewed papers.
 * **[Review 2/](Review%202/)**: Technical progress and methodology documents.
   * **[images/](Review%202/images/)**: Normalized architectural and implementation diagrams.
-  * **[output/](Review%202/output/)**: Final `report.pdf` & `presentation.pdf` compiled natively via LaTeX.
+  * **[output/](Review%202/output/)**: Final `report.pdf` & `presentation.pdf`.
   * **[latex/](Review%202/latex/)**: Bibliography files (`ref.bib`).
 
 ---
 
-## 📈 Phase 1 Accomplishments & Phase 2 Roadmap
-- [x] **Problem Formulation:** Redefined bounds directly targeting Healthcare Time-Series.
-- [x] **Conceptual Architecture:** Finalized the split-server decentralized blueprint.
-- [x] **Mathematical Definitions:** Extracted the necessary CUSUM statistical triggers.
-- [x] **Baseline Code Initialization:** Bootstrapped the GitHub PyTorch environment.
-- [ ] **Phase 2 Pipeline (Pending):** Implement PhysioNet normalization sequences, simulate local PyTorch hospital clients, and rigorously benchmark across (Accuracy, Precision, Recall, F1-Score, and AUC-ROC). 
-
----
-
 ## 👥 Team 28
-- Sheela Akshar Sakhi (CB.SC.U4CSE23547)
-- Hasini Reddy M (CB.SC.U4CSE23529)
-- Kousik Sarma Lakkaraju (CB.SC.U4CSE23761)
-- Haswitha K (CB.SC.U4CSE23363)
-- V.Chakravarthy (CB.SC.U4CSE23753)
+- **SHEELA AKSHAR SAKHI** (CB.SC.U4CSE23547)
+- **HASINI REDDY M** (CB.SC.U4CSE23529)
+- **KOUSIK SARMA LAKKARAJU** (CB.SC.U4CSE23761)
+- **HASWITHA K** (CB.SC.U4CSE23363)
+- **V. CHAKRAVARTHY** (CB.SC.U4CSE23753)
 
 ### 🎓 Guides
-- **Dr. G R RAMYA**
-- **Dr. VANDHANA S**
+- **DR. G R RAMYA**
+- **DR. VANDHANA S**
 
 ---
 *Department of Computer Science and Engineering, Amrita School of Computing.*
