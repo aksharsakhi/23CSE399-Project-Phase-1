@@ -192,9 +192,9 @@ Balances privacy, efficiency, and interpretability in a single framework \\
 \end{frame}
 
 % --- RESEARCH GAP VISUAL ---
-\begin{frame}{Research Gap — Visual Summary}
+\begin{frame}{Research Gap -- Visual Summary}
     \centering
-    \includegraphics[width=\linewidth, height=0.82\textheight, keepaspectratio]{images/research_gap_vislu.png}
+    \includegraphics[trim={0 1.1cm 0 0}, clip, width=0.98\textwidth, height=0.88\textheight, keepaspectratio]{images/research_gap_vislu.png}
 \end{frame}
 
 % --- DATASET USED ---
@@ -226,15 +226,17 @@ Balances privacy, efficiency, and interpretability in a single framework \\
 \begin{frame}{Multi-Tiered Data Acquisition Strategy}
     \small
     \renewcommand{\arraystretch}{1.2}
-    \begin{tabular}{|p{2.2cm}|p{5cm}|p{5cm}|}
+    \begin{tabular}{|p{2.8cm}|p{4.7cm}|p{4.7cm}|}
         \hline
         \textbf{Data Source} & \textbf{Content \& Features} & \textbf{Project Role \& Usage} \\
         \hline
-        \textbf{Tier 1: PhysioNet} & $\sim$40,000 .psv records; Sepsis clinical indicators (34 columns). & \textbf{Primary Algorithm Training:} Large-scale Federated simulation across heterogeneous hospital clients. \\
+        \textbf{Tier 1: PhysioNet} & $\sim$40,000 records; Sepsis clinical indicators (34 columns). & \textbf{Primary Algorithm Training:} Large-scale Federated simulation. \\
         \hline
-        \textbf{Tier 2: VitalDB} & High-density perioperative vital sign waveforms ($HR, SpO2, MBP$). & \textbf{Validation \& Personalization:} Testing FPDAF performance on high-frequency clinical distributions. \\
+        \textbf{Tier 2: VitalDB} (2020) & High-density vital waveforms ($HR, SpO2$). & \textbf{Validation:} High-frequency hospital telemetry testing. \\
+        \url{physionet.org/vitaldb} & Global patient monitoring data. & \\
         \hline
-        \textbf{Tier 3: EDT} & High-frequency CSV streams (HR every 5s); Continuous SpO2 logs. & \textbf{Drift Tracker Testing:} Proving immediate \textit{CUSUM} alert response to sudden physiological deviations (``crashing''). \\
+        \textbf{Tier 3: EDT} (2021) & High-frequency CSV streams (HR every 5s); Continuous logs. & \textbf{Drift Tracker Testing:} Proving immediate \textit{CUSUM} response to sudden clinical deviations. \\
+        \url{github.com/mommand/EDT} & Academic emergency/clinical data. & \\
         \hline
     \end{tabular}
     
@@ -420,9 +422,9 @@ Balances privacy, efficiency, and interpretability in a single framework \\
 \end{frame}
 
 % --- EXECUTION LOGIC VISUAL ---
-\begin{frame}{FPDAF Implementation Logic — Visual}
+\begin{frame}{FPDAF Implementation Logic -- Visual}
     \centering
-    \includegraphics[width=\linewidth, height=0.85\textheight, keepaspectratio]{images/FPDAF Detailed Implementation Logic_visul.png}
+    \includegraphics[trim={0 1.1cm 0 0}, clip, width=0.98\textwidth, height=0.9\textheight, keepaspectratio]{images/FPDAF Detailed Implementation Logic_visul.png}
 \end{frame}
 
 % --- REFERENCES ---
