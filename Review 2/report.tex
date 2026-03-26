@@ -60,16 +60,16 @@ DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING}}}
 \hline
 \multicolumn{2}{|c|}{\textbf{Team Members}} & \textbf{Guide} & \textbf{Project Type} & \textbf{Marks} \\
 \hline
-CB.SC.U4CSE23547 & Sheela Akshar Sakhi &
-\multirow{5}{=}{\raggedright \small \textbf{Dr. G R RAMYA, Dr. VANDHANA S}\\
+CB.SC.U4CSE23547 & SHEELA AKSHAR SAKHI &
+\multirow{5}{=}{\raggedright \small \textbf{DR. G R RAMYA, DR. VANDHANA S}\\
 \textit{Dept. of CSE}} &
-\multirow{5}{=}{\raggedright \small \textbf{Type 1}\\Research} &
+\multirow{5}{=}{\raggedright \small \textbf{TYPE 1}\\RESEARCH} &
 \multirow{5}{*}{\textbf{\huge \dots / 50}} \\ \cline{1-2}
 
-CB.SC.U4CSE23529 & Hasini Reddy M & & & \\ \cline{1-2}
-CB.SC.U4CSE23761 & Kousik Sarma Lakkaraju & & & \\ \cline{1-2}
-CB.SC.U4CSE23363 & Haswitha K & & & \\ \cline{1-2}
-CB.SC.U4CSE23753 & V.Chakravarthy & & & \\
+CB.SC.U4CSE23529 & HASINI REDDY M & & & \\ \cline{1-2}
+CB.SC.U4CSE23761 & KOUSIK SARMA LAKKARAJU & & & \\ \cline{1-2}
+CB.SC.U4CSE23363 & HASWITHA K & & & \\ \cline{1-2}
+CB.SC.U4CSE23753 & V. CHAKRAVARTHY & & & \\
 \hline
 \end{tabular}
 \end{center}
@@ -151,13 +151,23 @@ The \textbf{Attention Layer} sits atop the backbone to compute temporal context 
 \caption{FPDAF System Dataflow Mapping - Illustrating end-to-end data processing.}
 \end{figure}
 
+\section{Scientific Methodology \& Neural Formalism}
+The innovation of FPDAF is formalized as a split-weight optimization problem across $K$ hospital nodes. The local predictive output $\hat{y}_t^k$ is defined by:
+\[ \hat{y}_t^k = h_{\phi^k} \left( g_{\theta} (X_{1:t}^k) \cdot \alpha_t \right) \] 
+where $g_{\theta}$ is the \textbf{Global Temporal Backbone} (synchronized via FedAvg), $h_{\phi^k}$ is the \textbf{Private Personalization Head} (site-specific), and $\alpha_t$ represents the \textbf{Temporal Attention context vector}. 
+
+\vspace{0.2cm}
+To handle temporal drift, we implement the \textbf{CUSUM Neural Trigger}. The system monitors the cumulative deviation of local prediction residuals:
+\[ S_t = \max(0, S_{t-1} + |y_t - \hat{y}_t| - \mu - k) \]
+If $S_t > H$ (the statistical threshold), the framework automatically declares a patient state-drift, triggering a local backpropagation cycle on the personalization head $\phi^k$ while keeping $\theta$ frozen, preserving the global model's generalizability while adapting to the patient's acute deterioration.
+
 \section{Summary of works completed / research findings (Technical Evidence)}
 During this semester (Phase 1), the following milestones were completed mapping to our \textbf{Technical Validation \& Evidence} requirements:
 \begin{enumerate}[noitemsep, leftmargin=1.5em]
-    \item \textbf{Domain Consolidation:} Finalized transition to \textbf{PhysioNet Challenge 2019} (40,000+ psv records) targeting Sepsis prediction.
-    \item \textbf{Mathematical Definition:} Derived the CUSUM threshold trigger mechanism $S_t = \max(0, S_{t-1} + (e_t - \mu - k))$ specifically for linking to local model reset prompts.
+    \item \textbf{Dataset Acquisition \& Multi-Tier Strategy:} Secured the primary \textbf{PhysioNet Sepsis Challenge 2019} dataset (40k sequences), supplementary high-density waveforms from \textbf{VitalDB (2020)}, and testing streams from \textbf{EDT-Datasets (2021)}.
+    \item \textbf{Mathematical Definition:} Derived the formal CUSUM trigger logic and the split-weight optimization framework for localized personalization.
     \item \textbf{Data Engineering Engine:} Developed the Python sequence profiling script to handle ICU \texttt{NaN} issues using \textbf{Bi-Directional Forward-Filling} and \textbf{Standardization} for multivariate time-series.
-    \item \textbf{PyTorch Baseline Setup:} Established a foundational GitHub repository (\url{https://github.com/23CSE-TEAM-28/23CSE399-Project-Phase-1.git}) with mocked \texttt{ClientNode} simulation classes and decoupled LSTM module skeletons.
+    \item \textbf{Repository Finalization:} Established the official GitHub repository (\url{https://github.com/23CSE-TEAM-28/23CSE399-Project-Phase-1.git}) with functional FedAvg baseline code and project blueprints.
 \end{enumerate}
 
 \section{Plans for the oncoming semesters}
