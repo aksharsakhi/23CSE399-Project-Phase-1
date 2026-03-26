@@ -93,7 +93,7 @@
             \hline
             \textbf{1. Define application scope strictly} & Narrowed domain completely out of generalized data into \textbf{Healthcare ICU Time-Series (Sepsis / Deterioration Profiling)}. \\
             \hline
-            \textbf{2. Target a well-defined dataset} & Selected the \textbf{PhysioNet Challenge 2019 Dataset} (40,000+ real multivariate ICU records). \\
+            \textbf{2. Target well-defined datasets} & Curated a multi-task longitudinal stack (2012--2026) including \textbf{PhysioNet (2019, 2012, 2026)}, \textbf{VitalDB}, and \textbf{EDT} streams. \\
             \hline
             \textbf{3. Articulate research novelty \& Drift} & Defined the exact \textbf{CUSUM mathematical mechanism} triggering dynamic retraining when a patient's physiological state aggressively changes. \\
             \hline
@@ -103,6 +103,8 @@
             \hline
         \end{tabular}
     \end{table}
+    \vspace{0.1cm}
+    \centering \scriptsize \textit{Technical Architecture, Mathematical Proofs, and Detailed Novelty are presented in Frames 11--13.}
 \end{frame}
 
 % --- INTRODUCTION AND BACKGROUND ---
@@ -120,7 +122,7 @@
 \end{frame}
 
 % --- RESEARCH GAP ---
-\begin{frame}{Research Gap Analysis}
+\begin{frame}[fragile]{Research Gap Analysis}
 \tiny
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{p{3.8cm}p{4.2cm}p{4.4cm}p{4.2cm}}
@@ -189,6 +191,8 @@ Balances privacy, efficiency, and interpretability in a single framework \\
 \bottomrule
 \end{tabular}
 }
+\vspace{0.2cm}
+\centering \footnotesize \textbf{Full Literature Analysis (25+ Papers):} \href{https://docs.google.com/spreadsheets/d/1G_zAbr6MI_bYcCHEXfkWjhmvKzBEDKr0/edit\#gid=417550448}{\texttt{Google Sheets Link}}
 \end{frame}
 
 % --- RESEARCH GAP VISUAL ---
@@ -480,7 +484,7 @@ Balances privacy, efficiency, and interpretability in a single framework \\
     \begin{itemize}
         \item \textbf{\small PhysioNet Challenge 2019 (Primary Sepsis Dataset)} \\ \url{https://physionet.org/content/challenge-2019/1.0.0/}
         \item \textbf{\small PhysioNet Challenge 2012 (ICU Mortality Baseline)} \\ \url{https://physionet.org/content/challenge-2012/1.0.0/}
-        \item \textbf{\small Trajectory Flow Matching (March 2026 State-of-the-Art)} \\ \url{https://physionet.org/content/trajectory-flow-matching/1.0.0/}
+        \item \textbf{\small Trajectory Flow Matching (March 2026 State-of-the-Art)} \\ \url{https://physionet.org/content/clinical-trajectory-flow-icu/1.0.0/}
         \item \textbf{\small VitalDB: High-Density ICU Monitoring Dataset} \\ \url{https://physionet.org/content/vitaldb/1.0.0/}
         \item \textbf{\small EDT-Datasets: Emergency Device Telemetry} \\ \url{https://github.com/mommand/EDT-Datasets}
     \end{itemize}
