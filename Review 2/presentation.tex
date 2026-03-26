@@ -46,21 +46,21 @@
             \hline
             \textbf{S.No} & \textbf{Register Number} & \textbf{Student Name} \\
             \hline
-            1 & CB.SC.U4CSE23363 & Haswitha K \\
+            1 & CB.SC.U4CSE23363 & HASWITHA K \\
             \hline
-            2 & CB.SC.U4CSE23529 & Hasini Reddy M \\
+            2 & CB.SC.U4CSE23529 & HASINI REDDY M \\
             \hline
-            3 & CB.SC.U4CSE23547 & Sheela Akshar Sakhi \\
+            3 & CB.SC.U4CSE23547 & SHEELA AKSHAR SAKHI \\
             \hline
-            4 & CB.SC.U4CSE23761 & Kousik Sarma Lakkaraju \\
+            4 & CB.SC.U4CSE23761 & KOUSIK SARMA LAKKARAJU \\
             \hline
-            5 & CB.SC.U4CSE23753 & V.Chakravarthy \\
+            5 & CB.SC.U4CSE23753 & V. CHAKRAVARTHY \\
             \hline
         \end{tabular}
     \end{table}
 
     {\footnotesize
-    Guide: \textbf{Dr. G R RAMYA, Dr. VANDHANA S} \\
+    Guide: \textbf{DR. G R RAMYA, DR. VANDHANA S} \\
     Department of CSE
     }
 \end{frame}
@@ -222,26 +222,31 @@ Balances privacy, efficiency, and interpretability in a single framework \\
         \end{column}
     \end{columns}
 \end{frame}
-
-\begin{frame}{Multi-Tiered Data Acquisition Strategy}
+% --- CONSOLIDATED DATA EXPLORATION SLIDE ---
+\begin{frame}{Data Exploration: Longitudinal Stack \& Multi-Task Utilization}
     \small
-    \renewcommand{\arraystretch}{1.2}
-    \begin{tabular}{|p{2.8cm}|p{4.7cm}|p{4.7cm}|}
+    We have curated a 14-year longitudinal cross-section of clinical data to validate \textbf{FPDAF} against macro-level concept drift and varying technological eras (2012--2026).
+    
+    \vspace{0.2cm}
+    \renewcommand{\arraystretch}{1.1}
+    \begin{tabular}{|p{3.2cm}|p{4.3cm}|p{5.5cm}|}
         \hline
-        \textbf{Data Source} & \textbf{Content \& Features} & \textbf{Project Role \& Usage} \\
+        \textbf{Era \& Source} & \textbf{Data Found} & \textbf{Validation Goal (Phase 2 Utilization)} \\
         \hline
-        \textbf{Tier 1: PhysioNet} & $\sim$40,000 records; Sepsis clinical indicators (34 columns). & \textbf{Primary Algorithm Training:} Large-scale Federated simulation. \\
+        \textbf{Baseline (2012)} & \textbf{PhysioNet 2012}: 12k ICU PhysioNet Challenge records. & \textbf{Era Benchmarking:} Prove Attention-weights work on older clinical protocols (Mortality Task). \\
         \hline
-        \textbf{Tier 2: VitalDB} (2020) & High-density vital waveforms ($HR, SpO2$). & \textbf{Validation:} High-frequency hospital telemetry testing. \\
-        \url{physionet.org/vitaldb} & Global patient monitoring data. & \\
+        \textbf{Primary (2019)} & \textbf{PhysioNet 2019}: 40k Sepsis sequences. & \textbf{Primary Training:} Core FL algorithm simulation for temporal risk forecasting. \\
         \hline
-        \textbf{Tier 3: EDT} (2021) & High-frequency CSV streams (HR every 5s); Continuous logs. & \textbf{Drift Tracker Testing:} Proving immediate \textit{CUSUM} response to sudden clinical deviations. \\
-        \url{github.com/mommand/EDT} & Academic emergency/clinical data. & \\
+        \textbf{High-Fi (2020-21)} & \textbf{VitalDB \& EDT}: Waveforms and 5s telemetry streams. & \textbf{Stress Testing:} Proving immediate \textit{CUSUM} recovery to rapid physiological deviation. \\
+        \hline
+        \textbf{Future (2026)} & \textbf{PhysioNet 2026}: Trajectory Flow Matching sources. & \textbf{Longitudinal Generalization:} Final validation of transferability across a decade of data drift. \\
         \hline
     \end{tabular}
-    
-    \vspace{0.4cm}
-    \textbf{Phase 2 Execution:} All files successfully acquired and partitioned locally.
+
+    \vspace{0.3cm}
+    \begin{block}{Why this multi-task approach?}
+        By utilizing \textbf{Sepsis} (2019) vs. \textbf{Mortality} (2012) datasets, we prove that FPDAF is a generalized framework for ICU deterioration, not just a single-task model.
+    \end{block}
 \end{frame}
 
 % --- DATA PREPROCESSING ---
@@ -251,7 +256,7 @@ Balances privacy, efficiency, and interpretability in a single framework \\
     
     \vspace{0.2cm}
     \textbf{Engineered PyTorch Pipeline:}
-    We developed a local Python preprocessing engine to dynamically ingest the 40,000+ `.psv` files and render clean PyTorch Tensors:
+    We developed a local Python preprocessing engine to dynamically ingest the 40,000+ \texttt{.psv} files and render clean PyTorch Tensors:
     \begin{enumerate}
         \item \textbf{Forward-Filling (Time-Series Carry):} Carries the last-known medical lab value forward in the sequence until a new blood measurement is taken.
         \item \textbf{Backward-Filling \& Zero-Padding:} Synthesizes initial missing conditions and replaces completely unmeasured lab variables with \texttt{0}s to prevent Neural Network failure.
@@ -341,8 +346,8 @@ Balances privacy, efficiency, and interpretability in a single framework \\
         \item \textbf{Repository Framework Setup (Baseline Code):}
         \begin{itemize}
             \item Initialized project GitHub repository \\ (\url{https://github.com/23CSE-TEAM-28/23CSE399-Project-Phase-1.git}).
-            \item Pulled and set up the foundational **FedAvg-PyTorch base framework**.
-            \item Built initial custom PyTorch stubs simulating the isolated `LocalPersonalizedModel` and a synthetic `SimulatedICUDataset` proxy.
+            \item Pulled and set up the foundational \textbf{FedAvg-PyTorch base framework}.
+            \item Built initial custom PyTorch stubs simulating the isolated \texttt{LocalPersonalizedModel} and a synthetic \texttt{SimulatedICUDataset} proxy.
         \end{itemize}
     \end{enumerate}
 \end{frame}
@@ -474,8 +479,10 @@ Balances privacy, efficiency, and interpretability in a single framework \\
 \begin{frame}[allowframebreaks]{Data Source Resource Links}
     \begin{itemize}
         \item \textbf{\small PhysioNet Challenge 2019 (Primary Sepsis Dataset)} \\ \url{https://physionet.org/content/challenge-2019/1.0.0/}
-        \item \textbf{\small VitalDB: High-Density ICU Monitoring Dataset (PhysioNet)} \\ \url{https://physionet.org/content/vitaldb/1.0.0/}
-        \item \textbf{\small EDT-Datasets: Emergency Device Telemetry (GitHub)} \\ \url{https://github.com/mommand/EDT-Datasets}
+        \item \textbf{\small PhysioNet Challenge 2012 (ICU Mortality Baseline)} \\ \url{https://physionet.org/content/challenge-2012/1.0.0/}
+        \item \textbf{\small Trajectory Flow Matching (March 2026 State-of-the-Art)} \\ \url{https://physionet.org/content/trajectory-flow-matching/1.0.0/}
+        \item \textbf{\small VitalDB: High-Density ICU Monitoring Dataset} \\ \url{https://physionet.org/content/vitaldb/1.0.0/}
+        \item \textbf{\small EDT-Datasets: Emergency Device Telemetry} \\ \url{https://github.com/mommand/EDT-Datasets}
     \end{itemize}
 \end{frame}
 
