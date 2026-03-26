@@ -223,6 +223,30 @@ Balances privacy, efficiency, and interpretability in a single framework \\
     \end{columns}
 \end{frame}
 
+% --- MULTI-TIERED DATA ACQUISITION ---
+\begin{frame}{Multi-Tiered Data Acquisition Strategy}
+    \textbf{Phase 2 Expansion Plan (Acquired \& Processed):}
+    \vspace{0.3cm}
+    \begin{itemize}
+        \item \textbf{Tier 1: PhysioNet Challenge (Primary Dataset)}
+        \begin{itemize}
+            \item \textit{Use:} Primary Federated simulation across 40,000 patient sequences.
+        \end{itemize}
+        \vspace{0.2cm}
+        \item \textbf{Tier 2: VitalDB Dataset (Validation)}
+        \begin{itemize}
+            \item \textit{Source:} Surgical \& ICU vital sign waveforms (High-density).
+            \textit{Use:} Benchmark model performance against high-frequency hospital telemetry.
+        \end{itemize}
+        \vspace{0.2cm}
+        \item \textbf{Tier 3: EDT Device Datasets (Drift Testing)}
+        \begin{itemize}
+            \item \textit{Source:} Continuous heart rate \& SpO2 multivariate streams.
+            \textit{Use:} Unit-testing for our \textbf{Novel CUSUM Drift Detection} algorithm's rapid response to sudden physiological "crashing."
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
 % --- DATA PREPROCESSING ---
 \begin{frame}{Data Preprocessing \& Imputation Pipeline}
     \textbf{Challenge \& Why it looks like a mess:} 
