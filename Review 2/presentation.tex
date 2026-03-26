@@ -223,6 +223,25 @@ Balances privacy, efficiency, and interpretability in a single framework \\
     \end{columns}
 \end{frame}
 
+\begin{frame}{Multi-Tiered Data Acquisition Strategy}
+    \small
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{|p{2.2cm}|p{5cm}|p{5cm}|}
+        \hline
+        \textbf{Data Source} & \textbf{Content \& Features} & \textbf{Project Role \& Usage} \\
+        \hline
+        \textbf{Tier 1: PhysioNet} & $\sim$40,000 .psv records; Sepsis clinical indicators (34 columns). & \textbf{Primary Algorithm Training:} Large-scale Federated simulation across heterogeneous hospital clients. \\
+        \hline
+        \textbf{Tier 2: VitalDB} & High-density perioperative vital sign waveforms ($HR, SpO2, MBP$). & \textbf{Validation \& Personalization:} Testing FPDAF performance on high-frequency clinical distributions. \\
+        \hline
+        \textbf{Tier 3: EDT} & High-frequency CSV streams (HR every 5s); Continuous SpO2 logs. & \textbf{Drift Tracker Testing:} Proving immediate \textit{CUSUM} alert response to sudden physiological deviations (``crashing''). \\
+        \hline
+    \end{tabular}
+    
+    \vspace{0.4cm}
+    \textbf{Phase 2 Execution:} All files successfully acquired and partitioned locally.
+\end{frame}
+
 % --- DATA PREPROCESSING ---
 \begin{frame}{Data Preprocessing \& Imputation Pipeline}
     \textbf{Challenge \& Why it looks like a mess:} 
