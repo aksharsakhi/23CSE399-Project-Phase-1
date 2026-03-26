@@ -81,7 +81,7 @@ CB.SC.U4CSE23753 & V.Chakravarthy & & & \\
 % =========================================================================================
 
 \section{Project Proposal and objectives}
-\textbf{Overall Project Idea:} To design a fully decentralized, privacy-preserving \textbf{Federated Personalized Drift-Aware Attention Framework (FPDAF)} specifically tailored for multivariate healthcare time-series analysis (e.g., ICU patient risk monitoring and forecasting).
+\textbf{Overall Project Idea:} Instead of merely implementing standard off-the-shelf algorithms, this project proposes a novel mathematical extension to existing FedAvg and FedPer models. We introduce the fully decentralized \textbf{Federated Personalized Drift-Aware Attention Framework (FPDAF)} specifically designed for multivariate healthcare time-series analysis (e.g., ICU risk forecasting).
 
 \textbf{Objectives to Achieve:}
 \begin{enumerate}[noitemsep, leftmargin=1.5em]
@@ -97,9 +97,9 @@ Continuous monitoring systems in Intensive Care Units (ICUs) collect immense str
 Our literature review explored standard Federated methods. FedAvg (McMahan 2017) trains efficiently but lacks personalization. FedPer (Arivazhagan 2020) personalizes models to local distributions but lacks any mathematical mechanism for tracking concept drift over time. FedXAI works (Kalakoti 2025) focus mostly on classification datasets, not complex high-frequency critical care time-series. Thus, a significant gap exists in achieving privacy, personalization, drift monitoring, and clinical explainability simultaneously.
 
 \section{Execution plan}
-The subdomains required to solve this problem include \textbf{Data Engineering} (PhysioNet Challenge 2019 dataset ingestion, structuring temporal windows), \textbf{Deep Learning Architecture} (LSTM backbone and Softmax attention mechanics), \textbf{Decentralized Systems} (FedAvg aggregation protocols), \textbf{Model Customization} (extracting independent local decision heads), and \textbf{Bayesian Statistics/Math} (using CUSUM residual monitoring). 
+The subdomains required to solve this problem involve heavily modifying base components: \textbf{Data Engineering} (custom structural sequence profiling), \textbf{Deep Learning Architecture} (extending LSTMs with novel Temporal Attention constraints), \textbf{Decentralized Systems} (modifying generic \textit{FedAvg} aggregation to include attention weights), \textbf{Model Customization} (dynamically manipulating \textit{FedPer} baseline layers), and \textbf{Statistical Math} (altering standard \textit{CUSUM} tracking into an active Neural Network layer-freezing trigger). 
 
-Our plan mapped these subdomains to execution steps: initially solidifying the theoretical bounds and mathematical triggers in Phase 1, followed by developing the PyTorch dataset pipeline, establishing the generic FedAvg baseline model locally, and finally attaching our novel drift-detector and attention overlays in Phase 2.
+Our plan mapped these subdomains to execution steps: defining the novel mathematical intersection of these bases in Phase 1, followed by developing the PyTorch dataset pipeline, establishing the generic baseline variants locally, and finally attaching our novel drift-detector and attention overlays structurally in Python to prove the FPDAF extension in Phase 2.
 
 \section{Fundamentals which you have learned in the semester}
 To prepare for implementation, the team completed an extensive curriculum covering the fundamental requirements:
