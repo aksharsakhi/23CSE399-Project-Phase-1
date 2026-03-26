@@ -223,28 +223,23 @@ Balances privacy, efficiency, and interpretability in a single framework \\
     \end{columns}
 \end{frame}
 
-% --- MULTI-TIERED DATA ACQUISITION ---
 \begin{frame}{Multi-Tiered Data Acquisition Strategy}
-    \textbf{Phase 2 Expansion Plan (Acquired \& Processed):}
-    \vspace{0.3cm}
-    \begin{itemize}
-        \item \textbf{Tier 1: PhysioNet Challenge (Primary Dataset)}
-        \begin{itemize}
-            \item \textit{Use:} Primary Federated simulation across 40,000 patient sequences.
-        \end{itemize}
-        \vspace{0.2cm}
-        \item \textbf{Tier 2: VitalDB Dataset (Validation)}
-        \begin{itemize}
-            \item \textit{Source:} Surgical \& ICU vital sign waveforms (High-density).
-            \textit{Use:} Benchmark model performance against high-frequency hospital telemetry.
-        \end{itemize}
-        \vspace{0.2cm}
-        \item \textbf{Tier 3: EDT Device Datasets (Drift Testing)}
-        \begin{itemize}
-            \item \textit{Source:} Continuous heart rate \& SpO2 multivariate streams.
-            \textit{Use:} Unit-testing for our \textbf{Novel CUSUM Drift Detection} algorithm's rapid response to sudden physiological "crashing."
-        \end{itemize}
-    \end{itemize}
+    \small
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{|p{2.2cm}|p{5cm}|p{5cm}|}
+        \hline
+        \textbf{Data Source} & \textbf{Content \& Features} & \textbf{Project Role \& Usage} \\
+        \hline
+        \textbf{Tier 1: PhysioNet} & $\sim$40,000 .psv records; Sepsis clinical indicators (34 columns). & \textbf{Primary Algorithm Training:} Large-scale Federated simulation across heterogeneous hospital clients. \\
+        \hline
+        \textbf{Tier 2: VitalDB} & High-density perioperative vital sign waveforms ($HR, SpO2, MBP$). & \textbf{Validation \& Personalization:} Testing FPDAF performance on high-frequency clinical distributions. \\
+        \hline
+        \textbf{Tier 3: EDT} & High-frequency CSV streams (HR every 5s); Continuous SpO2 logs. & \textbf{Drift Tracker Testing:} Proving immediate \textit{CUSUM} alert response to sudden physiological deviations (``crashing''). \\
+        \hline
+    \end{tabular}
+    
+    \vspace{0.4cm}
+    \textbf{Phase 2 Execution:} All files successfully acquired and partitioned locally.
 \end{frame}
 
 % --- DATA PREPROCESSING ---
