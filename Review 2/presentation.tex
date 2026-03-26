@@ -245,11 +245,11 @@ Balances privacy, efficiency, and interpretability in a single framework \\
             \hline
             \textbf{Deep Learning Base} & LSTM/Transformer backbone, Temporal Attention Layer. & Global Model \\
             \hline
-            \textbf{Decentralization} & Federated Averaging (FedAvg) algorithm, Secure Gradient Aggregation. & Federated Loop \\
+            \textbf{Decentralization} & Federated Averaging (\textit{FedAvg}) or Proximal Aggregation (\textit{FedProx}). & Federated Loop \\
             \hline
-            \textbf{Customization} & Local Personalization Heads ($FedPer$). & Client Local Model \\
+            \textbf{Customization} & Local Personalization Heads (\textit{FedPer}) or Representation Decoupling (\textit{FedRep}). & Client Local Model \\
             \hline
-            \textbf{Statistical Math} & Cumulative Sum (CUSUM) for tracking prediction residual drift. & Drift Tracker Module \\
+            \textbf{Statistical Math} & Cumulative Sum (\textit{CUSUM}) or Page-Hinkley Test (\textit{PHT}) for residual drift. & Drift Tracker Module \\
             \hline
         \end{tabular}
     \end{table}
