@@ -30,7 +30,7 @@
 
     \centering
     \vspace{0.2cm}
-    \includegraphics[width=2.2cm]{logo_square.png} 
+    \includegraphics[width=2.2cm]{images/logo_square.png} 
     \vspace{0.2cm}
 
     {\Large \textbf{\textcolor{amritaMaroon}{Explainable Federated Learning for Healthcare Time-Series Forecasting with Personalized Drift Adaptation}}} \\
@@ -68,7 +68,7 @@
 % --- PROJECT PROPOSAL AND OBJECTIVES ---
 \begin{frame}{Project Proposal and Objectives}
     \textbf{Overall Project Idea:}
-    To design a completely decentralized, \textbf{Federated Personalized Drift-Aware Attention Framework (FPDAF)} tailored specifically for Multivariate Healthcare Time-Series (e.g., predicting ICU risks like Sepsis from patient vitals). 
+    Instead of implementing standard off-the-shelf ML algorithms, our team is proposing a \textbf{novel mathematical extension} to existing FL frameworks called the \textbf{Federated Personalized Drift-Aware Attention Framework (FPDAF)}. This custom algorithm modifies standard \textit{FedAvg} and \textit{CUSUM} to directly target Multivariate Healthcare Time-Series. 
 
     \vspace{0.3cm}
     \begin{block}{Objectives to Achieve}
@@ -191,6 +191,12 @@ Balances privacy, efficiency, and interpretability in a single framework \\
 }
 \end{frame}
 
+% --- RESEARCH GAP VISUAL ---
+\begin{frame}{Research Gap — Visual Summary}
+    \centering
+    \includegraphics[width=\linewidth, height=0.82\textheight, keepaspectratio]{images/research_gap_vislu.png}
+\end{frame}
+
 % --- DATASET USED ---
 \begin{frame}{Dataset: PhysioNet Challenge 2019 (Sepsis Prediction)}
     \begin{columns}
@@ -232,32 +238,6 @@ Balances privacy, efficiency, and interpretability in a single framework \\
     \end{enumerate}
 \end{frame}
 
-% --- EXECUTION PLAN ---
-\begin{frame}{Execution Plan (Components \& Flow)}
-    \small
-    \begin{table}
-        \centering
-        \begin{tabular}{|p{3cm}|p{6.5cm}|p{3.5cm}|}
-            \hline
-            \textbf{Subdomain} & \textbf{Matching Components Identified} & \textbf{Execution Target} \\
-            \hline
-            \textbf{Data Engineering} & PhysioNet Sepsis Database, Time-series normalization, Sequential chunking. & Preprocessing Pipeline \\
-            \hline
-            \textbf{Deep Learning Base} & LSTM/Transformer backbone, Temporal Attention Layer. & Global Model \\
-            \hline
-            \textbf{Decentralization} & Federated Averaging (FedAvg) algorithm, Secure Gradient Aggregation. & Federated Loop \\
-            \hline
-            \textbf{Customization} & Local Personalization Heads ($FedPer$). & Client Local Model \\
-            \hline
-            \textbf{Statistical Math} & Cumulative Sum (CUSUM) for tracking prediction residual drift. & Drift Tracker Module \\
-            \hline
-        \end{tabular}
-    \end{table}
-
-    \vspace{0.2cm}
-    \textbf{Solution Pipeline:} Extract Data $\rightarrow$ Train Local Models $\rightarrow$ Identify Attention Metrics $\rightarrow$ Sync Shared Layers Globally $\rightarrow$ Monitor Sub-populations for Drift $\rightarrow$ Adapt Local Heads.
-\end{frame}
-
 % --- FUNDAMENTALS LEARNED ---
 \begin{frame}{Fundamentals Learned in the Semester}
     To execute the plan above, our team embarked on extensive upskilling over this semester:
@@ -296,6 +276,19 @@ Balances privacy, efficiency, and interpretability in a single framework \\
     \end{itemize}
 \end{frame}
 
+% --- ALGORITHMIC NOVELTY ---
+\begin{frame}{Algorithmic Novelty \& Innovation Plan}
+    \textbf{The Research Novelty of FPDAF:}
+    We are not utilizing standard implementations of \textit{FedAvg} or \textit{CUSUM}. We are proposing a mathematical extension that fuses them into a single, responsive clinical algorithm.
+    
+    \vspace{0.3cm}
+    \textbf{The Novel Plan:}
+    \begin{itemize}
+        \item \textbf{CUSUM as a Neural Trigger:} We mathematically repurpose \textit{CUSUM} from a simple statistical quality-control tool into an active Neural Network manipulator. When the formulation $S_t > H$ alerts, our novel code aggressively unfreezes the isolated Local Personalization Head, forcing immediate recalibration without destroying the global backbone.
+        \item \textbf{Attention-Weighted Decentralization:} Standard \textit{FedAvg} treats all hospitals equally based on sample size. FPDAF will introduce a novel extension aggregating weights locally, prioritized by our \textit{Attention Mechanism}'s confidence, preventing outlier clinical anomalies from polarizing the central server.
+    \end{itemize}
+\end{frame}
+
 % --- ARCHITECTURE DIAGRAM ---
 \begin{frame}{Architecture Diagram and Explanation of Design}
     \begin{columns}
@@ -311,15 +304,9 @@ Balances privacy, efficiency, and interpretability in a single framework \\
         \end{column}
         \begin{column}{0.6\textwidth}
             \centering
-            \includegraphics[height=0.75\textheight, width=\linewidth, keepaspectratio]{architecture2.png}
+            \includegraphics[height=0.75\textheight, width=\linewidth, keepaspectratio]{images/architecture2.png}
         \end{column}
     \end{columns}
-\end{frame}
-
-% --- DATAFLOW DIAGRAM ---
-\begin{frame}{System Dataflow Mapping}
-    \centering
-    \includegraphics[width=0.95\linewidth, height=0.75\textheight, keepaspectratio]{Dataflow2.png}
 \end{frame}
 
 % --- SUMMARY OF WORKS COMPLETED ---
@@ -364,6 +351,61 @@ Balances privacy, efficiency, and interpretability in a single framework \\
     \end{table}
 \end{frame}
 
+% --- EXECUTION PLAN ---
+\begin{frame}{Execution Plan (Components \& Flow)}
+    \small
+    \begin{table}
+        \centering
+        \begin{tabular}{|p{3.2cm}|p{6.8cm}|p{3cm}|}
+            \hline
+            \textbf{Subdomain} & \textbf{Matching Components Identified} & \textbf{Execution Target} \\
+            \hline
+            \textbf{Data Engineering} & Custom ICU Sequence Windows, Imputation matrices. & Preprocessing \\
+            \hline
+            \textbf{Deep Learning Base} & Extending LSTM with a \textbf{novel} Temporal Attention constraint. & Global Model \\
+            \hline
+            \textbf{Decentralization} & \textbf{Extended} \textit{FedAvg} integrated with Attention-Aware weighting. & Federated Loop \\
+            \hline
+            \textbf{Customization} & \textit{FedPer} baseline modified dynamically via \textbf{FPDAF} heads. & Client Local Model \\
+            \hline
+            \textbf{Statistical Math} & \textit{CUSUM} mathematically altered to act as a Neural Network freezing layer trigger. & Drift Tracker \\
+            \hline
+        \end{tabular}
+    \end{table}
+
+    \vspace{0.2cm}
+    \textbf{Novel Solution Pipeline:} Extract Data $\rightarrow$ Modify \textit{FedAvg} Aggregation $\rightarrow$ Inject Attention Constraints $\rightarrow$ Sync Modified Shared Layers $\rightarrow$ Trigger Novel \textit{CUSUM}-Adaptive Local Reset.
+\end{frame}
+
+% --- EXECUTION LOGIC DETAILS ---
+\begin{frame}{FPDAF Detailed Implementation Logic (What \& How)}
+    \begin{itemize}
+        \item \textbf{1. Decentralization (Global Syncing)}
+        \begin{itemize}
+            \item \textit{What:} Establish a privacy-preserving Baseline.
+            \item \textit{How:} Code a central PyTorch Server script to securely aggregate only the \texttt{Global Temporal Base} gradient weights across 3-5 simulated hospital nodes, ensuring raw patient telemetry never leaves the client device.
+        \end{itemize}
+        \vspace{0.2cm}
+        \item \textbf{2. Customization (Personalized Modeling)}
+        \begin{itemize}
+            \item \textit{What:} Adapt Sepsis predictions to specific hospital demographics.
+            \item \textit{How:} Instantiate independent \texttt{Local Personalization Heads} (\textit{FedPer}) completely disconnected from the \textit{FedAvg} loop, allowing PyTorch client layers to heavily fit their local ICU distributions independently.
+        \end{itemize}
+        \vspace{0.2cm}
+        \item \textbf{3. Statistical Math (Active Concept Drift)}
+        \begin{itemize}
+            \item \textit{What:} Enable active AI response to rapid patient deterioration.
+            \item \textit{How:} We will sequentially track prediction residuals ($e_t$). If the $S_t > H$ CUSUM mathematical threshold breaches due to sudden physiological crashing, we dynamically unfreeze the personalization head for instant local patient recalibration!
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% --- EXECUTION LOGIC VISUAL ---
+\begin{frame}{FPDAF Implementation Logic — Visual}
+    \centering
+    \includegraphics[width=\linewidth, height=0.85\textheight, keepaspectratio]{images/FPDAF Detailed Implementation Logic_visul.png}
+\end{frame}
+
 % --- REFERENCES ---
 \begin{frame}[allowframebreaks]{References}
     \tiny
@@ -373,7 +415,7 @@ Balances privacy, efficiency, and interpretability in a single framework \\
     \nocite{zhang2022multitask,larocca2021attention,amato2023clustering,larocca2022shap,bernardi2023adaptive}
     \nocite{dusing2025sepsis,qayyum2023fedsepsis,lei2025supervised,pan2025multiprog,maurya2025secure}
     \bibliographystyle{IEEEtran}
-    \bibliography{ref}
+    \bibliography{latex/ref}
 \end{frame}
 
 % --- THANK YOU ---
