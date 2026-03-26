@@ -12,17 +12,17 @@ We aim to solve three critical clinical ML challenges:
 
 ---
 
-## 🏗 System Architecture & Dataflow
+## 🏗 System Architecture & Implementation Logic
 
 ### 🏥 Architecture Overview
 The framework intentionally decouples the neural network graph. A **Shared Global Temporal Backbone** captures generalized physiological boundaries (e.g., normal adult human heart rates). An extreme **Personalization Head** remains strictly isolated inside the hospital edge server, mapping exact predictions to the local localized cohort distributions. 
 
-![System Architecture](Review%202/architecture2.png)
+![System Architecture](Review%202/images/architecture2.png)
 
-### 📊 Adaptive System Dataflow
-The runtime dataflow processes temporal multivariate arrays (Heart Rate, BP, SpO2) sequentially. A **CUSUM** algorithm actively inspects the residual prediction streams $e_t$ inside the client. If cumulative error exceeds a statistical threshold $H$, a localized concept drift is declared, enforcing a dynamic un-freezing of the personalization head to adapt to the patient's deteriorating condition immediately.
+### 📊 Detailed Implementation Logic
+Our novel master plan integrates **Decentralization** (global weight syncing via FedAvg), **Customization** (local personalized heads), and **Statistical Math** (active CUSUM monitoring) into a single responsive clinical algorithm.
 
-![System Dataflow](Review%202/Dataflow2.png)
+![Implementation Logic](Review%202/images/FPDAF%20Detailed%20Implementation%20Logic_visul.png)
 
 ---
 
@@ -35,12 +35,14 @@ The runtime dataflow processes temporal multivariate arrays (Heart Rate, BP, SpO
 
 ## 📂 Repository Structure
 * **[Implementation/](Implementation/)**: (Phase 2 Initialization)
+  * `preprocess_physionet.py`: Automated PyTorch data pipeline for ICU sequence windows.
   * `models.py`: Structural code initializing PyTorch FPDAF modules (LSTM backbone + Local Head).
   * `fed_train.py`: Basic Federated Learning loop simulating PyTorch gradient aggregation.
-  * `data_simulation.py`: Sub-routine scripts for simulating ICU vitals prior to full PhysioNet ingestion.
 * **[Review 1/](Review%201/)**: Baseline literature survey mapping 25 peer-reviewed papers.
 * **[Review 2/](Review%202/)**: Technical progress and methodology documents.
-  * `report.pdf` & `presentation.pdf`: The final formulated Architecture mappings and execution plans natively compiled in LaTeX.
+  * **[images/](Review%202/images/)**: Normalized architectural and implementation diagrams.
+  * **[output/](Review%202/output/)**: Final `report.pdf` & `presentation.pdf` compiled natively via LaTeX.
+  * **[latex/](Review%202/latex/)**: Bibliography files (`ref.bib`).
 
 ---
 
