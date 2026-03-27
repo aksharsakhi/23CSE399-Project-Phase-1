@@ -294,22 +294,8 @@ Balances privacy, efficiency, and interpretability in a single framework \\
 
 % --- ARCHITECTURE DIAGRAM (13) ---
 \begin{frame}{Architecture Diagram and Explanation of Design}
-    \begin{columns}
-        \begin{column}{0.4\textwidth}
-            \textbf{Why this design?}
-            \small
-            \begin{itemize}
-                \item \textbf{Privacy:} Only encrypted gradients travel upward.
-                \item \textbf{Local LSTM Base:} Captures generalized physiological rules.
-                \item \textbf{Attention Layer:} Provides XAI (feature importance) right before the local prediction.
-                \item \textbf{Personalization Head:} NEVER shared with the server. Tailors risk predictions to the specific local patient cohort.
-            \end{itemize}
-        \end{column}
-        \begin{column}{0.6\textwidth}
-            \centering
-            \includegraphics[height=0.75\textheight, width=\linewidth, keepaspectratio]{images/architecture2.png}
-        \end{column}
-    \end{columns}
+    \centering
+    \includegraphics[width=0.95\textwidth, height=0.82\textheight, keepaspectratio]{images/ArcDigram.jpeg}
 \end{frame}
 
 % --- SUMMARY OF WORKS COMPLETED (14) ---
