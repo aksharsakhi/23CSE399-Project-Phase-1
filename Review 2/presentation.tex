@@ -107,8 +107,9 @@
     \small
     \begin{table}
         \centering
-        \renewcommand{\arraystretch}{1.3}
-        \begin{tabular}{|p{5.5cm}|p{8cm}|}
+        \renewcommand{\arraystretch}{1.2}
+        \resizebox{\textwidth}{!}{%
+        \begin{tabular}{|p{5.5cm}|p{8.5cm}|}
             \hline
             \textbf{Review 1 Panel Feedback} & \textbf{Adjustments Made for Review 2} \\
             \hline
@@ -122,7 +123,7 @@
             \hline
             \textbf{5. Comparative FL Discussion} & Contrasted standard AI (FedAvg) with our personalized approach (FedPer) to show how we handle different hospital patient types. \\
             \hline
-        \end{tabular}
+        \end{tabular}}
     \end{table}
     \vspace{0.1cm}
     \centering \scriptsize \textit{Technical Architecture, Mathematical Proofs, and Detailed Novelty are presented in Frames 11--13.}
