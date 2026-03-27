@@ -405,21 +405,22 @@ Balances privacy, efficiency, and interpretability in a single framework \\
     \begin{table}
         \centering
         \small
-        \begin{tabular}{|p{3.5cm}|p{9.5cm}|}
+        \resizebox{\textwidth}{!}{%
+        \begin{tabular}{|p{3cm}|p{8.5cm}|p{2.5cm}|c|}
             \hline
-            \textbf{Target Area} & \textbf{Objective for Phase 2} \\
+            \textbf{Target Area} & \textbf{Objective for Phase 2 \& 3} & \textbf{Timeline} & \textbf{Status} \\
             \hline
-            \textbf{Data Preprocessing} & Implement normalization, handle missing values, and construct sequential time windows for the acquired PhysioNet dataset. \\
+            \textbf{Data Preprocessing} & Implement normalization, handle missing values, and construct sequential windows for PhysioNet. & April 2026 & Phase 2 \\
             \hline
-            \textbf{Baseline Training} & Code standard \textit{FedAvg} on PyTorch locally to establish stable forecasting baselines. \\
+            \textbf{Baseline Training} & Code standard \textit{FedAvg} on PyTorch locally to establish stable forecasting baselines. & May -- Aug 2026 & Phase 2 \\
             \hline
-            \textbf{FPDAF Integration} & Embed \textit{CUSUM} threshold triggering and \textit{Attention} layers into the personalized model heads. \\
+            \textbf{FPDAF Integration} & Embed \textit{CUSUM} threshold triggering and \textit{Attention} layers into the personalized heads. & Sept -- Nov 2026 & Phase 3 \\
             \hline
-            \textbf{Federated Simulation} & Deploy 3-5 independent simulated Hospital "Clients" to test concept drift adaptation latency. \\
+            \textbf{Federated Simulation} & Deploy 3-5 independent simulated Hospital "Clients" to test concept drift adaptation latency. & Dec 2026 & Phase 3 \\
             \hline
-            \textbf{Evaluation Metrics} & Benchmark system performance utilizing \textbf{Accuracy, Precision, Recall, F1-Score, and AUC-ROC}. \\
+            \textbf{Final Evaluation} & Overall system performance benchmarking utilizing \textbf{Accuracy, F1-Score, and AUC-ROC}. & Jan -- Feb 2027 & Phase 3 \\
             \hline
-        \end{tabular}
+        \end{tabular}}
     \end{table}
 \end{frame}
 
