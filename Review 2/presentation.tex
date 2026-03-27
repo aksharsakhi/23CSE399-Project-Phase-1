@@ -67,15 +67,20 @@
 
 % --- INTRODUCTION AND BACKGROUND (2) ---
 \begin{frame}{Introduction and Background}
-    \textbf{Introduction to the Problem:}
-    In modern Intensive Care Units (ICUs), continuous monitoring systems generate vast amounts of high-frequency multivariate time-series data (Heart Rate, Blood Pressure, SpO2). Detecting critical deterioration early saves lives.
+    \textbf{Clinical Context \& Terminology:}
+    \scriptsize
+    \begin{itemize}
+        \item \textbf{Sepsis:} Life-threatening organ failure caused by infection; needs early detection.
+        \item \textbf{Deterioration:} Rapid worsening of patient condition (vitals becoming abnormal).
+        \item \textbf{Profiling:} Analyzing time-series data (Heart Rate, BP) to predict patient risk.
+    \end{itemize}
 
-    \vspace{0.3cm}
+    \vspace{0.2cm}
     \textbf{Motivation to Solve This Specific Problem:}
     \begin{itemize}
-        \item \textbf{The Data Silo Problem:} High-accuracy models require massive datasets, but laws (e.g., \textbf{HIPAA} / \textbf{DPDPA 2023, Section 8: Obligations}) forbid combining data into a centralized server.
-        \item \textbf{The Global Model Failure:} If multiple hospitals successfully engage in standard Federated Learning (FedAvg), the resulting "global model" fails because hospital demographics and local treatment protocols vary wildly.
-        \item \textbf{The Black Box Problem:} Doctors cannot act on an AI alert if the model cannot explain the physiological basis for its warning.
+        \item \textbf{The Data Silo Problem:} Privacy laws (\textbf{HIPAA/DPDPA}) forbid moving data to servers.
+        \item \textbf{The Global Model Failure:} A single model fails if hospital distributions vary.
+        \item \textbf{The Black Box Problem:} Doctors need explaining (XAI) to trust AI alerts.
     \end{itemize}
 
     \vspace{0.2cm}
