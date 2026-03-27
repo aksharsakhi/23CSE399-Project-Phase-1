@@ -128,16 +128,16 @@
     \centering \scriptsize \textit{Technical Architecture, Mathematical Proofs, and Detailed Novelty are presented in Frames 11--13.}
 \end{frame}
 
-% --- ALGORITHMIC NOVELTY (5) ---
 \begin{frame}{Algorithmic Novelty \& Innovation Plan}
     \textbf{The Research Novelty of FPDAF:}
-    We are not utilizing standard implementations of \textit{FedAvg} or \textit{CUSUM}. We are proposing a mathematical extension that fuses them into a single, responsive clinical algorithm.
+    We are not just using off-the-shelf tools; we are creating a custom extension that combines Federated Learning with Drift Detection for a responsive clinical system.
     
     \vspace{0.3cm}
-    \textbf{The Novel Plan:}
+    \textbf{Key Innovation Pillars:}
     \begin{itemize}
-        \item \textbf{CUSUM as a Neural Trigger:} We mathematically repurpose \textit{CUSUM} from a simple statistical quality-control tool into an active Neural Network manipulator. When the formulation $S_t > H$ alerts, our novel code aggressively unfreezes the isolated Local Personalization Head, forcing immediate recalibration without destroying the global backbone.
-        \item \textbf{Attention-Weighted Decentralization:} Standard \textit{FedAvg} treats all hospitals equally based on sample size. FPDAF will introduce a novel extension aggregating weights locally, prioritized by our \textit{Attention Mechanism}'s confidence, preventing outlier clinical anomalies from polarizing the central server.
+        \item \textbf{Novel FedAvg Extension:} Instead of weighting hospitals by patient count only, we use \textbf{Attention-Aware Weighting} to prioritize higher-confidence hospital data during the global update.
+        \item \textbf{Novel CUSUM Extension:} Instead of only monitoring data quality, we repurpose CUSUM to act as an \textbf{Automated Neural Trigger}. It detects rapid patient deterioration and "unfreezes" model layers for instant adaptation.
+        \item \textbf{Novel Local Personalization:} We extend standard \textit{FedPer} nodes to ensure the local hospital model focuses purely on its specific patient types without losing shared global intelligence.
     \end{itemize}
 \end{frame}
 
