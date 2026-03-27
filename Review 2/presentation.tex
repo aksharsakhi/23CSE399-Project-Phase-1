@@ -270,31 +270,7 @@ Balances privacy, efficiency, and interpretability in a single framework \\
     \end{enumerate}
 \end{frame}
 
-% --- MATHEMATICAL FORMULATION (11) ---
-\begin{frame}{Mathematical Foundation}
-    \textbf{1. Standard Federated Averaging (FedAvg Base):}
-    \vspace{-0.2cm}
-    \begin{equation}
-        w_{t+1} = \sum_{k=1}^{K} \frac{n_k}{n} w_{t+1}^k
-    \end{equation}
-    \vspace{-0.2cm}
-    \begin{itemize}
-        \small \item Server aggregates weights $w_{t+1}^k$ from $K$ hospitals weighted by patient count $n_k$. (Personalization heads are strictly excluded from this sum).
-    \end{itemize}
 
-    \vspace{0.3cm}
-    \textbf{2. CUSUM Drift Detection (Client-Side Trigger):}
-    \vspace{-0.2cm}
-    \begin{equation}
-        S_t = \max(0, S_{t-1} + (e_t - \mu - k))
-    \end{equation}
-    \vspace{-0.2cm}
-    \begin{itemize}
-        \small \item $e_t$: Prediction error (residual) at time step $t$.
-        \small \item $\mu$: Mean error during stable conditions.
-        \small \item If the cumulative statistic $S_t > H$ (Threshold), a concept drift is flagged, triggering local model retraining.
-    \end{itemize}
-\end{frame}
 
 % --- ALGORITHMIC NOVELTY (12) ---
 \begin{frame}{Algorithmic Novelty \& Innovation Plan}
