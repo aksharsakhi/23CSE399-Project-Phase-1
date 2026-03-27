@@ -81,19 +81,20 @@
 
 % --- PROJECT PROPOSAL AND OBJECTIVES (3) ---
 \begin{frame}{Project Proposal and Objectives}
-    \textbf{Overall Project Goal:}
-    Instead of merely implementing existing algorithms, our team \textbf{proposes to develop} a novel mathematical extension to current FL frameworks: the \textbf{Federated Personalized Drift-Aware Attention Framework (FPDAF)}. This custom algorithm \textbf{will be engineered} to modify standard \textit{FedAvg} and \textit{CUSUM} to directly target Multivariate Healthcare Time-Series.
+    {\small \textbf{Overall Project Goal:}
+    Instead of merely implementing existing algorithms, our team \textbf{proposes to develop} a novel mathematical extension to current FL frameworks: the \textbf{Federated Personalized Drift-Aware Attention Framework (FPDAF)}. This custom algorithm \textbf{will be engineered} to modify standard \textit{FedAvg} and \textit{CUSUM} to directly target Multivariate Healthcare Time-Series.}
 
-    \vspace{0.3cm}
+    \vspace{0.1cm}
     \begin{block}{Objectives to Achieve}
+        \footnotesize
         \begin{enumerate}
-            \item \textbf{Privacy Preservation:} Train predictive models across multiple hospitals collaboratively without sharing raw patient data (Federated Learning).
-            \item \textbf{Personalization:} Use Local Personalization Heads to manage patient heterogeneity (Non-IID distributions).
-            \item \textbf{Drift Adaptation:} Implement CUSUM algorithms to detect when a patient's physiological state degrades and rapidly adapt the model locally.
-            \item \textbf{Clinical Trust:} Provide transparency using Temporal Attention mechanisms so doctors know \textit{why} the model predicted a risk.
+            \item \textbf{Privacy Preservation:} Train predictive models collaboratively without sharing raw data.
+            \item \textbf{Personalization:} Use Local Heads to handle patient heterogeneity.
+            \item \textbf{Drift Adaptation:} Use CUSUM to adapt when physiological state degrades.
+            \item \textbf{Clinical Trust:} Use Temporal Attention so doctors know \textit{why} risk is predicted.
         \end{enumerate}
     \end{block}
-    \vspace{0.2cm}
+    \vspace{0.1cm}
     \centering \footnotesize \textbf{SDG Alignment:} This project maps directly to \textbf{SDG 3 (Good Health and Well-being)} by automating mortality risk detection in critical care.
 \end{frame}
 
