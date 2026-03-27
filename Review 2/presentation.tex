@@ -77,22 +77,27 @@
         \item \textbf{The Global Model Failure:} If multiple hospitals successfully engage in standard Federated Learning (FedAvg), the resulting "global model" fails because hospital demographics and local treatment protocols vary wildly.
         \item \textbf{The Black Box Problem:} Doctors cannot act on an AI alert if the model cannot explain the physiological basis for its warning.
     \end{itemize}
+
+    \vspace{0.2cm}
+    \begin{block}{Sustainable Development Goal (SDG) Mapping}
+        \scriptsize
+        \textbf{Primary (SDG 3):} Directly contributes to Good Health by enabling explainable patient risk prediction. \\
+        \textbf{Secondary (SDG 9 \& 16):} Supports scalable clinical innovation and ethical data privacy security.
+    \end{block}
 \end{frame}
 
 % --- PROJECT PROPOSAL AND OBJECTIVES (3) ---
 \begin{frame}{Project Proposal and Objectives}
-    \textbf{\small Overall Project Goal} \\
-    {\scriptsize Instead of standard algorithms, our team is developing a novel extension: \textbf{FPDAF}, mathematically modifying \textit{FedAvg} and \textit{CUSUM} for Multivariate Healthcare Time-Series.}
+    \textbf{Overall Project Goal:}
+    Instead of merely implementing existing algorithms, our team \textbf{proposes to develop} a novel mathematical extension to current FL frameworks: the \textbf{Federated Personalized Drift-Aware Attention Framework (FPDAF)}. This custom algorithm \textbf{will be engineered} to modify standard \textit{FedAvg} and \textit{CUSUM} to directly target Multivariate Healthcare Time-Series.
 
-    \vspace{0.1cm}
-    \begin{block}{Core Objectives \& Social Impact}
-        \scriptsize
+    \vspace{0.3cm}
+    \begin{block}{Objectives to Achieve}
         \begin{enumerate}
-            \item \textbf{Privacy Preservation:} Collaborative training without raw data sharing.
-            \item \textbf{Personalization:} Local Heads to handle patient heterogeneity.
-            \item \textbf{Drift Adaptation:} CUSUM-based response to physiological degradation.
-            \item \textbf{Clinical Trust:} Temporal Attention for clinician-friendly risk alerts.
-            \item \textbf{SDG Alignment:} Directly maps to \textbf{SDG 3 (Good Health \& Well-being)}.
+            \item \textbf{Privacy Preservation:} Train predictive models across multiple hospitals collaboratively without sharing raw patient data (Federated Learning).
+            \item \textbf{Personalization:} Use Local Personalization Heads to manage patient heterogeneity (Non-IID distributions).
+            \item \textbf{Drift Adaptation:} Implement CUSUM algorithms to detect when a patient's physiological state degrades and rapidly adapt the model locally.
+            \item \textbf{Clinical Trust:} Provide transparency using Temporal Attention mechanisms so doctors know \textit{why} the model predicted a risk.
         \end{enumerate}
     \end{block}
 \end{frame}
