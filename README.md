@@ -12,6 +12,18 @@ We aim to solve three critical clinical ML challenges:
 
 ---
 
+## 📊 Data Exploration: 14-Year Longitudinal ICU Stack
+To ensure the framework is robust against macro-level data evolution, we have curated a multi-era dataset portfolio spanning **2012--2026** to validate cross-hospital generalizability and drift recovery:
+
+| Era & Source | Dataset Content | Project Validation Role |
+| :--- | :--- | :--- |
+| **Baseline (2012)** | **PhysioNet 2012**: 12,000 Mortality records | **Age-Robustness:** Validating attention on legacy clinical protocols. |
+| **Primary (2019)** | **PhysioNet 2019**: 40,000 Sepsis sequences | **Main Training:** Core FL algorithm & temporal risk forecasting. |
+| **High-Fi (2020-21)** | **VitalDB & EDT**: Waveforms & 5s telemetry | **Stress Testing:** Testing CUSUM trigger on sub-minute drifts. |
+| **Future (2026)** | **PhysioNet 2026**: Trajectory Flow sources | **State-of-the-Art:** Final validation on the latest clinical standards. |
+
+---
+
 ## 🏗 System Architecture & Implementation Logic
 
 ### 🏥 Architecture Overview
@@ -49,6 +61,7 @@ The runtime dataflow processes temporal multivariate arrays sequentially. If the
   * `models.py`: Structural code initializing PyTorch FPDAF modules (LSTM backbone + Local Head).
   * `fed_train.py`: Basic Federated Learning loop simulating PyTorch gradient aggregation.
 * **[Review 1/](Review%201/)**: Baseline literature survey mapping 25 peer-reviewed papers.
+  * **[Full Literature Analysis (25+ Papers)](https://docs.google.com/spreadsheets/d/1G_zAbr6MI_bYcCHEXfkWjhmvKzBEDKr0/edit#gid=417550448)**: Detailed Google Sheets analysis.
 * **[Review 2/](Review%202/)**: Technical progress and methodology documents.
   * **[images/](Review%202/images/)**: Normalized architectural and implementation diagrams.
   * **[output/](Review%202/output/)**: Final `report.pdf` & `presentation.pdf`.
