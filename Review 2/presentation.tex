@@ -128,6 +128,19 @@
     \centering \scriptsize \textit{Technical Architecture, Mathematical Proofs, and Detailed Novelty are presented in Frames 11--13.}
 \end{frame}
 
+% --- ALGORITHMIC NOVELTY (5) ---
+\begin{frame}{Algorithmic Novelty \& Innovation Plan}
+    \textbf{The Research Novelty of FPDAF:}
+    We are not utilizing standard implementations of \textit{FedAvg} or \textit{CUSUM}. We are proposing a mathematical extension that fuses them into a single, responsive clinical algorithm.
+    
+    \vspace{0.3cm}
+    \textbf{The Novel Plan:}
+    \begin{itemize}
+        \item \textbf{CUSUM as a Neural Trigger:} We mathematically repurpose \textit{CUSUM} from a simple statistical quality-control tool into an active Neural Network manipulator. When the formulation $S_t > H$ alerts, our novel code aggressively unfreezes the isolated Local Personalization Head, forcing immediate recalibration without destroying the global backbone.
+        \item \textbf{Attention-Weighted Decentralization:} Standard \textit{FedAvg} treats all hospitals equally based on sample size. FPDAF will introduce a novel extension aggregating weights locally, prioritized by our \textit{Attention Mechanism}'s confidence, preventing outlier clinical anomalies from polarizing the central server.
+    \end{itemize}
+\end{frame}
+
 % --- RESEARCH GAP (5) ---
 \begin{frame}[fragile]{Research Gap Analysis}
 \tiny
@@ -279,18 +292,7 @@ Balances privacy, efficiency, and interpretability in a single framework \\
 
 
 
-% --- ALGORITHMIC NOVELTY (12) ---
-\begin{frame}{Algorithmic Novelty \& Innovation Plan}
-    \textbf{The Research Novelty of FPDAF:}
-    We are not utilizing standard implementations of \textit{FedAvg} or \textit{CUSUM}. We are proposing a mathematical extension that fuses them into a single, responsive clinical algorithm.
-    
-    \vspace{0.3cm}
-    \textbf{The Novel Plan:}
-    \begin{itemize}
-        \item \textbf{CUSUM as a Neural Trigger:} We mathematically repurpose \textit{CUSUM} from a simple statistical quality-control tool into an active Neural Network manipulator. When the formulation $S_t > H$ alerts, our novel code aggressively unfreezes the isolated Local Personalization Head, forcing immediate recalibration without destroying the global backbone.
-        \item \textbf{Attention-Weighted Decentralization:} Standard \textit{FedAvg} treats all hospitals equally based on sample size. FPDAF will introduce a novel extension aggregating weights locally, prioritized by our \textit{Attention Mechanism}'s confidence, preventing outlier clinical anomalies from polarizing the central server.
-    \end{itemize}
-\end{frame}
+
 
 % --- ARCHITECTURE DIAGRAM (13) ---
 \begin{frame}{Architecture Diagram and Explanation of Design}
