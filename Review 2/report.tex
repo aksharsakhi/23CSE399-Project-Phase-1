@@ -81,47 +81,56 @@ CB.SC.U4CSE23753 & V. CHAKRAVARTHY & & & \\
 % =========================================================================================
 
 \section{Project Proposal and objectives}
-\textbf{Overall Project Idea:} Instead of merely implementing standard off-the-shelf algorithms, this project \textbf{sets the objective to develop} a novel mathematical extension to existing FedAvg and FedPer models. We will introduce the fully decentralized \textbf{Federated Personalized Drift-Aware Attention Framework (FPDAF)} specifically designed for multivariate healthcare time-series analysis (e.g., ICU risk forecasting).
+\textbf{Overall Project Goal:} Instead of merely implementing standard off-the-shelf algorithms, this project \textbf{sets the objective to develop} a novel extension to existing FedAvg and FedPer models. We will introduce the fully decentralized \textbf{Federated Personalized Drift-Aware Attention Framework (FPDAF)} specifically designed for multivariate healthcare time-series analysis (e.g., ICU risk forecasting).
 
 \vspace{0.2cm}
 \textbf{Primary Novelty \& Proposed Algorithmic Innovation:} 
-The definitive novelty of FPDAF lies in its planned hybrid integration. Unlike conventional FL architectures that maintain blind static global averaging, our extension \textbf{proposes to mathematically intercept} the \textit{FedAvg} loop. We will inject a \textbf{CUSUM Statistical Trigger} directly into local active hospital nodes, enabling isolated Neural Network layers (Personalization Heads) to mathematically detach and adapt in real-time when patient physiology rapidly deteriorates, utilizing \textbf{Temporal Attention} to explain exactly which vitals caused the deviation.
+The definitive novelty of FPDAF lies in its planned hybrid integration. Unlike conventional FL architectures that maintain blind static global averaging, our extension \textbf{proposes to intercept} the \textit{FedAvg} loop. We will inject a \textbf{Novel CUSUM Extension} directly into local active hospital nodes, enabling isolated Neural Network layers to act as an \textbf{Automated Neural Trigger}. This allows the model to "unfreeze" and adapt in real-time when patient physiology rapidly deteriorates, utilizing \textbf{Temporal Attention} to explain exactly which vitals caused the deviation.
 
 \vspace{0.2cm}
-\textbf{Objectives to Achieve:}
-\begin{enumerate}[noitemsep, leftmargin=1.5em]
-    \item \textbf{Privacy-Preserving Decentralized Training:} Implement a multi-hospital training cycle using PyTorch that ensures individual patient records never leave the local client node.
-    \item \textbf{Mitigate Client Heterogeneity:} Resolve the global averaging mismatch by implementing \textbf{Local Personalization Heads} (\textit{FedPer}) for site-specific clinical fine-tuning.
-    \item \textbf{Active Temporal Drift Detection:} Embed a mathematical \textbf{CUSUM Drift Tracker} to monitor prediction confidence and trigger automated local weight resets upon patient physiological status shift.
-    \item \textbf{Clinician-Centric Explainability:} Deploy \textbf{Temporal Attention Mechanisms} to highlight precisely which ICU vital signs (e.g., Blood Pressure drop + Heart Rate spike) contributed to the risk prediction.
-\end{enumerate}
+\textbf{Key Research Pillars:}
+\begin{itemize}[noitemsep, leftmargin=1.5em]
+    \item \textbf{Novel FedAvg Extension:} Uses \textbf{Attention-Aware Weighting} to prioritize higher-confidence hospital data during the global update instead of just simple patient-count averages.
+    \item \textbf{Novel CUSUM Extension:} Repurposes statistical monitoring as an active neural manipulator for instant clinical adaptation.
+    \item \textbf{Novel Local Personalization:} Extends standard \textit{FedPer} nodes to focus on specific hospital demographics without losing shared global intelligence.
+\end{itemize}
 
 \section{Introduction and Background}
-Continuous monitoring systems in Intensive Care Units (ICUs) collect immense streams of physiological data (HR, BP, SpO2). Early detection of patient deterioration using Deep Learning models can prevent fatalities like Sepsis or Cardiac Arrest. However, massive clinical models require centralized data, violating privacy laws. While Federated Learning (e.g., FedAvg) resolves the data-sharing issue, it fails to account for non-IID data distributions (how demographics and hospital protocols vary significantly between facilities).
+\textbf{Clinical Context \& Terminology:}
+\begin{itemize}[noitemsep, leftmargin=1.5em]
+    \item \textbf{Sepsis:} Life-threatening organ failure caused by infection; needs early detection.
+    \item \textbf{Deterioration:} Rapid worsening of patient condition (vitals becoming abnormal).
+    \item \textbf{Profiling:} Analyzing time-series data (Heart Rate, BP) to predict patient risk.
+\end{itemize}
 
-Our literature review explored standard Federated methods. FedAvg (McMahan 2017) trains efficiently but lacks personalization. FedPer (Arivazhagan 2020) personalizes models to local distributions but lacks any mathematical mechanism for tracking concept drift over time. To ensure longitudinal robustness, we have acquired medical datasets spanning over a decade, including traditional benchmarks like **PhysioNet 2012** and cutting-edge **2026 Trajectory Flow Matching** sources. This allows us to validate the framework's resistance to data evolution across 14 years of ICU sensor history.
+Continuous monitoring systems in Intensive Care Units (ICUs) collect immense streams of physiological data (HR, BP, SpO2). Early detection of patient deterioration using Deep Learning models can prevent fatalities. However, massive clinical models require centralized data, violating privacy laws. While Federated Learning (e.g., FedAvg) resolves the data-sharing issue, it often fails to account for hospital-specific demographics and protocols (Accuracy Gap) or lacks clinician trust (Trust Gap).
+
+\vspace{0.2cm}
+\textbf{Sustainable Development Goal (SDG) Mapping:}
+\begin{itemize}[noitemsep, leftmargin=1.5em]
+    \item \textbf{Primary (SDG 3):} Directly contributes to Good Health by enabling explainable patient risk prediction.
+    \item \textbf{Secondary (SDG 9 \& 16):} Supports scalable clinical innovation and ethical data privacy security.
+\end{itemize}
 
 \section{Execution plan}
-The subdomains required to solve this problem involve heavily modifying base components: \textbf{Data Engineering} (custom structural sequence profiling), \textbf{Deep Learning Architecture} (extending LSTMs with novel Temporal Attention constraints), \textbf{Decentralized Systems} (modifying generic \textit{FedAvg} aggregation to include attention weights), \textbf{Model Customization} (dynamically manipulating \textit{FedPer} baseline layers), and \textbf{Statistical Math} (altering standard \textit{CUSUM} tracking into an active Neural Network layer-freezing trigger). 
-
-Our plan mapped these subdomains to execution steps: defining the novel mathematical intersection of these bases in Phase 1, followed by developing the PyTorch dataset pipeline, establishing the generic baseline variants locally, and finally attaching our novel drift-detector and attention overlays structurally in Python to prove the FPDAF extension in Phase 2.
+The subdomains required involve: \textbf{Data Engineering} (custom ICU sequence windows), \textbf{Deep Learning Base} (extending LSTMs with novel Temporal Attention), \textbf{Decentralization} (Attention-Aware FedAvg), \textbf{Customization} (dynamic FedPer heads), and \textbf{Continuous Adaptation} (iterative feedback loops for real-time recalibration).
 
 \section{Fundamentals which you have learned in the semester}
-To prepare for implementation, the team completed an extensive curriculum covering the fundamental requirements:
+To prepare for implementation, the team completed an extensive curriculum:
 \begin{itemize}[noitemsep, leftmargin=1.5em]
-    \item \textbf{Textbooks \& Papers:} Thoroughly studied the foundational architectures of Federated Learning (FedAvg, pFL, and FedPer) to mathematically understand secure aggregation.
-    \item \textbf{PyTorch Engineering:} Used MOOCs and official documentation to learn how to explicitly sever Neural Network graphs in PyTorch (allowing us to separate "Global Backbones" from isolated "Local Heads") and simulate custom training loops iteratively without data centralization.
-    \item \textbf{The Data Silo Problem:} High-accuracy deep learning models require massive amounts of diverse patient records. However, rigid healthcare privacy regulations—such as \textbf{HIPAA} in the USA and India's \textbf{Digital Personal Data Protection Act (DPDPA) 2023 (Section 8: Obligations of Data Fiduciary)}—forbid the consolidation of private biometric data into a centralized cloud server.
-    \item \textbf{Statistical Mechanics:} Learned the equations and thresholds defining the Cumulative Sum (CUSUM) drift detection standard to track temporal shifts in residual streams.
+    \item \textbf{Textbooks \& Papers:} Thoroughly studied Federated Learning architectures (FedAvg, FedPer) to understand secure aggregation.
+    \item \textbf{PyTorch Engineering:} Mastered custom training loops and gradient isolation techniques in PyTorch to separate "Global Backbones" from "Local Heads".
+    \item \textbf{The Privacy Gap:} Studied international and local regulations—\textbf{HIPAA} and India's \textbf{DPDPA 2023 (Section 8)}—which mandate decentralized data handling.
+    \item \textbf{Statistical Mechanics:} Learned the equations defining the \textit{CUSUM} drift detection standard for monitoring temporal shifts in clinical residuals.
 \end{itemize}
 
 \section{Architecture diagram and explanation of the design}
-The FPDAF architecture is a split-layer design. The \textbf{Global Temporal Backbone} consists of the LSTM layers responsible for learning generalized physiological laws across all participating hospitals.
+The FPDAF architecture is a split-layer design as shown in Figure 1. It utilizes a centralized server for global weight aggregation while maintaining strictly isolated local personalization heads at each hospital node to ensure privacy and specialized clinical accuracy.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\linewidth]{images/architecture2.png}
-\caption{System Architecture highlighting separation of Global Backbone (server-synced) and Local Heads (hospital-isolated).}
+\includegraphics[width=0.98\linewidth]{images/ArcDigram.jpeg}
+\caption{Master System Architecture: Highlighting the FPDAF extension for early ICU risk prediction.}
 \end{figure}
 
 The \textbf{Attention Layer} sits atop the backbone to compute temporal context vectors based on recent physiological spikes, giving transparent $x_i$ timestamps feature importance. Finally, the \textbf{Personalization Head} is isolated completely to the hospital node; it never transfers its gradients to the server, ensuring the final clinical decision is strictly correlated to the local hospital's demographic distribution.
@@ -162,18 +171,39 @@ To handle temporal drift, we implement the \textbf{CUSUM Neural Trigger}. The sy
 \[ S_t = \max(0, S_{t-1} + |y_t - \hat{y}_t| - \mu - k) \]
 If $S_t > H$ (the statistical threshold), the framework automatically declares a patient state-drift, triggering a local backpropagation cycle on the personalization head $\phi^k$ while keeping $\theta$ frozen, preserving the global model's generalizability while adapting to the patient's acute deterioration.
 
-\section{Summary of works completed / research findings (Technical Evidence)}
-During this semester (Phase 1), the following milestones were completed mapping to our \textbf{Technical Validation \& Evidence} requirements:
-\begin{enumerate}[noitemsep, leftmargin=1.5em]
-    \item \textbf{Heterogeneous Dataset Aggregation:} Secured a multi-era clinical stack including \textbf{PhysioNet (2019, 2012, 2026)}, high-density waveforms from \textbf{VitalDB (2020)}, and emergency telemetry from \textbf{EDT-Datasets (2021)}. This enables robust multi-task benchmarking (Sepsis, Mortality, and Trajectory) within a single longitudinal framework.
-    \item \textbf{Longitudinal Validation Strategy:} We will formulate a novelty-driven validation suite for Phase 2, testing drift recovery across a \textbf{14-year technological gap (2012--2026)}.
-    \item \textbf{Mathematical Definition:} Derived the formal CUSUM trigger logic and the split-weight optimization framework for localized personalization.
-    \item \textbf{Data Engineering Engine:} Developed the Python sequence profiling script to handle ICU \texttt{NaN} issues using \textbf{Bi-Directional Forward-Filling} and \textbf{Standardization} for multivariate time-series.
-    \item \textbf{Repository Finalization:} Established the official GitHub repository (\url{https://github.com/23CSE-TEAM-28/23CSE399-Project-Phase-1.git}) with functional FedAvg baseline code and project blueprints.
-\end{enumerate}
+\section{Proposed Phase 2 \& 3 Roadmap}
+The direct roadmap to full implementation is detailed in Table 2.
 
-\section{Plans for the oncoming semesters}
-Having successfully acquired the \textbf{PhysioNet Challenge 2019 (Sepsis Prediction)} open-access dataset, along with supplementary high-fidelity and testing streams from \textbf{VitalDB (2020)} and the \textbf{EDT-Datasets (2021)}, Phase 2 will aggressively focus on data preprocessing, missing value imputation, and constructing sequential time-windows. The team will establish the foundational generic \textit{FedAvg} baseline locally, and subsequently train the custom decoupled FPDAF pipeline across dynamically simulated hospital nodes using PyTorch. Finally, rigorous benchmarking will be conducted, measuring drift recovery delays alongside formal evaluation metrics including \textbf{Accuracy, Precision, Recall, F1-Score, and AUC-ROC} to definitively quantify the optimization \& personalization gains.
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{|p{3cm}|p{8.5cm}|p{3.5cm}|}
+\hline
+\textbf{Target Area} & \textbf{Objective for Phase 2 \& 3} & \textbf{Tentative Time} \\
+\hline
+\textbf{Data Preprocessing} & Clean, Impute, and construct sequential windows for PhysioNet. & Ongoing -- April 2026 \\
+\hline
+\textbf{Baseline Training} & Code standard \textit{FedAvg} on PyTorch locally for forecasting baselines. & April -- June 2026 \\
+\hline
+\textbf{FPDAF Integration} & Embed \textit{CUSUM} triggers and \textit{Attention} layers into personalized heads. & July -- Sept 2026 \\
+\hline
+\textbf{Federated Simulation} & Deploy 3-5 simulated Hospital "Clients" to test adaptation latency. & Oct -- Dec 2026 \\
+\hline
+\textbf{Final Evaluation} & Overall system performance benchmarking (Accuracy, F1-Score, AUC-ROC). & Jan -- Feb 2027 \\
+\hline
+\end{tabular}
+\caption{Project Execution Roadmap (2026-2027)}
+\end{table}
+
+\section{Summary of works completed in Phase 1}
+During this semester, the following milestones were successfully completed:
+\begin{enumerate}[noitemsep, leftmargin=1.5em]
+    \item \textbf{High-Era Dataset Aggregation:} Secured a clinical stack including \textbf{PhysioNet (2019, 2012, 2026)}, \textbf{VitalDB}, and \textbf{EDT-Datasets}.
+    \item \textbf{Novelty Identification:} Defined the \textbf{FPDAF} architectural extension fusing Federated Learning with proactive Drift Detection.
+    \item \textbf{Mathematical Definition:} Derived the formal split-weight optimization framework for localized personalization.
+    \item \textbf{Data Engineering:} Developed the initial Python sequence profiling script to handle ICU \texttt{NaN} issues and standardization.
+    \item \textbf{Environment Setup:} Established the official repository and verified standard \textit{FedAvg} baseline feasibility.
+\end{enumerate}
 
 \vspace{0.2cm}
 \section*{Appendix: Data \& Resource Access}
