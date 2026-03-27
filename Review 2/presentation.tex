@@ -20,7 +20,7 @@
 
 \begin{document}
 
-% --- TITLE SLIDE ---
+% --- TITLE SLIDE (1) ---
 \begin{frame}
     \begin{tikzpicture}[remember picture,overlay]
         \node[fill=amritaMaroon, text=white, font=\bfseries\scriptsize, anchor=north east, rounded corners=2pt, inner sep=5pt]
@@ -65,7 +65,21 @@
     }
 \end{frame}
 
-% --- PROJECT PROPOSAL AND OBJECTIVES ---
+% --- INTRODUCTION AND BACKGROUND (2) ---
+\begin{frame}{Introduction and Background}
+    \textbf{Introduction to the Problem:}
+    In modern Intensive Care Units (ICUs), continuous monitoring systems generate vast amounts of high-frequency multivariate time-series data (Heart Rate, Blood Pressure, SpO2). Detecting critical deterioration early saves lives.
+
+    \vspace{0.3cm}
+    \textbf{Motivation to Solve This Specific Problem:}
+    \begin{itemize}
+        \item \textbf{The Data Silo Problem:} High-accuracy models require massive datasets, but laws (e.g., \textbf{HIPAA} / \textbf{DPDPA 2023, Section 8: Obligations}) forbid combining data into a centralized server.
+        \item \textbf{The Global Model Failure:} If multiple hospitals successfully engage in standard Federated Learning (FedAvg), the resulting "global model" fails because hospital demographics and local treatment protocols vary wildly.
+        \item \textbf{The Black Box Problem:} Doctors cannot act on an AI alert if the model cannot explain the physiological basis for its warning.
+    \end{itemize}
+\end{frame}
+
+% --- PROJECT PROPOSAL AND OBJECTIVES (3) ---
 \begin{frame}{Project Proposal and Objectives}
     \textbf{Overall Project Goal:}
     Instead of merely implementing existing algorithms, our team \textbf{proposes to develop} a novel mathematical extension to current FL frameworks: the \textbf{Federated Personalized Drift-Aware Attention Framework (FPDAF)}. This custom algorithm \textbf{will be engineered} to modify standard \textit{FedAvg} and \textit{CUSUM} to directly target Multivariate Healthcare Time-Series.
@@ -81,7 +95,7 @@
     \end{block}
 \end{frame}
 
-% --- REVIEW 1 COMMENTS ---
+% --- ADDRESSING REVIEW 1 COMMENTS (4) ---
 \begin{frame}{Addressing Review 1 Panel Comments}
     \small
     \begin{table}
@@ -107,21 +121,7 @@
     \centering \scriptsize \textit{Technical Architecture, Mathematical Proofs, and Detailed Novelty are presented in Frames 11--13.}
 \end{frame}
 
-% --- INTRODUCTION AND BACKGROUND ---
-\begin{frame}{Introduction and Background}
-    \textbf{Introduction to the Problem:}
-    In modern Intensive Care Units (ICUs), continuous monitoring systems generate vast amounts of high-frequency multivariate time-series data (Heart Rate, Blood Pressure, SpO2). Detecting critical deterioration early saves lives.
-
-    \vspace{0.3cm}
-    \textbf{Motivation to Solve This Specific Problem:}
-    \begin{itemize}
-        \item \textbf{The Data Silo Problem:} High-accuracy models require massive datasets, but laws (e.g., \textbf{HIPAA} / \textbf{DPDPA 2023, Section 8: Obligations}) forbid combining data into a centralized server.
-        \item \textbf{The Global Model Failure:} If multiple hospitals successfully engage in standard Federated Learning (FedAvg), the resulting "global model" fails because hospital demographics and local treatment protocols vary wildly.
-        \item \textbf{The Black Box Problem:} Doctors cannot act on an AI alert if the model cannot explain the physiological basis for its warning.
-    \end{itemize}
-\end{frame}
-
-% --- RESEARCH GAP ---
+% --- RESEARCH GAP (5) ---
 \begin{frame}[fragile]{Research Gap Analysis}
 \tiny
 \resizebox{\textwidth}{!}{%
@@ -163,7 +163,7 @@ Integrates drift detection with time-series analytics and forecasting \\
 \midrule
 Federated Time-Series Forecasting works
 (Papers 6, 8, 10–15, 18) &
-Primarily focus on accuracy; limited explainability and personalization &
+Primically focus on accuracy; limited explainability and personalization &
 Stakeholders require transparency to trust and act on predictions &
 Provides explainable insights alongside federated forecasting \\
 
@@ -195,13 +195,25 @@ Balances privacy, efficiency, and interpretability in a single framework \\
 \centering \footnotesize \textbf{Full Literature Analysis (25+ Papers):} \href{https://docs.google.com/spreadsheets/d/1G_zAbr6MI_bYcCHEXfkWjhmvKzBEDKr0/edit\#gid=417550448}{\texttt{Google Sheets Link}}
 \end{frame}
 
-% --- RESEARCH GAP VISUAL ---
+% --- RESEARCH GAP VISUAL (6) ---
 \begin{frame}{Research Gap -- Visual Summary}
     \centering
     \includegraphics[trim={0 1.1cm 0 0}, clip, width=0.98\textwidth, height=0.88\textheight, keepaspectratio]{images/research_gap_vislu.png}
 \end{frame}
 
-% --- DATASET USED ---
+% --- FUNDAMENTALS LEARNED (7) ---
+\begin{frame}{Fundamentals Learned in the Semester}
+    To execute the plan above, our team embarked on extensive upskilling over this semester:
+    \vspace{0.3cm}
+    \begin{itemize}
+        \item \textbf{Federated Learning Architecture:} Extensively reviewed \textit{McMahan et al.'s} fundamental papers to understand gradient averaging and the shift from Centralized ML to Decentralized ML.
+        \item \textbf{PyTorch Framework Fundamentals:} Completed MOOCs \& online tutorials to transition our team's technical skills into PyTorch (specifically custom \texttt{nn.Module} networks, \texttt{DataLoaders}, and customized training loops).
+        \item \textbf{Time-Series Analytics:} Studied LSTM sequence modeling and Attention-mechanism math (computing context vectors via softmax weights).
+        \item \textbf{Statistical Process Control:} Learned the \textit{CUSUM} (Cumulative Sum) statistical methodology for detecting small shifts in ongoing time-series data.
+    \end{itemize}
+\end{frame}
+
+% --- DATASET USED (8) ---
 \begin{frame}{Dataset: PhysioNet Challenge 2019 (Sepsis Prediction)}
     \begin{columns}
         \begin{column}{0.65\textwidth}
@@ -226,7 +238,8 @@ Balances privacy, efficiency, and interpretability in a single framework \\
         \end{column}
     \end{columns}
 \end{frame}
-% --- CONSOLIDATED DATA EXPLORATION SLIDE ---
+
+% --- CONSOLIDATED DATA EXPLORATION SLIDE (9) ---
 \begin{frame}{Data Exploration: Longitudinal Stack \& Multi-Task Utilization}
     \small
     We have curated a 14-year longitudinal cross-section of clinical data to validate \textbf{FPDAF} against macro-level concept drift and varying technological eras (2012--2026).
@@ -253,7 +266,7 @@ Balances privacy, efficiency, and interpretability in a single framework \\
     \end{block}
 \end{frame}
 
-% --- DATA PREPROCESSING ---
+% --- DATA PREPROCESSING (10) ---
 \begin{frame}{Data Preprocessing \& Imputation Pipeline}
     \textbf{Challenge \& Why it looks like a mess:} 
     Real clinical records in PhysioNet contain massive sparsity and \texttt{NaN} gaps. High-frequency vitals (Heart Rate) are logged continuously by bedside monitors, while low-frequency lab tests (Bilirubin, Calcium) are only drawn manually by nurses every 12-24 hours.
@@ -268,19 +281,7 @@ Balances privacy, efficiency, and interpretability in a single framework \\
     \end{enumerate}
 \end{frame}
 
-% --- FUNDAMENTALS LEARNED ---
-\begin{frame}{Fundamentals Learned in the Semester}
-    To execute the plan above, our team embarked on extensive upskilling over this semester:
-    \vspace{0.3cm}
-    \begin{itemize}
-        \item \textbf{Federated Learning Architecture:} Extensively reviewed \textit{McMahan et al.'s} fundamental papers to understand gradient averaging and the shift from Centralized ML to Decentralized ML.
-        \item \textbf{PyTorch Framework Fundamentals:} Completed MOOCs \& online tutorials to transition our team's technical skills into PyTorch (specifically custom \texttt{nn.Module} networks, \texttt{DataLoaders}, and customized training loops).
-        \item \textbf{Time-Series Analytics:} Studied LSTM sequence modeling and Attention-mechanism math (computing context vectors via softmax weights).
-        \item \textbf{Statistical Process Control:} Learned the \textit{CUSUM} (Cumulative Sum) statistical methodology for detecting small shifts in ongoing time-series data.
-    \end{itemize}
-\end{frame}
-
-% --- MATHEMATICAL FORMULATION ---
+% --- MATHEMATICAL FORMULATION (11) ---
 \begin{frame}{Mathematical Foundation}
     \textbf{1. Standard Federated Averaging (FedAvg Base):}
     \vspace{-0.2cm}
@@ -306,7 +307,7 @@ Balances privacy, efficiency, and interpretability in a single framework \\
     \end{itemize}
 \end{frame}
 
-% --- ALGORITHMIC NOVELTY ---
+% --- ALGORITHMIC NOVELTY (12) ---
 \begin{frame}{Algorithmic Novelty \& Innovation Plan}
     \textbf{The Research Novelty of FPDAF:}
     We are not utilizing standard implementations of \textit{FedAvg} or \textit{CUSUM}. We are proposing a mathematical extension that fuses them into a single, responsive clinical algorithm.
@@ -319,7 +320,7 @@ Balances privacy, efficiency, and interpretability in a single framework \\
     \end{itemize}
 \end{frame}
 
-% --- ARCHITECTURE DIAGRAM ---
+% --- ARCHITECTURE DIAGRAM (13) ---
 \begin{frame}{Architecture Diagram and Explanation of Design}
     \begin{columns}
         \begin{column}{0.4\textwidth}
@@ -339,7 +340,7 @@ Balances privacy, efficiency, and interpretability in a single framework \\
     \end{columns}
 \end{frame}
 
-% --- SUMMARY OF WORKS COMPLETED ---
+% --- SUMMARY OF WORKS COMPLETED (14) ---
 \begin{frame}{Summary of Works Completed (Technical Evidence)}
     \textbf{Phase 1 Contributions mapping to Technical Validation \& Evidence:}
     \vspace{0.3cm}
@@ -356,32 +357,7 @@ Balances privacy, efficiency, and interpretability in a single framework \\
     \end{enumerate}
 \end{frame}
 
-% --- PLANS FOR ONCOMING SEMESTERS ---
-\begin{frame}{Plans for the Oncoming Semesters (Phase 2)}
-    \textbf{The direct roadmap to full implementation:}
-    \vspace{0.3cm}
-    \begin{table}
-        \centering
-        \small
-        \begin{tabular}{|p{3.5cm}|p{9.5cm}|}
-            \hline
-            \textbf{Target Area} & \textbf{Objective for Phase 2} \\
-            \hline
-            \textbf{Data Preprocessing} & Implement normalization, handle missing values, and construct sequential time windows for the acquired PhysioNet dataset. \\
-            \hline
-            \textbf{Baseline Training} & Code standard \textit{FedAvg} on PyTorch locally to establish stable forecasting baselines. \\
-            \hline
-            \textbf{FPDAF Integration} & Embed \textit{CUSUM} threshold triggering and \textit{Attention} layers into the personalized model heads. \\
-            \hline
-            \textbf{Federated Simulation} & Deploy 3-5 independent simulated Hospital "Clients" to test concept drift adaptation latency. \\
-            \hline
-            \textbf{Evaluation Metrics} & Benchmark system performance utilizing \textbf{Accuracy, Precision, Recall, F1-Score, and AUC-ROC}. \\
-            \hline
-        \end{tabular}
-    \end{table}
-\end{frame}
-
-% --- EXECUTION PLAN ---
+% --- EXECUTION PLAN (15) ---
 \begin{frame}{Execution Plan (Components \& Flow)}
     \small
     \begin{table}
@@ -407,7 +383,7 @@ Balances privacy, efficiency, and interpretability in a single framework \\
     \textbf{Novel Solution Pipeline:} Extract Data $\rightarrow$ Modify \textit{FedAvg} Aggregation $\rightarrow$ Inject Attention Constraints $\rightarrow$ Sync Modified Shared Layers $\rightarrow$ Trigger Novel \textit{CUSUM}-Adaptive Local Reset.
 \end{frame}
 
-% --- EXECUTION LOGIC DETAILS ---
+% --- EXECUTION LOGIC DETAILS (16) ---
 \begin{frame}{FPDAF Detailed Implementation Logic (What \& How)}
     \begin{itemize}
         \item \textbf{1. Decentralization (Global Syncing)}
@@ -430,13 +406,38 @@ Balances privacy, efficiency, and interpretability in a single framework \\
     \end{itemize}
 \end{frame}
 
-% --- EXECUTION LOGIC VISUAL ---
+% --- EXECUTION LOGIC VISUAL (17) ---
 \begin{frame}{FPDAF Implementation Logic -- Visual}
     \centering
     \includegraphics[trim={0 1.1cm 0 0}, clip, width=0.98\textwidth, height=0.9\textheight, keepaspectratio]{images/FPDAF Detailed Implementation Logic_visul.png}
 \end{frame}
 
-% --- REFERENCES ---
+% --- PLANS FOR ONCOMING SEMESTERS (18) ---
+\begin{frame}{Plans for the Oncoming Semesters (Phase 2)}
+    \textbf{The direct roadmap to full implementation:}
+    \vspace{0.3cm}
+    \begin{table}
+        \centering
+        \small
+        \begin{tabular}{|p{3.5cm}|p{9.5cm}|}
+            \hline
+            \textbf{Target Area} & \textbf{Objective for Phase 2} \\
+            \hline
+            \textbf{Data Preprocessing} & Implement normalization, handle missing values, and construct sequential time windows for the acquired PhysioNet dataset. \\
+            \hline
+            \textbf{Baseline Training} & Code standard \textit{FedAvg} on PyTorch locally to establish stable forecasting baselines. \\
+            \hline
+            \textbf{FPDAF Integration} & Embed \textit{CUSUM} threshold triggering and \textit{Attention} layers into the personalized model heads. \\
+            \hline
+            \textbf{Federated Simulation} & Deploy 3-5 independent simulated Hospital "Clients" to test concept drift adaptation latency. \\
+            \hline
+            \textbf{Evaluation Metrics} & Benchmark system performance utilizing \textbf{Accuracy, Precision, Recall, F1-Score, and AUC-ROC}. \\
+            \hline
+        \end{tabular}
+    \end{table}
+\end{frame}
+
+% --- REFERENCES (19) ---
 \begin{frame}[allowframebreaks]{References}
     \tiny
     \nocite{churaev2023,jothimurugesan2022,arivazhagan2020,mcmahan2017,liu2022}
@@ -448,7 +449,7 @@ Balances privacy, efficiency, and interpretability in a single framework \\
     \bibliography{latex/ref}
 \end{frame}
 
-% --- LITERATURE LINKS ---
+% --- LITERATURE LINKS (20) ---
 \begin{frame}[allowframebreaks]{Full Literature Resource Links}
     \begin{itemize}
         \item \textbf{\small A standalone software for real-time facial analysis in online conferences and e-lessons} \\ \url{https://doi.org/10.1016/j.simpa.2023.100507}
@@ -479,7 +480,7 @@ Balances privacy, efficiency, and interpretability in a single framework \\
     \end{itemize}
 \end{frame}
 
-% --- DATA SOURCE RESOURCE LINKS ---
+% --- DATA SOURCE RESOURCE LINKS (21) ---
 \begin{frame}[allowframebreaks]{Data Source Resource Links}
     \begin{itemize}
         \item \textbf{\small PhysioNet Challenge 2019 (Primary Sepsis Dataset)} \\ \url{https://physionet.org/content/challenge-2019/1.0.0/}
@@ -488,14 +489,6 @@ Balances privacy, efficiency, and interpretability in a single framework \\
         \item \textbf{\small VitalDB: High-Density ICU Monitoring Dataset} \\ \url{https://physionet.org/content/vitaldb/1.0.0/}
         \item \textbf{\small EDT-Datasets: Emergency Device Telemetry} \\ \url{https://github.com/mommand/EDT-Datasets}
     \end{itemize}
-\end{frame}
-
-% --- THANK YOU ---
-\begin{frame}
-    \centering
-    {\Huge \textbf{\textcolor{amritaMaroon}{Thank You}}}
-    \vspace{0.5cm}
-    {\large Questions?}
 \end{frame}
 
 \end{document}
