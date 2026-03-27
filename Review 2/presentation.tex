@@ -20,7 +20,7 @@
 
 \begin{document}
 
-% --- TITLE SLIDE ---
+% --- TITLE SLIDE (1) ---
 \begin{frame}
     \begin{tikzpicture}[remember picture,overlay]
         \node[fill=amritaMaroon, text=white, font=\bfseries\scriptsize, anchor=north east, rounded corners=2pt, inner sep=5pt]
@@ -65,10 +65,41 @@
     }
 \end{frame}
 
-% --- PROJECT PROPOSAL AND OBJECTIVES ---
+% --- INTRODUCTION AND BACKGROUND (2) ---
+\begin{frame}{Introduction and Background}
+    \textbf{Introduction to the Problem:}
+    \scriptsize 
+    In modern Intensive Care Units (ICUs), continuous monitoring systems generate vast amounts of high-frequency multivariate time-series data (Heart Rate, Blood Pressure, SpO2). Detecting critical deterioration early saves lives.
+
+    \vspace{0.2cm}
+    \textbf{Clinical Context \& Terminology:}
+    \begin{itemize}
+        \item \textbf{Sepsis:} Life-threatening organ failure caused by infection; needs early detection.
+        \item \textbf{Deterioration:} Rapid worsening of patient condition (vitals becoming abnormal).
+        \item \textbf{Profiling:} Analyzing time-series data (Heart Rate, BP) to predict patient risk.
+    \end{itemize}
+
+    \vspace{0.2cm}
+    \textbf{Why solve this with Federated AI?}
+    \begin{itemize}
+        \scriptsize 
+        \item \textbf{The Privacy Gap:} Strict laws (\textbf{HIPAA/DPDPA}) prevent hospitals from sharing raw patient data to a central cloud.
+        \item \textbf{The Accuracy Gap:} A "one-size-fits-all" model fails because every hospital has different patient demographics and local protocols.
+        \item \textbf{The Trust Gap:} Doctors cannot trust "black-box" AI alerts; they need explainable proof (\textbf{XAI}) to make life-saving decisions.
+    \end{itemize}
+
+    \vspace{0.2cm}
+    \begin{block}{Sustainable Development Goal (SDG) Mapping}
+        \scriptsize
+        \textbf{Primary (SDG 3):} Directly contributes to Good Health by enabling explainable patient risk prediction. \\
+        \textbf{Secondary (SDG 9 \& 16):} Supports scalable clinical innovation and ethical data privacy security.
+    \end{block}
+\end{frame}
+
+% --- PROJECT PROPOSAL AND OBJECTIVES (3) ---
 \begin{frame}{Project Proposal and Objectives}
     \textbf{Overall Project Goal:}
-    Instead of merely implementing existing algorithms, our team \textbf{proposes to develop} a novel mathematical extension to current FL frameworks: the \textbf{Federated Personalized Drift-Aware Attention Framework (FPDAF)}. This custom algorithm \textbf{will be engineered} to modify standard \textit{FedAvg} and \textit{CUSUM} to directly target Multivariate Healthcare Time-Series.
+    Instead of merely implementing existing algorithms, our team \textbf{proposes to develop} a novel extension to current FL frameworks: the \textbf{Federated Personalized Drift-Aware Attention Framework (FPDAF)}. This custom algorithm \textbf{will be engineered} to modify standard \textit{FedAvg} and \textit{CUSUM} to directly target Multivariate Healthcare Time-Series.
 
     \vspace{0.3cm}
     \begin{block}{Objectives to Achieve}
@@ -81,13 +112,14 @@
     \end{block}
 \end{frame}
 
-% --- REVIEW 1 COMMENTS ---
+% --- ADDRESSING REVIEW 1 COMMENTS (4) ---
 \begin{frame}{Addressing Review 1 Panel Comments}
     \small
     \begin{table}
         \centering
-        \renewcommand{\arraystretch}{1.3}
-        \begin{tabular}{|p{5.5cm}|p{8cm}|}
+        \renewcommand{\arraystretch}{1.1}
+        \resizebox{\textwidth}{!}{%
+        \begin{tabular}{|p{5.5cm}|p{8.5cm}|}
             \hline
             \textbf{Review 1 Panel Feedback} & \textbf{Adjustments Made for Review 2} \\
             \hline
@@ -99,29 +131,26 @@
             \hline
             \textbf{4. Improve technical depth \& XAI} & Architected a formal \textbf{split-architecture} using \textbf{Temporal Attention} to be prototyped for clinician visualization in Phase 2. \\
             \hline
-            \textbf{5. Comparative FL Discussion} & Contrasted generalized \textit{FedAvg} with our localized \textit{FedPer} nodes to prove handling of hospital heterogeneity. \\
+            \textbf{5. Comparative FL Discussion} & Contrasted standard AI (FedAvg) with our personalized approach (FedPer) to show how we handle different hospital patient types. \\
             \hline
-        \end{tabular}
+        \end{tabular}}
     \end{table}
-    \vspace{0.1cm}
-    \centering \scriptsize \textit{Technical Architecture, Mathematical Proofs, and Detailed Novelty are presented in Frames 11--13.}
 \end{frame}
 
-% --- INTRODUCTION AND BACKGROUND ---
-\begin{frame}{Introduction and Background}
-    \textbf{Introduction to the Problem:}
-    In modern Intensive Care Units (ICUs), continuous monitoring systems generate vast amounts of high-frequency multivariate time-series data (Heart Rate, Blood Pressure, SpO2). Detecting critical deterioration early saves lives.
-
+\begin{frame}{Algorithmic Novelty \& Innovation Plan}
+    \textbf{The Research Novelty of FPDAF:}
+    We are not just using off-the-shelf tools; we are creating a custom extension that combines Federated Learning with Drift Detection for a responsive clinical system.
+    
     \vspace{0.3cm}
-    \textbf{Motivation to Solve This Specific Problem:}
+    \textbf{Key Innovation Pillars:}
     \begin{itemize}
-        \item \textbf{The Data Silo Problem:} High-accuracy models require massive datasets, but laws (e.g., \textbf{HIPAA} / \textbf{DPDPA 2023, Section 8: Obligations}) forbid combining data into a centralized server.
-        \item \textbf{The Global Model Failure:} If multiple hospitals successfully engage in standard Federated Learning (FedAvg), the resulting "global model" fails because hospital demographics and local treatment protocols vary wildly.
-        \item \textbf{The Black Box Problem:} Doctors cannot act on an AI alert if the model cannot explain the physiological basis for its warning.
+        \item \textbf{Novel FedAvg Extension:} Instead of weighting hospitals by patient count only, we use \textbf{Attention-Aware Weighting} to prioritize higher-confidence hospital data during the global update.
+        \item \textbf{Novel CUSUM Extension:} Instead of only monitoring data quality, we repurpose CUSUM to act as an \textbf{Automated Neural Trigger}. It detects rapid patient deterioration and "unfreezes" model layers for instant adaptation.
+        \item \textbf{Novel Local Personalization:} We extend standard \textit{FedPer} nodes to ensure the local hospital model focuses purely on its specific patient types without losing shared global intelligence.
     \end{itemize}
 \end{frame}
 
-% --- RESEARCH GAP ---
+% --- RESEARCH GAP (5) ---
 \begin{frame}[fragile]{Research Gap Analysis}
 \tiny
 \resizebox{\textwidth}{!}{%
@@ -163,7 +192,7 @@ Integrates drift detection with time-series analytics and forecasting \\
 \midrule
 Federated Time-Series Forecasting works
 (Papers 6, 8, 10–15, 18) &
-Primarily focus on accuracy; limited explainability and personalization &
+Primically focus on accuracy; limited explainability and personalization &
 Stakeholders require transparency to trust and act on predictions &
 Provides explainable insights alongside federated forecasting \\
 
@@ -195,13 +224,14 @@ Balances privacy, efficiency, and interpretability in a single framework \\
 \centering \footnotesize \textbf{Full Literature Analysis (25+ Papers):} \href{https://docs.google.com/spreadsheets/d/1G_zAbr6MI_bYcCHEXfkWjhmvKzBEDKr0/edit\#gid=417550448}{\texttt{Google Sheets Link}}
 \end{frame}
 
-% --- RESEARCH GAP VISUAL ---
+% --- RESEARCH GAP VISUAL (6) ---
 \begin{frame}{Research Gap -- Visual Summary}
     \centering
     \includegraphics[trim={0 1.1cm 0 0}, clip, width=0.98\textwidth, height=0.88\textheight, keepaspectratio]{images/research_gap_vislu.png}
 \end{frame}
 
-% --- DATASET USED ---
+
+% --- DATASET USED (8) ---
 \begin{frame}{Dataset: PhysioNet Challenge 2019 (Sepsis Prediction)}
     \begin{columns}
         \begin{column}{0.65\textwidth}
@@ -226,7 +256,8 @@ Balances privacy, efficiency, and interpretability in a single framework \\
         \end{column}
     \end{columns}
 \end{frame}
-% --- CONSOLIDATED DATA EXPLORATION SLIDE ---
+
+% --- CONSOLIDATED DATA EXPLORATION SLIDE (9) ---
 \begin{frame}{Data Exploration: Longitudinal Stack \& Multi-Task Utilization}
     \small
     We have curated a 14-year longitudinal cross-section of clinical data to validate \textbf{FPDAF} against macro-level concept drift and varying technological eras (2012--2026).
@@ -253,7 +284,7 @@ Balances privacy, efficiency, and interpretability in a single framework \\
     \end{block}
 \end{frame}
 
-% --- DATA PREPROCESSING ---
+% --- DATA PREPROCESSING (10) ---
 \begin{frame}{Data Preprocessing \& Imputation Pipeline}
     \textbf{Challenge \& Why it looks like a mess:} 
     Real clinical records in PhysioNet contain massive sparsity and \texttt{NaN} gaps. High-frequency vitals (Heart Rate) are logged continuously by bedside monitors, while low-frequency lab tests (Bilirubin, Calcium) are only drawn manually by nurses every 12-24 hours.
@@ -268,78 +299,17 @@ Balances privacy, efficiency, and interpretability in a single framework \\
     \end{enumerate}
 \end{frame}
 
-% --- FUNDAMENTALS LEARNED ---
-\begin{frame}{Fundamentals Learned in the Semester}
-    To execute the plan above, our team embarked on extensive upskilling over this semester:
-    \vspace{0.3cm}
-    \begin{itemize}
-        \item \textbf{Federated Learning Architecture:} Extensively reviewed \textit{McMahan et al.'s} fundamental papers to understand gradient averaging and the shift from Centralized ML to Decentralized ML.
-        \item \textbf{PyTorch Framework Fundamentals:} Completed MOOCs \& online tutorials to transition our team's technical skills into PyTorch (specifically custom \texttt{nn.Module} networks, \texttt{DataLoaders}, and customized training loops).
-        \item \textbf{Time-Series Analytics:} Studied LSTM sequence modeling and Attention-mechanism math (computing context vectors via softmax weights).
-        \item \textbf{Statistical Process Control:} Learned the \textit{CUSUM} (Cumulative Sum) statistical methodology for detecting small shifts in ongoing time-series data.
-    \end{itemize}
-\end{frame}
 
-% --- MATHEMATICAL FORMULATION ---
-\begin{frame}{Mathematical Foundation}
-    \textbf{1. Standard Federated Averaging (FedAvg Base):}
-    \vspace{-0.2cm}
-    \begin{equation}
-        w_{t+1} = \sum_{k=1}^{K} \frac{n_k}{n} w_{t+1}^k
-    \end{equation}
-    \vspace{-0.2cm}
-    \begin{itemize}
-        \small \item Server aggregates weights $w_{t+1}^k$ from $K$ hospitals weighted by patient count $n_k$. (Personalization heads are strictly excluded from this sum).
-    \end{itemize}
 
-    \vspace{0.3cm}
-    \textbf{2. CUSUM Drift Detection (Client-Side Trigger):}
-    \vspace{-0.2cm}
-    \begin{equation}
-        S_t = \max(0, S_{t-1} + (e_t - \mu - k))
-    \end{equation}
-    \vspace{-0.2cm}
-    \begin{itemize}
-        \small \item $e_t$: Prediction error (residual) at time step $t$.
-        \small \item $\mu$: Mean error during stable conditions.
-        \small \item If the cumulative statistic $S_t > H$ (Threshold), a concept drift is flagged, triggering local model retraining.
-    \end{itemize}
-\end{frame}
 
-% --- ALGORITHMIC NOVELTY ---
-\begin{frame}{Algorithmic Novelty \& Innovation Plan}
-    \textbf{The Research Novelty of FPDAF:}
-    We are not utilizing standard implementations of \textit{FedAvg} or \textit{CUSUM}. We are proposing a mathematical extension that fuses them into a single, responsive clinical algorithm.
-    
-    \vspace{0.3cm}
-    \textbf{The Novel Plan:}
-    \begin{itemize}
-        \item \textbf{CUSUM as a Neural Trigger:} We mathematically repurpose \textit{CUSUM} from a simple statistical quality-control tool into an active Neural Network manipulator. When the formulation $S_t > H$ alerts, our novel code aggressively unfreezes the isolated Local Personalization Head, forcing immediate recalibration without destroying the global backbone.
-        \item \textbf{Attention-Weighted Decentralization:} Standard \textit{FedAvg} treats all hospitals equally based on sample size. FPDAF will introduce a novel extension aggregating weights locally, prioritized by our \textit{Attention Mechanism}'s confidence, preventing outlier clinical anomalies from polarizing the central server.
-    \end{itemize}
-\end{frame}
 
-% --- ARCHITECTURE DIAGRAM ---
+% --- ARCHITECTURE DIAGRAM (13) ---
 \begin{frame}{Architecture Diagram and Explanation of Design}
-    \begin{columns}
-        \begin{column}{0.4\textwidth}
-            \textbf{Why this design?}
-            \small
-            \begin{itemize}
-                \item \textbf{Privacy:} Only encrypted gradients travel upward.
-                \item \textbf{Local LSTM Base:} Captures generalized physiological rules.
-                \item \textbf{Attention Layer:} Provides XAI (feature importance) right before the local prediction.
-                \item \textbf{Personalization Head:} NEVER shared with the server. Tailors risk predictions to the specific local patient cohort.
-            \end{itemize}
-        \end{column}
-        \begin{column}{0.6\textwidth}
-            \centering
-            \includegraphics[height=0.75\textheight, width=\linewidth, keepaspectratio]{images/architecture2.png}
-        \end{column}
-    \end{columns}
+    \centering
+    \includegraphics[width=0.95\textwidth, height=0.82\textheight, keepaspectratio]{images/ArcDigram.jpeg}
 \end{frame}
 
-% --- SUMMARY OF WORKS COMPLETED ---
+% --- SUMMARY OF WORKS COMPLETED (14) ---
 \begin{frame}{Summary of Works Completed (Technical Evidence)}
     \textbf{Phase 1 Contributions mapping to Technical Validation \& Evidence:}
     \vspace{0.3cm}
@@ -356,32 +326,7 @@ Balances privacy, efficiency, and interpretability in a single framework \\
     \end{enumerate}
 \end{frame}
 
-% --- PLANS FOR ONCOMING SEMESTERS ---
-\begin{frame}{Plans for the Oncoming Semesters (Phase 2)}
-    \textbf{The direct roadmap to full implementation:}
-    \vspace{0.3cm}
-    \begin{table}
-        \centering
-        \small
-        \begin{tabular}{|p{3.5cm}|p{9.5cm}|}
-            \hline
-            \textbf{Target Area} & \textbf{Objective for Phase 2} \\
-            \hline
-            \textbf{Data Preprocessing} & Implement normalization, handle missing values, and construct sequential time windows for the acquired PhysioNet dataset. \\
-            \hline
-            \textbf{Baseline Training} & Code standard \textit{FedAvg} on PyTorch locally to establish stable forecasting baselines. \\
-            \hline
-            \textbf{FPDAF Integration} & Embed \textit{CUSUM} threshold triggering and \textit{Attention} layers into the personalized model heads. \\
-            \hline
-            \textbf{Federated Simulation} & Deploy 3-5 independent simulated Hospital "Clients" to test concept drift adaptation latency. \\
-            \hline
-            \textbf{Evaluation Metrics} & Benchmark system performance utilizing \textbf{Accuracy, Precision, Recall, F1-Score, and AUC-ROC}. \\
-            \hline
-        \end{tabular}
-    \end{table}
-\end{frame}
-
-% --- EXECUTION PLAN ---
+% --- EXECUTION PLAN (15) ---
 \begin{frame}{Execution Plan (Components \& Flow)}
     \small
     \begin{table}
@@ -400,6 +345,8 @@ Balances privacy, efficiency, and interpretability in a single framework \\
             \hline
             \textbf{Statistical Math} & \textit{CUSUM} mathematically altered to act as a Neural Network freezing layer trigger. & Drift Tracker \\
             \hline
+            \textbf{Continuous Adaptation} & Iterative feedback loop for automated real-time model recalibration. & Autonomous Syncing \\
+            \hline
         \end{tabular}
     \end{table}
 
@@ -407,7 +354,7 @@ Balances privacy, efficiency, and interpretability in a single framework \\
     \textbf{Novel Solution Pipeline:} Extract Data $\rightarrow$ Modify \textit{FedAvg} Aggregation $\rightarrow$ Inject Attention Constraints $\rightarrow$ Sync Modified Shared Layers $\rightarrow$ Trigger Novel \textit{CUSUM}-Adaptive Local Reset.
 \end{frame}
 
-% --- EXECUTION LOGIC DETAILS ---
+% --- EXECUTION LOGIC DETAILS (16) ---
 \begin{frame}{FPDAF Detailed Implementation Logic (What \& How)}
     \begin{itemize}
         \item \textbf{1. Decentralization (Global Syncing)}
@@ -430,13 +377,51 @@ Balances privacy, efficiency, and interpretability in a single framework \\
     \end{itemize}
 \end{frame}
 
-% --- EXECUTION LOGIC VISUAL ---
+% --- EXECUTION LOGIC VISUAL (17) ---
 \begin{frame}{FPDAF Implementation Logic -- Visual}
     \centering
     \includegraphics[trim={0 1.1cm 0 0}, clip, width=0.98\textwidth, height=0.9\textheight, keepaspectratio]{images/FPDAF Detailed Implementation Logic_visul.png}
 \end{frame}
 
-% --- REFERENCES ---
+% --- FUNDAMENTALS LEARNED (18) ---
+\begin{frame}{Fundamentals Learned in the Semester}
+    To execute the plan above, our team embarked on extensive upskilling over this semester:
+    \vspace{0.3cm}
+    \begin{itemize}
+        \item \textbf{Federated Learning Architecture:} Extensively reviewed \textit{McMahan et al.'s} fundamental papers to understand gradient averaging and the shift from Centralized ML to Decentralized ML.
+        \item \textbf{PyTorch Framework Fundamentals:} Completed MOOCs \& online tutorials to transition our team's technical skills into PyTorch (specifically custom \texttt{nn.Module} networks, \texttt{DataLoaders}, and customized training loops).
+        \item \textbf{Time-Series Analytics:} Studied LSTM sequence modeling and Attention-mechanism math (computing context vectors via softmax weights).
+        \item \textbf{Statistical Process Control:} Learned the \textit{CUSUM} (Cumulative Sum) statistical methodology for detecting small shifts in ongoing time-series data.
+    \end{itemize}
+\end{frame}
+
+% --- PLANS FOR ONCOMING SEMESTERS (19) ---
+\begin{frame}{Plans for the Oncoming Semesters (Phase 2 \& 3)}
+    \textbf{The direct roadmap to full implementation:}
+    \vspace{0.3cm}
+    \begin{table}
+        \centering
+        \small
+        \resizebox{\textwidth}{!}{%
+        \begin{tabular}{|p{4cm}|p{9cm}|p{3.5cm}|}
+            \hline
+            \textbf{Target Area} & \textbf{Objective for Phase 2 \& 3} & \textbf{Tentative Time} \\
+            \hline
+            \textbf{Data Preprocessing} & Implement normalization, handle missing values, and construct sequential windows for PhysioNet. & Ongoing -- April 2026 \\
+            \hline
+            \textbf{Baseline Training} & Code standard \textit{FedAvg} on PyTorch locally to establish stable forecasting baselines. & April -- June 2026 \\
+            \hline
+            \textbf{FPDAF Integration} & Embed \textit{CUSUM} threshold triggering and \textit{Attention} layers into the personalized heads. & July -- Sept 2026 \\
+            \hline
+            \textbf{Federated Simulation} & Deploy 3-5 independent simulated Hospital "Clients" to test concept drift adaptation latency. & Oct -- Dec 2026 \\
+            \hline
+            \textbf{Final Evaluation} & Overall system performance benchmarking utilizing \textbf{Accuracy, F1-Score, and AUC-ROC}. & Jan -- Feb 2027 \\
+            \hline
+        \end{tabular}}
+    \end{table}
+\end{frame}
+
+% --- REFERENCES (19) ---
 \begin{frame}[allowframebreaks]{References}
     \tiny
     \nocite{churaev2023,jothimurugesan2022,arivazhagan2020,mcmahan2017,liu2022}
@@ -448,7 +433,7 @@ Balances privacy, efficiency, and interpretability in a single framework \\
     \bibliography{latex/ref}
 \end{frame}
 
-% --- LITERATURE LINKS ---
+% --- LITERATURE LINKS (20) ---
 \begin{frame}[allowframebreaks]{Full Literature Resource Links}
     \begin{itemize}
         \item \textbf{\small A standalone software for real-time facial analysis in online conferences and e-lessons} \\ \url{https://doi.org/10.1016/j.simpa.2023.100507}
@@ -479,7 +464,7 @@ Balances privacy, efficiency, and interpretability in a single framework \\
     \end{itemize}
 \end{frame}
 
-% --- DATA SOURCE RESOURCE LINKS ---
+% --- DATA SOURCE RESOURCE LINKS (21) ---
 \begin{frame}[allowframebreaks]{Data Source Resource Links}
     \begin{itemize}
         \item \textbf{\small PhysioNet Challenge 2019 (Primary Sepsis Dataset)} \\ \url{https://physionet.org/content/challenge-2019/1.0.0/}
@@ -490,7 +475,7 @@ Balances privacy, efficiency, and interpretability in a single framework \\
     \end{itemize}
 \end{frame}
 
-% --- THANK YOU ---
+% --- THANK YOU (23) ---
 \begin{frame}
     \centering
     {\Huge \textbf{\textcolor{amritaMaroon}{Thank You}}}
