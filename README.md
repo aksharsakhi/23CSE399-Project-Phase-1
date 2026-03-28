@@ -20,10 +20,27 @@ We aim to solve three critical clinical challenges:
 
 ---
 
-## 🏗 System Architecture (Master Visual)
+## 🏗 System Architecture & Framework Logic
+
+### 🏥 Master System Architecture
 The framework decoupling the neural network graph to ensure both global intelligence and local privacy.
 
 ![Master Architecture](Review%202/images/ArcDigram.jpeg)
+
+### 📊 Detailed Implementation Logic
+The novel master plan integrates **Decentralization** (global weight syncing via FedAvg), **Customization** (local personalized heads), and **Statistical Math** (active CUSUM monitoring).
+
+![Implementation Logic](Review%202/images/FPDAF%20Detailed%20Implementation%20Logic_visul.png)
+
+### 🔍 Research Gap Visual Summary
+The following analysis highlights how the proposed **FPDAF** framework bridges the gaps in existing Federated Learning literature through integrated explainability and proactive drift adaptation.
+
+![Research Gap Summary](Review%202/images/research_gap_vislu.png)
+
+### 📈 Adaptive System Dataflow
+The sequential runtime logic for clinical risk forecasting and automated local model recalibration.
+
+![System Dataflow](Review%202/images/Dataflow2.png)
 
 ---
 
