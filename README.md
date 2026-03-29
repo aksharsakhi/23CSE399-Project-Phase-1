@@ -3,6 +3,8 @@
 ## Project Overview
 This repository contains the work for **23CSE399 -- Project Phase 1** at **Amrita Vishwa Vidyapeetham**. Our research proposes the **Federated Personalized Drift-Aware Attention Framework (FPDAF)**, a decentralized architecture designed for early ICU risk prediction.
 
+**📅 Status:** Phase 1 Review 2 Finalized (Panel Review Date: **28th May**)
+
 ### 🏥 Clinical Context & Terminology
 - **Sepsis:** Life-threatening organ failure caused by infection; needs early detection.
 - **Deterioration:** Rapid worsening of patient condition (vitals becoming abnormal).
