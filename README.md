@@ -66,11 +66,16 @@ The sequential runtime logic for clinical risk forecasting and automated local m
 ---
 
 ## 📂 Repository Structure
+* **[Implementation/](Implementation/)**: (Phase 2 Development)
+  * `preprocess_physionet.py`: Scripts for processing the PhysioNet Sepsis dataset (Cleaning, Imputation, Seq Generation).
+  * `models.py`: Structural definitions for the **FPDAF** Network (Global LSTM + Local Head).
+  * `fed_train.py`: Baseline Federated Training cycles for multi-client simulations.
+  * `data_simulation.py`: Utility for generating hospital-specific data splits for testing.
+  * **[FedAvg-Pytorch/](Implementation/FedAvg-Pytorch/)**: Sub-module containing the foundational notebooks and utilities for standard FedAvg benchmarking.
 * **[Review 2/](Review%202/)**: Technical progress and methodology documents.
-  * **[images/](Review%202/images/)**: Normalized architectural and implementation diagrams.
+  * **[images/](Review%202/images/)**: Master architectural and framework implementation diagrams.
   * **[output/](Review%202/output/)**: Final `report.pdf` & `presentation.pdf`.
-* **[Implementation/](Implementation/)**: (Phase 2 Initialization)
-* **[Review 1/](Review%201/)**: Baseline literature survey mapping 25 peer-reviewed papers.
+* **[Review 1/](Review%201/)**: Baseline literature survey and panel comments addressed.
 
 ---
 
