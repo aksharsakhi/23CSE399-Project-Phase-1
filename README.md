@@ -65,6 +65,43 @@ The sequential runtime logic for clinical risk forecasting and automated local m
 
 ---
 
+## 🔬 Scientific Methodology & Neural Formalism
+The **FPDAF** framework is formalized as a split-weight optimization problem across $K$ hospital nodes. The local predictive output $\hat{y}_t^k$ is defined by:
+$$ \hat{y}_t^k = h_{\phi^k} \left( g_{\theta} (X_{1:t}^k) \cdot \alpha_t \right) $$ 
+Where:
+- $g_{\theta}$: **Global Temporal Backbone** (Synchronized via FedAvg).
+- $h_{\phi^k}$: **Private Personalization Head** (Strictly isolated at hospital $k$).
+- $\alpha_t$: **Temporal Attention Context Vector** for feature importance.
+
+### ⚠️ Concept Drift Adaptation
+The system monitors the cumulative deviation of local prediction residuals using the **CUSUM Neural Trigger**:
+$$ S_t = \max(0, S_{t-1} + |y_t - \hat{y}_t| - \mu - k) $$
+When $S_t > H$ (threshold), the framework "unfreezes" the local head $\phi^k$ for real-time patient recalibration.
+
+---
+
+## 🛠 Getting Started 
+To set up the Phase 2 implementation environment:
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/aksharsakhi/23CSE399-Project-Phase-1.git
+   cd 23CSE399-Project-Phase-1
+   ```
+
+2. **Install Dependencies:**
+   ```bash
+   pip install torch pandas numpy matplotlib scikit-learn
+   ```
+
+3. **Data Preparation:**
+   Place the **PhysioNet Challenge 2019** files in the `DetaSets/` directory and run:
+   ```bash
+   python Implementation/preprocess_physionet.py
+   ```
+
+---
+
 ## 📂 Repository Structure
 * **[Implementation/](Implementation/)**: (Phase 2 Development)
   * `preprocess_physionet.py`: Scripts for processing the PhysioNet Sepsis dataset (Cleaning, Imputation, Seq Generation).
